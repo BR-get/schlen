@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 页面未找到</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="error-page">
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-icon">🏝️💨</div>
+        <h1>哎呀，这座岛屿飘走了！</h1>
+        <p>您访问的页面可能已经被洋流带到其他地方去了喵~</p>
+        <div class="error-actions">
+            <a href="index.html" class="btn btn-primary">返回主页</a>
+            <a href="islands.html" class="btn btn-secondary">查看七座浮岛</a>
+        </div>
+        <div class="floating-islands">
+            <span class="island-float">🏝️</span>
+            <span class="island-float">🏝️</span>
+            <span class="island-float">🏝️</span>
+        </div>
+    </div>
+
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #007BFF 0%, #00BFFF 50%, #87CEEB 100%);
+            overflow: hidden;
+        }
+        
+        .error-container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 500px;
+            position: relative;
+            animation: float-in 0.6s ease;
+        }
+        
+        @keyframes float-in {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .error-code {
+            font-size: 8em;
+            font-weight: 700;
+            color: #007BFF;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 #FFA726;
+        }
+        
+        .error-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .error-container h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .error-container p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-actions .btn {
+            padding: 12px 30px;
+        }
+        
+        .floating-islands {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .island-float {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.3;
+        }
+        
+        .island-float:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation: float-1 6s ease-in-out infinite;
+        }
+        
+        .island-float:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation: float-2 8s ease-in-out infinite;
+        }
+        
+        .island-float:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            animation: float-3 7s ease-in-out infinite;
+        }
+        
+        @keyframes float-1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -15px) rotate(5deg); }
+        }
+        
+        @keyframes float-2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-15px, 10px) rotate(-5deg); }
+        }
+        
+        @keyframes float-3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, 10px) rotate(3deg); }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schlen联邦共和国 - 官方网站</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <h1 class="logo">Schlen喵~</h1>
+            <ul class="nav-links">
+                <li><a href="about.html">关于Schlen</a></li>
+                <li><a href="islands.html">七座浮岛</a></li>
+                <li><a href="culture.html">文化</a></li>
+                <li><a href="government.html">政体</a></li>
+                <li><a href="citizens.html">公民专区</a></li>
+                <li><a href="news.html">动态</a></li>
+                <li><a href="#brcoin-wallet">BR-coin</a></li>
+                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h2>欢迎来到 <span class="highlight">Schlen联邦共和国</span></h2>
+                <p>漂浮在南半球太平洋上的梦幻国度</p>
+                <a href="#about" class="btn">探索更多</a>
+            </div>
+        </section>
+
+        <section id="about" class="info-section ocean-bg">
+            <div class="container">
+                <h3>关于Schlen</h3>
+                <div class="grid-container">
+                    <div class="info-card">
+                        <h4>国名全称</h4>
+                        <p>Schlen联邦共和国</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>简称</h4>
+                        <p>Schlen喵~</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>地理位置</h4>
+                        <p>位于南半球太平洋，由七座悬浮岛链组成，总面积约4200平方公里，远离任何大陆，漂浮在广阔的蓝色海域之上喵~</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>首都</h4>
+                        <p>新施伦城，建在最大主岛核心之环的几何中心喵~</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>成立时间</h4>
+                        <p>2024年</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>官方语言</h4>
+                        <p>Boryoki</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>官方货币</h4>
+                        <p>BR-coin</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>人口</h4>
+                        <p>当前登记公民3人</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="government" class="info-section">
+            <div class="container">
+                <h3>施伦政体</h3>
+                <div class="info-card full-width">
+                    <h4>政体</h4>
+                    <p>液态民主</p>
+                    <p class="description">液态民主是一种结合了直接民主和代议民主优点的混合政体。公民可以对每个议题直接投票（直接民主），也可以选择将自己的投票权委托给某个代表，而这个委托可以随时撤销或更改，并且可以针对不同的议题委托给不同的代表（代议民主）。这种灵活的委托机制使其像“液体”一样流动和适应，赋予公民更大的自由和控制权。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="brcoin-wallet" class="info-section ocean-bg">
+            <div class="container">
+                <h3>BR-coin 数字钱包</h3>
+                <p class="section-desc">Schlen联邦共和国官方数字货币，基于区块链技术的安全支付系统喵~</p>
+                
+                <div class="wallet-container">
+                    <!-- 登录状态显示 -->
+                    <div id="wallet-status" class="wallet-status">
+                        <p>请先登录您的BR-coin账户</p>
+                    </div>
+
+                    <!-- 登录/注册标签页 -->
+                    <div class="wallet-tabs">
+                        <button class="tab-btn active" data-tab="login">登录</button>
+                        <button class="tab-btn" data-tab="register">注册</button>
+                    </div>
+
+                    <!-- 登录表单 -->
+                    <div id="login-tab" class="tab-content active">
+                        <form id="login-form" class="wallet-form">
+                            <input type="text" id="login-username" placeholder="用户名" required>
+                            <input type="password" id="login-password" placeholder="密码（至少6位）" required>
+                            <button type="submit" class="btn btn-primary">登录</button>
+                        </form>
+                    </div>
+
+                    <!-- 注册表单 -->
+                    <div id="register-tab" class="tab-content">
+                        <form id="register-form" class="wallet-form">
+                            <input type="text" id="register-username" placeholder="用户名" required>
+                            <input type="password" id="register-password" placeholder="密码（至少6位）" required>
+                            <button type="submit" class="btn btn-primary">注册</button>
+                        </form>
+                    </div>
+
+                    <!-- 钱包操作面板（登录后显示） -->
+                    <div id="wallet-panel" class="wallet-panel" style="display: none;">
+                        <div class="balance-display">
+                            <h4>当前余额</h4>
+                            <p id="balance-amount" class="balance-amount">0 BR</p>
+                            <p id="wallet-username" class="wallet-username"></p>
+                        </div>
+                        
+                        <div class="wallet-actions">
+                            <div class="action-card">
+                                <h5>转账</h5>
+                                <form id="transfer-form">
+                                    <input type="text" id="transfer-to" placeholder="收款用户名" required>
+                                    <input type="number" id="transfer-amount" placeholder="金额" min="0.01" step="0.01" required>
+                                    <button type="submit" class="btn btn-primary">确认转账</button>
+                                </form>
+                            </div>
+                            
+                            <div class="action-card">
+                                <h5>查询余额</h5>
+                                <div class="query-balance">
+                                    <input type="text" id="query-username" placeholder="输入用户名查询">
+                                    <button id="query-btn" class="btn btn-secondary">查询</button>
+                                    <p id="query-result" class="query-result"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="logout-btn" class="btn btn-secondary logout-btn">退出登录</button>
+                    </div>
+
+                    <div id="wallet-message" class="wallet-message"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 Schlen联邦共和国. 保留所有权利喵~</p>
+        <p>拥护真实性，共建美好未来。</p>
+    </footer>
+
+    <!-- 加入国籍弹窗 -->
+    <div id="join-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>加入Schlen联邦共和国</h3>
+            <p>您确定要申请加入Schlen联邦共和国吗？</p>
+            <p class="modal-desc">作为世界最新颖的液态民主国家，我们期待您的加入！</p>
+            <div class="modal-actions">
+                <button id="confirm-join" class="btn btn-primary">确认申请</button>
+                <button id="cancel-join" class="btn btn-secondary">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
