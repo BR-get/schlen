@@ -1,6 +1,27 @@
 console.log('Script loaded');
 
 const API_BASE = 'https://coin.schlen.top';
+
+// 带超时的 fetch
+async function fetchWithTimeout(url, options, timeout = 5000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(id);
+        return response;
+    } catch (error) {
+        clearTimeout(id);
+        if (error.name === 'AbortError') {
+            throw new Error('请求超时，请检查网络连接');
+        }
+        throw error;
+    }
+}
 let apiKey = localStorage.getItem('brcoin_api_key');
 let currentUser = localStorage.getItem('brcoin_user');
 
@@ -91,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('正在注册...', 'info');
             
             try {
-                const response = await fetch(`${API_BASE}/register`, {
+                const response = await fetchWithTimeout(`${API_BASE}/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
@@ -128,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('正在登录...', 'info');
             
             try {
-                const response = await fetch(`${API_BASE}/login`, {
+                const response = await fetchWithTimeout(`${API_BASE}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
@@ -172,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage('正在转账...', 'info');
             
             try {
-                const response = await fetch(`${API_BASE}/transfer`, {
+                const response = await fetchWithTimeout(`${API_BASE}/transfer`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -209,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('query-result').textContent = '查询中...';
             
             try {
-                const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`);
+                const response = await fetchWithTimeout(`${API_BASE}/balance?user=${encodeURIComponent(username)}`, {}, 3000);
                 const data = await response.json();
                 
                 if (response.ok) {
@@ -264,7 +285,7 @@ async function updateBalance() {
     if (!currentUser) return;
     
     try {
-        const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(currentUser)}`);
+        const response = await fetchWithTimeout(`${API_BASE}/balance?user=${encodeURIComponent(currentUser)}`, {}, 3000);
         const data = await response.json();
         
         if (response.ok) {
