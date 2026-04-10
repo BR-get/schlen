@@ -11,12 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const joinBtn = document.getElementById('join-nation-btn');
     const modal = document.getElementById('join-modal');
     
-    if (joinBtn && modal) {
-        joinBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-        });
-        
+    // 绑定弹窗内部事件（只要有弹窗就绑定）
+    if (modal) {
         const closeBtn = modal.querySelector('.close-btn');
         const cancelBtn = document.getElementById('cancel-join');
         const confirmBtn = document.getElementById('confirm-join');
@@ -35,10 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 页面内的加入按钮
+    // 导航栏加入按钮
+    if (joinBtn && modal) {
+        joinBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+    }
+    
+    // 页面内的加入按钮（公民专区等）
     document.querySelectorAll('#join-nation-btn-cta').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+            console.log('CTA button clicked');
             if (modal) modal.classList.add('active');
         });
     });
