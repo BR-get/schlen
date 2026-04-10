@@ -1,159 +1,139 @@
-// 平滑滚动（仅在首页生效）
-if (document.querySelector('.hero-section')) {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId !== '#' && targetId.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(targetId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        });
-    });
-}
+console.log('Script loaded');
 
-// 加入国籍功能
-document.addEventListener('DOMContentLoaded', function() {
-    const joinBtn = document.getElementById('join-nation-btn');
-    const modal = document.getElementById('join-modal');
-    const closeBtn = document.querySelector('.close-btn');
-    const confirmBtn = document.getElementById('confirm-join');
-    const cancelBtn = document.getElementById('cancel-join');
-
-    if (joinBtn) {
-        joinBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-        });
-    }
-
-    // 页面内的加入按钮（公民页面、政府页面等）
-    document.querySelectorAll('#join-nation-btn-cta').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.classList.add('active');
-        });
-    });
-
-    function closeModal() {
-        modal.classList.remove('active');
-    }
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-    }
-
-    if (confirmBtn) {
-        confirmBtn.addEventListener('click', function() {
-            window.location.href = 'mailto:joinschlen@shundebo.top?subject=Schlen联邦共和国入籍申请';
-            closeModal();
-    });
-    }
-});
-
-// BR-coin 钱包功能
 const API_BASE = 'https://coin.schlen.top';
 let apiKey = localStorage.getItem('brcoin_api_key');
 let currentUser = localStorage.getItem('brcoin_user');
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 标签切换
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            tabBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
+    console.log('DOM loaded');
+    
+    // ===== 加入国籍弹窗 =====
+    const joinBtn = document.getElementById('join-nation-btn');
+    const modal = document.getElementById('join-modal');
+    
+    if (joinBtn && modal) {
+        joinBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+        
+        const closeBtn = modal.querySelector('.close-btn');
+        const cancelBtn = document.getElementById('cancel-join');
+        const confirmBtn = document.getElementById('confirm-join');
+        
+        if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+        if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                window.location.href = 'mailto:joinschlen@shundebo.top?subject=Schlen联邦共和国入籍申请';
+                modal.classList.remove('active');
             });
+        }
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+    }
+    
+    // 页面内的加入按钮
+    document.querySelectorAll('#join-nation-btn-cta').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (modal) modal.classList.add('active');
+        });
+    });
+    
+    // ===== BR-coin 钱包 =====
+    const walletContainer = document.querySelector('.wallet-container');
+    if (!walletContainer) {
+        console.log('Wallet not on this page');
+        return;
+    }
+    
+    console.log('Wallet found, initializing...');
+    
+    // 标签切换
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(btn.dataset.tab + '-tab').classList.add('active');
         });
     });
-
+    
     // 检查登录状态
     if (apiKey && currentUser) {
         showWalletPanel();
         updateBalance();
     }
-
-    // 辅助函数：处理 API 响应
-    async function handleResponse(response) {
-        const text = await response.text();
-        try {
-            return { data: JSON.parse(text), ok: response.ok, status: response.status };
-        } catch (e) {
-            return { data: { message: text }, ok: response.ok, status: response.status };
-        }
-    }
-
-    // 注册表单
+    
+    // 注册
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log('Register submitted');
+            
             const username = document.getElementById('register-username').value;
             const password = document.getElementById('register-password').value;
-
+            
             if (password.length < 6) {
                 showMessage('密码至少需要6位', 'error');
                 return;
             }
-
+            
+            showMessage('正在注册...', 'info');
+            
             try {
-                showMessage('正在注册...', 'info');
                 const response = await fetch(`${API_BASE}/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
-
-                const result = await handleResponse(response);
                 
-                if (result.ok) {
+                console.log('Register response:', response.status);
+                const data = await response.json().catch(() => ({}));
+                
+                if (response.ok) {
                     showMessage('注册成功！请登录', 'success');
                     document.getElementById('register-username').value = '';
                     document.getElementById('register-password').value = '';
-                    setTimeout(() => {
-                        document.querySelector('[data-tab="login"]').click();
-                    }, 1000);
+                    setTimeout(() => document.querySelector('[data-tab="login"]').click(), 1000);
                 } else {
-                    showMessage(result.data.message || `注册失败 (HTTP ${result.status})`, 'error');
+                    showMessage(data.message || `注册失败 (${response.status})`, 'error');
                 }
-            } catch (error) {
-                console.error('注册错误:', error);
-                showMessage('网络错误: ' + error.message, 'error');
+            } catch (err) {
+                console.error('Register error:', err);
+                showMessage('网络错误，请检查控制台', 'error');
             }
         });
     }
-
-    // 登录表单
+    
+    // 登录
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log('Login submitted');
+            
             const username = document.getElementById('login-username').value;
             const password = document.getElementById('login-password').value;
-
+            
+            showMessage('正在登录...', 'info');
+            
             try {
-                showMessage('正在登录...', 'info');
                 const response = await fetch(`${API_BASE}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
-
-                const result = await handleResponse(response);
                 
-                if (result.ok && result.data.token) {
-                    apiKey = result.data.token;
+                console.log('Login response:', response.status);
+                const data = await response.json().catch(() => ({}));
+                
+                if (response.ok && data.token) {
+                    apiKey = data.token;
                     currentUser = username;
                     localStorage.setItem('brcoin_api_key', apiKey);
                     localStorage.setItem('brcoin_user', currentUser);
@@ -161,30 +141,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     updateBalance();
                     showMessage('登录成功！', 'success');
                 } else {
-                    showMessage(result.data.message || `登录失败 (HTTP ${result.status})`, 'error');
+                    showMessage(data.message || '用户名或密码错误', 'error');
                 }
-            } catch (error) {
-                console.error('登录错误:', error);
-                showMessage('网络错误: ' + error.message, 'error');
+            } catch (err) {
+                console.error('Login error:', err);
+                showMessage('网络错误，请检查控制台', 'error');
             }
         });
     }
-
+    
     // 转账
     const transferForm = document.getElementById('transfer-form');
     if (transferForm) {
         transferForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
             const to = document.getElementById('transfer-to').value;
             const amount = parseFloat(document.getElementById('transfer-amount').value);
-
+            
             if (!apiKey) {
                 showMessage('请先登录', 'error');
                 return;
             }
-
+            
+            showMessage('正在转账...', 'info');
+            
             try {
-                showMessage('正在转账...', 'info');
                 const response = await fetch(`${API_BASE}/transfer`, {
                     method: 'POST',
                     headers: {
@@ -193,23 +175,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     body: JSON.stringify({ from: currentUser, to, amount })
                 });
-
-                const result = await handleResponse(response);
                 
-                if (result.ok) {
+                const data = await response.json().catch(() => ({}));
+                
+                if (response.ok) {
                     showMessage('转账成功！', 'success');
                     updateBalance();
                     transferForm.reset();
                 } else {
-                    showMessage(result.data.message || `转账失败 (HTTP ${result.status})`, 'error');
+                    showMessage(data.message || '转账失败', 'error');
                 }
-            } catch (error) {
-                console.error('转账错误:', error);
-                showMessage('网络错误: ' + error.message, 'error');
+            } catch (err) {
+                showMessage('网络错误', 'error');
             }
         });
     }
-
+    
     // 查询余额
     const queryBtn = document.getElementById('query-btn');
     if (queryBtn) {
@@ -219,28 +200,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage('请输入用户名', 'error');
                 return;
             }
-
+            
+            document.getElementById('query-result').textContent = '查询中...';
+            
             try {
-                document.getElementById('query-result').textContent = '查询中...';
                 const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`);
-                const result = await handleResponse(response);
+                const data = await response.json();
                 
-                if (result.ok) {
-                    document.getElementById('query-result').textContent = 
-                        `${username} 的余额: ${result.data.balance} BR`;
+                if (response.ok) {
+                    document.getElementById('query-result').textContent = `${username}: ${data.balance} BR`;
                 } else {
                     document.getElementById('query-result').textContent = '查询失败';
-                    showMessage(result.data.message || '查询失败', 'error');
                 }
-            } catch (error) {
-                console.error('查询错误:', error);
+            } catch (err) {
                 document.getElementById('query-result').textContent = '查询失败';
-                showMessage('网络错误: ' + error.message, 'error');
             }
         });
     }
-
-    // 退出登录
+    
+    // 退出
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
@@ -249,39 +227,32 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.removeItem('brcoin_api_key');
             localStorage.removeItem('brcoin_user');
             hideWalletPanel();
-            showMessage('已退出登录', 'info');
+            showMessage('已退出', 'info');
         });
     }
 });
 
 function showWalletPanel() {
-    const walletStatus = document.getElementById('wallet-status');
-    const walletTabs = document.querySelector('.wallet-tabs');
-    const walletPanel = document.getElementById('wallet-panel');
-    const walletUsername = document.getElementById('wallet-username');
+    const status = document.getElementById('wallet-status');
+    const tabs = document.querySelector('.wallet-tabs');
+    const panel = document.getElementById('wallet-panel');
     
-    if (walletStatus) walletStatus.style.display = 'none';
-    if (walletTabs) walletTabs.style.display = 'none';
+    if (status) status.style.display = 'none';
+    if (tabs) tabs.style.display = 'none';
+    if (panel) panel.style.display = 'block';
     
-    const loginTab = document.getElementById('login-tab');
-    const registerTab = document.getElementById('register-tab');
-    if (loginTab) loginTab.classList.remove('active');
-    if (registerTab) registerTab.classList.remove('active');
-    
-    if (walletPanel) walletPanel.style.display = 'block';
-    if (walletUsername) walletUsername.textContent = `当前用户: ${currentUser}`;
+    const usernameEl = document.getElementById('wallet-username');
+    if (usernameEl) usernameEl.textContent = `用户: ${currentUser}`;
 }
 
 function hideWalletPanel() {
-    const walletStatus = document.getElementById('wallet-status');
-    const walletTabs = document.querySelector('.wallet-tabs');
-    const walletPanel = document.getElementById('wallet-panel');
-    const loginTab = document.getElementById('login-tab');
+    const status = document.getElementById('wallet-status');
+    const tabs = document.querySelector('.wallet-tabs');
+    const panel = document.getElementById('wallet-panel');
     
-    if (walletStatus) walletStatus.style.display = 'block';
-    if (walletTabs) walletTabs.style.display = 'flex';
-    if (walletPanel) walletPanel.style.display = 'none';
-    if (loginTab) loginTab.classList.add('active');
+    if (status) status.style.display = 'block';
+    if (tabs) tabs.style.display = 'flex';
+    if (panel) panel.style.display = 'none';
 }
 
 async function updateBalance() {
@@ -289,28 +260,28 @@ async function updateBalance() {
     
     try {
         const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(currentUser)}`);
-        const result = await response.json();
+        const data = await response.json();
         
         if (response.ok) {
-            const balanceEl = document.getElementById('balance-amount');
-            if (balanceEl) balanceEl.textContent = `${result.balance} BR`;
+            const el = document.getElementById('balance-amount');
+            if (el) el.textContent = `${data.balance} BR`;
         }
-    } catch (error) {
-        console.error('获取余额失败:', error);
+    } catch (err) {
+        console.error('Balance error:', err);
     }
 }
 
-function showMessage(message, type) {
-    const msgEl = document.getElementById('wallet-message');
-    if (!msgEl) return;
+function showMessage(msg, type) {
+    const el = document.getElementById('wallet-message');
+    if (!el) return;
     
-    msgEl.textContent = message;
-    msgEl.className = `wallet-message ${type}`;
-    msgEl.style.display = 'block';
+    el.textContent = msg;
+    el.className = `wallet-message ${type}`;
+    el.style.display = 'block';
     
     setTimeout(() => {
-        msgEl.className = 'wallet-message';
-        msgEl.textContent = '';
-        msgEl.style.display = 'none';
+        el.className = 'wallet-message';
+        el.textContent = '';
+        el.style.display = 'none';
     }, 3000);
 }
