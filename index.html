@@ -18,7 +18,7 @@
                 <li><a href="government.html">政体</a></li>
                 <li><a href="citizens.html">公民专区</a></li>
                 <li><a href="news.html">动态</a></li>
-                <li><a href="#brcoin-wallet">BR-coin</a></li>
+                <li><a href="wallet.html">BR-coin</a></li>
                 <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
             </ul>
         </nav>
@@ -84,60 +84,7 @@
             </div>
         </section>
 
-        <section id="brcoin-wallet" class="info-section ocean-bg">
-            <div class="container">
-                <h3>BR-coin 数字钱包</h3>
-                <p class="section-desc">Schlen联邦共和国官方数字货币，基于区块链技术的安全支付系统喵~</p>
-                
-                <div class="wallet-container">
-                    <!-- API Key 输入 -->
-                    <div id="apikey-input-panel" class="apikey-panel">
-                        <noscript>请启用 JavaScript 以使用钱包功能</noscript>
-                        <div class="apikey-info">
-                            <p>🔑 请先访问 <a href="https://coin.schlen.top" target="_blank" class="api-link">coin.schlen.top</a> 注册账号并获取 API Key</p>
-                            <p class="apikey-hint">获取后在此输入您的 API Key 即可使用钱包功能</p>
-                        </div>
-                        <form id="apikey-form" class="wallet-form">
-                            <input type="text" id="api-key-input" placeholder="请输入您的 API Key (brkey_xxx)" required>
-                            <button type="submit" class="btn btn-primary">连接钱包</button>
-                        </form>
-                    </div>
 
-                    <!-- 钱包操作面板（输入密钥后显示） -->
-                    <div id="wallet-panel" class="wallet-panel" style="display: none;">
-                        <div class="balance-display">
-                            <h4>当前余额</h4>
-                            <p id="balance-amount" class="balance-amount">0 BR</p>
-                            <p id="wallet-status" class="wallet-status-text">已连接</p>
-                        </div>
-                        
-                        <div class="wallet-actions">
-                            <div class="action-card">
-                                <h5>转账</h5>
-                                <form id="transfer-form">
-                                    <input type="text" id="transfer-to" placeholder="收款用户名" required>
-                                    <input type="number" id="transfer-amount" placeholder="金额" min="0.01" step="0.01" required>
-                                    <button type="submit" class="btn btn-primary">确认转账</button>
-                                </form>
-                            </div>
-                            
-                            <div class="action-card">
-                                <h5>查询余额</h5>
-                                <div class="query-balance">
-                                    <input type="text" id="query-username" placeholder="输入用户名查询">
-                                    <button id="query-btn" class="btn btn-secondary">查询</button>
-                                    <p id="query-result" class="query-result"></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button id="logout-btn" class="btn btn-secondary logout-btn">断开连接</button>
-                    </div>
-
-                    <div id="wallet-message" class="wallet-message"></div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="main-footer">

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BR-coin 钱包 - Schlen联邦共和国</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        .wallet-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #007BFF 0%, #00BFFF 100%);
+            padding: 40px 20px;
+        }
+        
+        .wallet-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .wallet-header {
+            background: linear-gradient(135deg, #007BFF, #0056b3);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .wallet-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .wallet-header p {
+            opacity: 0.9;
+        }
+        
+        .wallet-body {
+            padding: 30px;
+        }
+        
+        .apikey-section {
+            text-align: center;
+        }
+        
+        .apikey-section .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .apikey-section h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .apikey-section .hint {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+        
+        .apikey-section .api-link {
+            color: #007BFF;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .apikey-section .api-link:hover {
+            text-decoration: underline;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: monospace;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+        
+        .btn-full {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #007BFF;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, #007BFF, #00BFFF);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .balance-card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .balance-card .amount {
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        
+        .action-section {
+            margin-bottom: 20px;
+        }
+        
+        .action-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .form-row {
+            margin-bottom: 15px;
+        }
+        
+        .form-row input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .message.info {
+            display: block;
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="wallet-page">
+        <div class="wallet-box">
+            <div class="wallet-header">
+                <h1>BR-coin 钱包</h1>
+                <p>Schlen联邦共和国官方数字货币</p>
+            </div>
+            
+            <div class="wallet-body">
+                <!-- API Key 输入界面 -->
+                <div id="login-section" class="apikey-section">
+                    <div class="icon">🔑</div>
+                    <h2>连接您的钱包</h2>
+                    <p class="hint">
+                        请先访问 <a href="https://coin.schlen.top" target="_blank" class="api-link">coin.schlen.top</a> 
+                        注册并获取 API Key
+                    </p>
+                    
+                    <div class="input-group">
+                        <input type="text" id="api-key-input" placeholder="请输入 API Key (brkey_xxx)" autocomplete="off">
+                    </div>
+                    
+                    <button id="connect-btn" class="btn-full btn-primary">连接钱包</button>
+                    
+                    <div id="message" class="message"></div>
+                </div>
+                
+                <!-- 钱包操作界面 -->
+                <div id="wallet-section" class="hidden">
+                    <div class="balance-card">
+                        <h3>当前余额</h3>
+                        <div id="balance-amount" class="amount">0 BR</div>
+                    </div>
+                    
+                    <div class="action-section">
+                        <h4>💸 转账</h4>
+                        <div class="form-row">
+                            <input type="text" id="transfer-to" placeholder="收款用户名">
+                        </div>
+                        <div class="form-row">
+                            <input type="number" id="transfer-amount" placeholder="金额" min="0.01" step="0.01">
+                        </div>
+                        <button id="transfer-btn" class="btn-full btn-primary">确认转账</button>
+                    </div>
+                    
+                    <div class="action-section">
+                        <h4>🔍 查询余额</h4>
+                        <div class="form-row">
+                            <input type="text" id="query-user" placeholder="输入用户名查询">
+                        </div>
+                        <button id="query-btn" class="btn-full btn-primary">查询</button>
+                        <div id="query-result" style="margin-top: 10px; text-align: center; color: #007BFF; font-weight: 600;"></div>
+                    </div>
+                    
+                    <button id="disconnect-btn" class="btn-full btn-secondary">断开连接</button>
+                    
+                    <div id="wallet-message" class="message"></div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-link">← 返回官网</a>
+    </div>
+
+    <script>
+        const API_BASE = 'https://coin.schlen.top';
+        let apiKey = localStorage.getItem('brcoin_api_key');
+        
+        // 页面加载时检查
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Wallet page loaded');
+            
+            if (apiKey) {
+                showWallet();
+                updateBalance();
+            }
+            
+            // 连接按钮
+            document.getElementById('connect-btn').addEventListener('click', function() {
+                const input = document.getElementById('api-key-input').value.trim();
+                
+                if (!input || !input.startsWith('brkey_')) {
+                    showMsg('请输入正确的 API Key (以 brkey_ 开头)', 'error');
+                    return;
+                }
+                
+                apiKey = input;
+                localStorage.setItem('brcoin_api_key', apiKey);
+                showWallet();
+                updateBalance();
+                showMsg('钱包已连接！', 'success');
+            });
+            
+            // 断开按钮
+            document.getElementById('disconnect-btn').addEventListener('click', function() {
+                apiKey = null;
+                localStorage.removeItem('brcoin_api_key');
+                showLogin();
+                showMsg('已断开连接', 'info', 'wallet-message');
+            });
+            
+            // 转账按钮
+            document.getElementById('transfer-btn').addEventListener('click', async function() {
+                const to = document.getElementById('transfer-to').value.trim();
+                const amount = parseFloat(document.getElementById('transfer-amount').value);
+                
+                if (!to || !amount || amount <= 0) {
+                    showMsg('请填写完整的转账信息', 'error', 'wallet-message');
+                    return;
+                }
+                
+                showMsg('正在转账...', 'info', 'wallet-message');
+                
+                try {
+                    const response = await fetch(`${API_BASE}/transfer`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-API-Key': apiKey
+                        },
+                        body: JSON.stringify({ from: 'me', to, amount })
+                    });
+                    
+                    const data = await response.json().catch(() => ({}));
+                    
+                    if (response.ok) {
+                        showMsg('转账成功！', 'success', 'wallet-message');
+                        updateBalance();
+                        document.getElementById('transfer-to').value = '';
+                        document.getElementById('transfer-amount').value = '';
+                    } else {
+                        showMsg(data.message || '转账失败', 'error', 'wallet-message');
+                    }
+                } catch (err) {
+                    showMsg('网络错误: ' + err.message, 'error', 'wallet-message');
+                }
+            });
+            
+            // 查询按钮
+            document.getElementById('query-btn').addEventListener('click', async function() {
+                const username = document.getElementById('query-user').value.trim();
+                
+                if (!username) {
+                    showMsg('请输入用户名', 'error', 'wallet-message');
+                    return;
+                }
+                
+                document.getElementById('query-result').textContent = '查询中...';
+                
+                try {
+                    const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`);
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        document.getElementById('query-result').textContent = `${username}: ${data.balance} BR`;
+                    } else {
+                        document.getElementById('query-result').textContent = '查询失败';
+                    }
+                } catch (err) {
+                    document.getElementById('query-result').textContent = '查询失败';
+                }
+            });
+            
+            // 回车键支持
+            document.getElementById('api-key-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('connect-btn').click();
+                }
+            });
+        });
+        
+        function showWallet() {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('wallet-section').classList.remove('hidden');
+        }
+        
+        function showLogin() {
+            document.getElementById('login-section').classList.remove('hidden');
+            document.getElementById('wallet-section').classList.add('hidden');
+            document.getElementById('api-key-input').value = '';
+        }
+        
+        function showMsg(text, type, elementId = 'message') {
+            const el = document.getElementById(elementId);
+            el.textContent = text;
+            el.className = 'message ' + type;
+            
+            setTimeout(() => {
+                el.className = 'message';
+                el.textContent = '';
+            }, 3000);
+        }
+        
+        async function updateBalance() {
+            if (!apiKey) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/balance?user=me`, {
+                    headers: { 'X-API-Key': apiKey }
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('balance-amount').textContent = data.balance + ' BR';
+                }
+            } catch (err) {
+                console.error('获取余额失败:', err);
+            }
+        }
+    </script>
+</body>
+</html>
