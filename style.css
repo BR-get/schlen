@@ -248,6 +248,16 @@ a:hover {
 
 .apikey-panel {
     text-align: center;
+    padding: 20px;
+    background: #f0f7ff;
+    border-radius: 8px;
+    border: 2px dashed var(--primary-color);
+}
+
+.wallet-status-text {
+    font-size: 0.9em;
+    opacity: 0.9;
+    margin-top: 5px;
 }
 
 .apikey-info {
