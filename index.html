@@ -90,41 +90,24 @@
                 <p class="section-desc">Schlen联邦共和国官方数字货币，基于区块链技术的安全支付系统喵~</p>
                 
                 <div class="wallet-container">
-                    <!-- 登录状态显示 -->
-                    <div id="wallet-status" class="wallet-status">
-                        <p>请先登录您的BR-coin账户</p>
-                    </div>
-
-                    <!-- 登录/注册标签页 -->
-                    <div class="wallet-tabs">
-                        <button class="tab-btn active" data-tab="login">登录</button>
-                        <button class="tab-btn" data-tab="register">注册</button>
-                    </div>
-
-                    <!-- 登录表单 -->
-                    <div id="login-tab" class="tab-content active">
-                        <form id="login-form" class="wallet-form">
-                            <input type="text" id="login-username" placeholder="用户名" required>
-                            <input type="password" id="login-password" placeholder="密码（至少6位）" required>
-                            <button type="submit" class="btn btn-primary">登录</button>
+                    <!-- API Key 输入 -->
+                    <div id="apikey-input-panel" class="apikey-panel">
+                        <div class="apikey-info">
+                            <p>🔑 请先访问 <a href="https://coin.schlen.top" target="_blank" class="api-link">coin.schlen.top</a> 注册账号并获取 API Key</p>
+                            <p class="apikey-hint">获取后在此输入您的 API Key 即可使用钱包功能</p>
+                        </div>
+                        <form id="apikey-form" class="wallet-form">
+                            <input type="text" id="api-key-input" placeholder="请输入您的 API Key (brkey_xxx)" required>
+                            <button type="submit" class="btn btn-primary">连接钱包</button>
                         </form>
                     </div>
 
-                    <!-- 注册表单 -->
-                    <div id="register-tab" class="tab-content">
-                        <form id="register-form" class="wallet-form">
-                            <input type="text" id="register-username" placeholder="用户名" required>
-                            <input type="password" id="register-password" placeholder="密码（至少6位）" required>
-                            <button type="submit" class="btn btn-primary">注册</button>
-                        </form>
-                    </div>
-
-                    <!-- 钱包操作面板（登录后显示） -->
+                    <!-- 钱包操作面板（输入密钥后显示） -->
                     <div id="wallet-panel" class="wallet-panel" style="display: none;">
                         <div class="balance-display">
                             <h4>当前余额</h4>
                             <p id="balance-amount" class="balance-amount">0 BR</p>
-                            <p id="wallet-username" class="wallet-username"></p>
+                            <p id="wallet-status" class="wallet-status-text">已连接</p>
                         </div>
                         
                         <div class="wallet-actions">
@@ -147,7 +130,7 @@
                             </div>
                         </div>
                         
-                        <button id="logout-btn" class="btn btn-secondary logout-btn">退出登录</button>
+                        <button id="logout-btn" class="btn btn-secondary logout-btn">断开连接</button>
                     </div>
 
                     <div id="wallet-message" class="wallet-message"></div>

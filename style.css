@@ -246,14 +246,33 @@ a:hover {
     box-shadow: var(--box-shadow);
 }
 
-.wallet-status {
+.apikey-panel {
     text-align: center;
-    padding: 15px;
-    background-color: #e3f2fd;
-    border-radius: 8px;
-    margin-bottom: 20px;
+}
+
+.apikey-info {
+    margin-bottom: 25px;
+}
+
+.apikey-info p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.api-link {
     color: var(--primary-color);
     font-weight: 600;
+    text-decoration: underline;
+}
+
+.apikey-hint {
+    color: #888;
+    font-size: 0.95em !important;
+}
+
+#api-key-input {
+    font-family: monospace;
+    font-size: 0.95em;
 }
 
 .wallet-tabs {
