@@ -225,7 +225,8 @@
                     </p>
                     
                     <div class="input-group">
-                        <input type="text" id="api-key-input" placeholder="请输入 API Key (brkey_xxx)" autocomplete="off">
+                        <input type="text" id="username-input" placeholder="您的用户名" autocomplete="off" style="margin-bottom: 10px;">
+                        <input type="text" id="api-key-input" placeholder="API Key (brkey_xxx 或管理员密钥)" autocomplete="off">
                     </div>
                     
                     <button id="connect-btn" class="btn-full btn-primary">连接钱包</button>
@@ -292,22 +293,31 @@
             console.log('Wallet page loaded');
             
             if (apiKey) {
-                showWallet();
-                updateBalance();
-                
-                // 检测是否为管理员
-                if (!apiKey.startsWith('brkey_')) {
-                    document.getElementById('user-type').textContent = '管理员';
-                    document.getElementById('mint-section').classList.remove('hidden');
-                } else {
-                    document.getElementById('user-type').textContent = '普通用户';
-                    document.getElementById('mint-section').classList.add('hidden');
+                const savedUsername = localStorage.getItem('brcoin_username');
+                if (savedUsername) {
+                    showWallet();
+                    updateBalance();
+                    
+                    // 检测是否为管理员
+                    if (!apiKey.startsWith('brkey_')) {
+                        document.getElementById('user-type').textContent = '管理员 (' + savedUsername + ')';
+                        document.getElementById('mint-section').classList.remove('hidden');
+                    } else {
+                        document.getElementById('user-type').textContent = '普通用户 (' + savedUsername + ')';
+                        document.getElementById('mint-section').classList.add('hidden');
+                    }
                 }
             }
             
             // 连接按钮
             document.getElementById('connect-btn').addEventListener('click', function() {
+                const username = document.getElementById('username-input').value.trim();
                 const input = document.getElementById('api-key-input').value.trim();
+                
+                if (!username) {
+                    showMsg('请输入用户名', 'error');
+                    return;
+                }
                 
                 if (!input) {
                     showMsg('请输入 API Key', 'error');
@@ -316,16 +326,17 @@
                 
                 apiKey = input;
                 localStorage.setItem('brcoin_api_key', apiKey);
+                localStorage.setItem('brcoin_username', username);
                 showWallet();
                 updateBalance();
                 
                 // 检测是否为管理员
                 if (!input.startsWith('brkey_')) {
-                    document.getElementById('user-type').textContent = '管理员';
+                    document.getElementById('user-type').textContent = '管理员 (' + username + ')';
                     document.getElementById('mint-section').classList.remove('hidden');
                     showMsg('管理员钱包已连接！', 'success');
                 } else {
-                    document.getElementById('user-type').textContent = '普通用户';
+                    document.getElementById('user-type').textContent = '普通用户 (' + username + ')';
                     document.getElementById('mint-section').classList.add('hidden');
                     showMsg('钱包已连接！', 'success');
                 }
@@ -335,6 +346,9 @@
             document.getElementById('disconnect-btn').addEventListener('click', function() {
                 apiKey = null;
                 localStorage.removeItem('brcoin_api_key');
+                localStorage.removeItem('brcoin_username');
+                document.getElementById('username-input').value = '';
+                document.getElementById('api-key-input').value = '';
                 showLogin();
                 showMsg('已断开连接', 'info', 'wallet-message');
             });
@@ -352,13 +366,20 @@
                 showMsg('正在转账...', 'info', 'wallet-message');
                 
                 try {
+                    // 获取当前用户名
+                    const fromUser = localStorage.getItem('brcoin_username');
+                    if (!fromUser) {
+                        showMsg('会话已过期，请重新连接', 'error', 'wallet-message');
+                        return;
+                    }
+                    
                     const response = await fetch(`${API_BASE}/transfer`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'X-API-Key': apiKey
                         },
-                        body: JSON.stringify({ from: 'me', to, amount })
+                        body: JSON.stringify({ from: fromUser, to, amount })
                     });
                     
                     const data = await response.json().catch(() => ({}));
@@ -440,6 +461,11 @@
             });
             
             // 回车键支持
+            document.getElementById('username-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('api-key-input').focus();
+                }
+            });
             document.getElementById('api-key-input').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     document.getElementById('connect-btn').click();
@@ -455,7 +481,6 @@
         function showLogin() {
             document.getElementById('login-section').classList.remove('hidden');
             document.getElementById('wallet-section').classList.add('hidden');
-            document.getElementById('api-key-input').value = '';
         }
         
         function showMsg(text, type, elementId = 'message') {
@@ -472,17 +497,28 @@
         async function updateBalance() {
             if (!apiKey) return;
             
+            // 获取用户名
+            const username = localStorage.getItem('brcoin_username');
+            if (!username) {
+                document.getElementById('balance-amount').textContent = '请重新连接';
+                return;
+            }
+            
             try {
-                const response = await fetch(`${API_BASE}/balance?user=me`, {
+                const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`, {
                     headers: { 'X-API-Key': apiKey }
                 });
                 const data = await response.json();
                 
                 if (response.ok) {
                     document.getElementById('balance-amount').textContent = data.balance + ' BR';
+                } else {
+                    console.error('余额查询失败:', data.message);
+                    document.getElementById('balance-amount').textContent = '查询失败';
                 }
             } catch (err) {
                 console.error('获取余额失败:', err);
+                document.getElementById('balance-amount').textContent = '网络错误';
             }
         }
     </script>
