@@ -29,6 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // 页面内的加入按钮（公民页面、政府页面等）
+    document.querySelectorAll('#join-nation-btn-cta').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+    });
+
     function closeModal() {
         modal.classList.remove('active');
     }
@@ -76,6 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBalance();
     }
 
+    // 辅助函数：处理 API 响应
+    async function handleResponse(response) {
+        const text = await response.text();
+        try {
+            return { data: JSON.parse(text), ok: response.ok, status: response.status };
+        } catch (e) {
+            return { data: { message: text }, ok: response.ok, status: response.status };
+        }
+    }
+
     // 注册表单
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
@@ -90,21 +108,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
+                showMessage('正在注册...', 'info');
                 const response = await fetch(`${API_BASE}/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
 
-                const data = await response.json();
-                if (response.ok) {
+                const result = await handleResponse(response);
+                
+                if (result.ok) {
                     showMessage('注册成功！请登录', 'success');
-                    document.querySelector('[data-tab="login"]').click();
+                    document.getElementById('register-username').value = '';
+                    document.getElementById('register-password').value = '';
+                    setTimeout(() => {
+                        document.querySelector('[data-tab="login"]').click();
+                    }, 1000);
                 } else {
-                    showMessage(data.message || '注册失败', 'error');
+                    showMessage(result.data.message || `注册失败 (HTTP ${result.status})`, 'error');
                 }
             } catch (error) {
-                showMessage('网络错误，请稍后重试', 'error');
+                console.error('注册错误:', error);
+                showMessage('网络错误: ' + error.message, 'error');
             }
         });
     }
@@ -118,15 +143,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
 
             try {
+                showMessage('正在登录...', 'info');
                 const response = await fetch(`${API_BASE}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })
                 });
 
-                const data = await response.json();
-                if (response.ok && data.token) {
-                    apiKey = data.token;
+                const result = await handleResponse(response);
+                
+                if (result.ok && result.data.token) {
+                    apiKey = result.data.token;
                     currentUser = username;
                     localStorage.setItem('brcoin_api_key', apiKey);
                     localStorage.setItem('brcoin_user', currentUser);
@@ -134,10 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     updateBalance();
                     showMessage('登录成功！', 'success');
                 } else {
-                    showMessage(data.message || '登录失败', 'error');
+                    showMessage(result.data.message || `登录失败 (HTTP ${result.status})`, 'error');
                 }
             } catch (error) {
-                showMessage('网络错误，请稍后重试', 'error');
+                console.error('登录错误:', error);
+                showMessage('网络错误: ' + error.message, 'error');
             }
         });
     }
@@ -150,7 +178,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const to = document.getElementById('transfer-to').value;
             const amount = parseFloat(document.getElementById('transfer-amount').value);
 
+            if (!apiKey) {
+                showMessage('请先登录', 'error');
+                return;
+            }
+
             try {
+                showMessage('正在转账...', 'info');
                 const response = await fetch(`${API_BASE}/transfer`, {
                     method: 'POST',
                     headers: {
@@ -160,16 +194,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify({ from: currentUser, to, amount })
                 });
 
-                const data = await response.json();
-                if (response.ok) {
+                const result = await handleResponse(response);
+                
+                if (result.ok) {
                     showMessage('转账成功！', 'success');
                     updateBalance();
                     transferForm.reset();
                 } else {
-                    showMessage(data.message || '转账失败', 'error');
+                    showMessage(result.data.message || `转账失败 (HTTP ${result.status})`, 'error');
                 }
             } catch (error) {
-                showMessage('网络错误，请稍后重试', 'error');
+                console.error('转账错误:', error);
+                showMessage('网络错误: ' + error.message, 'error');
             }
         });
     }
@@ -185,17 +221,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch(`${API_BASE}/balance?user=${username}`);
-                const data = await response.json();
+                document.getElementById('query-result').textContent = '查询中...';
+                const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`);
+                const result = await handleResponse(response);
                 
-                if (response.ok) {
+                if (result.ok) {
                     document.getElementById('query-result').textContent = 
-                        `${username} 的余额: ${data.balance} BR`;
+                        `${username} 的余额: ${result.data.balance} BR`;
                 } else {
-                    showMessage(data.message || '查询失败', 'error');
+                    document.getElementById('query-result').textContent = '查询失败';
+                    showMessage(result.data.message || '查询失败', 'error');
                 }
             } catch (error) {
-                showMessage('网络错误，请稍后重试', 'error');
+                console.error('查询错误:', error);
+                document.getElementById('query-result').textContent = '查询失败';
+                showMessage('网络错误: ' + error.message, 'error');
             }
         });
     }
@@ -215,28 +255,45 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showWalletPanel() {
-    document.getElementById('wallet-status').style.display = 'none';
-    document.querySelector('.wallet-tabs').style.display = 'none';
-    document.getElementById('login-tab').classList.remove('active');
-    document.getElementById('register-tab').classList.remove('active');
-    document.getElementById('wallet-panel').style.display = 'block';
-    document.getElementById('wallet-username').textContent = `当前用户: ${currentUser}`;
+    const walletStatus = document.getElementById('wallet-status');
+    const walletTabs = document.querySelector('.wallet-tabs');
+    const walletPanel = document.getElementById('wallet-panel');
+    const walletUsername = document.getElementById('wallet-username');
+    
+    if (walletStatus) walletStatus.style.display = 'none';
+    if (walletTabs) walletTabs.style.display = 'none';
+    
+    const loginTab = document.getElementById('login-tab');
+    const registerTab = document.getElementById('register-tab');
+    if (loginTab) loginTab.classList.remove('active');
+    if (registerTab) registerTab.classList.remove('active');
+    
+    if (walletPanel) walletPanel.style.display = 'block';
+    if (walletUsername) walletUsername.textContent = `当前用户: ${currentUser}`;
 }
 
 function hideWalletPanel() {
-    document.getElementById('wallet-status').style.display = 'block';
-    document.querySelector('.wallet-tabs').style.display = 'flex';
-    document.getElementById('wallet-panel').style.display = 'none';
-    document.getElementById('login-tab').classList.add('active');
+    const walletStatus = document.getElementById('wallet-status');
+    const walletTabs = document.querySelector('.wallet-tabs');
+    const walletPanel = document.getElementById('wallet-panel');
+    const loginTab = document.getElementById('login-tab');
+    
+    if (walletStatus) walletStatus.style.display = 'block';
+    if (walletTabs) walletTabs.style.display = 'flex';
+    if (walletPanel) walletPanel.style.display = 'none';
+    if (loginTab) loginTab.classList.add('active');
 }
 
 async function updateBalance() {
+    if (!currentUser) return;
+    
     try {
-        const response = await fetch(`${API_BASE}/balance?user=${currentUser}`);
-        const data = await response.json();
+        const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(currentUser)}`);
+        const result = await response.json();
         
         if (response.ok) {
-            document.getElementById('balance-amount').textContent = `${data.balance} BR`;
+            const balanceEl = document.getElementById('balance-amount');
+            if (balanceEl) balanceEl.textContent = `${result.balance} BR`;
         }
     } catch (error) {
         console.error('获取余额失败:', error);
@@ -245,11 +302,15 @@ async function updateBalance() {
 
 function showMessage(message, type) {
     const msgEl = document.getElementById('wallet-message');
+    if (!msgEl) return;
+    
     msgEl.textContent = message;
     msgEl.className = `wallet-message ${type}`;
+    msgEl.style.display = 'block';
     
     setTimeout(() => {
         msgEl.className = 'wallet-message';
         msgEl.textContent = '';
+        msgEl.style.display = 'none';
     }, 3000);
 }
