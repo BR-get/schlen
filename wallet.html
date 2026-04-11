@@ -36,6 +36,7 @@
         
         .wallet-header p {
             opacity: 0.9;
+            font-size: 1em;
         }
         
         .wallet-body {
@@ -54,12 +55,14 @@
         .apikey-section h2 {
             color: #333;
             margin-bottom: 10px;
+            font-size: 1.5em;
         }
         
         .apikey-section .hint {
             color: #666;
             margin-bottom: 25px;
             font-size: 0.95em;
+            line-height: 1.5;
         }
         
         .apikey-section .api-link {
@@ -84,6 +87,11 @@
             font-size: 1em;
             font-family: monospace;
             transition: border-color 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .input-group input:last-child {
+            margin-bottom: 0;
         }
         
         .input-group input:focus {
@@ -149,6 +157,7 @@
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
+            font-size: 1.1em;
         }
         
         .form-row {
@@ -169,6 +178,7 @@
             margin-top: 15px;
             text-align: center;
             display: none;
+            word-break: break-word;
         }
         
         .message.success {
@@ -195,6 +205,7 @@
             margin-top: 20px;
             color: white;
             text-decoration: none;
+            padding: 10px;
         }
         
         .back-link:hover {
@@ -203,6 +214,102 @@
         
         .hidden {
             display: none !important;
+        }
+        
+        /* ==================== 响应式设计 ==================== */
+        @media (max-width: 768px) {
+            .wallet-page {
+                padding: 20px 15px;
+            }
+            
+            .wallet-box {
+                border-radius: 12px;
+            }
+            
+            .wallet-header {
+                padding: 20px 15px;
+            }
+            
+            .wallet-header h1 {
+                font-size: 1.6em;
+            }
+            
+            .wallet-header p {
+                font-size: 0.9em;
+            }
+            
+            .wallet-body {
+                padding: 20px 15px;
+            }
+            
+            .apikey-section .icon {
+                font-size: 2.5em;
+            }
+            
+            .apikey-section h2 {
+                font-size: 1.3em;
+            }
+            
+            .apikey-section .hint {
+                font-size: 0.9em;
+            }
+            
+            .input-group input {
+                padding: 12px;
+                font-size: 16px; /* 防止iOS缩放 */
+            }
+            
+            .btn-full {
+                padding: 12px;
+                font-size: 1em;
+                min-height: 48px; /* 触摸友好 */
+            }
+            
+            .balance-card {
+                padding: 20px 15px;
+            }
+            
+            .balance-card .amount {
+                font-size: 2em;
+            }
+            
+            .action-section h4 {
+                font-size: 1em;
+            }
+            
+            .form-row input {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .wallet-header h1 {
+                font-size: 1.4em;
+            }
+            
+            .balance-card .amount {
+                font-size: 1.8em;
+            }
+            
+            .apikey-section h2 {
+                font-size: 1.2em;
+            }
+        }
+        
+        /* 触摸设备优化 */
+        @media (hover: none) {
+            .btn-full:hover {
+                transform: none;
+            }
+            
+            .btn-primary:hover {
+                background: #007BFF;
+            }
+            
+            .btn-secondary:hover {
+                background: #f0f0f0;
+            }
         }
     </style>
 </head>
