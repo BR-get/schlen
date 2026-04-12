@@ -41,7 +41,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
         if (confirmBtn) {
             confirmBtn.addEventListener('click', () => {
-                window.location.href = 'mailto:joinschlen@shundebo.top?subject=Schlen联邦共和国入籍申请';
+                const subject = encodeURIComponent('Schlen联邦共和国入籍申请');
+                const body = encodeURIComponent(`称呼/昵称:
+联系方式(邮箱):
+所在地时区:
+
+申请理由:
+[请简单说明您为何想要加入Schlen联邦共和国]
+
+自我介绍:
+[请简单介绍一下自己]
+
+对Schlen的理解:
+[请描述您对液态民主和BR-coin的了解]
+
+期待与愿景:
+[您希望为Schlen贡献什么?]`);
+                window.location.href = `mailto:joinschlen@shundebo.top?subject=${subject}&body=${body}`;
                 modal.classList.remove('active');
             });
         }
