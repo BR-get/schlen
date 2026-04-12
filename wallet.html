@@ -340,7 +340,7 @@
                     </p>
                     
                     <div class="input-group">
-                        <input type="text" id="username-input" placeholder="您的用户名" autocomplete="off" style="margin-bottom: 10px;">
+                        <input type="text" id="username-input" placeholder="用户名（选填）" autocomplete="off" style="margin-bottom: 10px;">
                         <input type="text" id="api-key-input" placeholder="API Key (brkey_xxx 或管理员密钥)" autocomplete="off">
                     </div>
                     
@@ -391,6 +391,51 @@
                     
                     <button id="disconnect-btn" class="btn-full btn-secondary">断开连接</button>
                     
+                    <!-- 管理员功能 -->
+                    <div id="admin-section" class="action-section hidden">
+                        <h4>⚙️ 管理员功能</h4>
+                        <div class="form-row">
+                            <input type="text" id="admin-user" placeholder="目标用户名">
+                        </div>
+                        <div class="form-row">
+                            <input type="number" id="admin-value" placeholder="金额/数值">
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button id="deduct-btn" class="btn-full" style="background: #FF5722; color: white;">扣除资金</button>
+                            <button id="freeze-btn" class="btn-full" style="background: #FFC107; color: #333;">冻结账户</button>
+                            <button id="unfreeze-btn" class="btn-full" style="background: #4CAF50; color: white;">解冻账户</button>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                            <button id="setbalance-btn" class="btn-full" style="background: #9C27B0; color: white;">设置余额</button>
+                            <button id="deleteuser-btn" class="btn-full" style="background: #f44336; color: white;">删除用户</button>
+                        </div>
+                        <div id="admin-result" style="margin-top: 15px; text-align: center; font-weight: 600;"></div>
+                    </div>
+                    
+                    <!-- 用户信息 -->
+                    <div id="userinfo-section" class="action-section hidden">
+                        <h4>👤 用户信息</h4>
+                        <div class="form-row">
+                            <input type="text" id="userinfo-user" placeholder="输入用户名">
+                        </div>
+                        <button id="userinfo-btn" class="btn-full btn-primary">查询用户信息</button>
+                        <div id="userinfo-result" style="margin-top: 15px; font-size: 0.9em;"></div>
+                    </div>
+                    
+                    <!-- 所有用户 -->
+                    <div id="users-section" class="action-section hidden">
+                        <h4>📋 所有用户列表</h4>
+                        <button id="users-btn" class="btn-full btn-primary">刷新列表</button>
+                        <div id="users-result" style="margin-top: 15px; max-height: 250px; overflow-y: auto; font-size: 0.85em;"></div>
+                    </div>
+                    
+                    <!-- 交易记录 -->
+                    <div id="transactions-section" class="action-section">
+                        <h4>📜 交易记录</h4>
+                        <button id="transactions-btn" class="btn-full btn-primary">查看记录</button>
+                        <div id="transactions-result" style="margin-top: 15px; max-height: 250px; overflow-y: auto; font-size: 0.8em;"></div>
+                    </div>
+                    
                     <div id="wallet-message" class="message"></div>
                 </div>
             </div>
@@ -408,19 +453,20 @@
             console.log('Wallet page loaded');
             
             if (apiKey) {
+                showWallet();
                 const savedUsername = localStorage.getItem('brcoin_username');
-                if (savedUsername) {
-                    showWallet();
+                // 检测是否为管理员
+                if (!apiKey.startsWith('brkey_')) {
+                    document.getElementById('user-type').textContent = '管理员';
+                    document.getElementById('mint-section').classList.remove('hidden');
+                    document.getElementById('admin-section').classList.remove('hidden');
+                    document.getElementById('userinfo-section').classList.remove('hidden');
+                    document.getElementById('users-section').classList.remove('hidden');
+                    document.getElementById('balance-amount').textContent = 'N/A (无账户)';
+                } else {
+                    document.getElementById('user-type').textContent = savedUsername || '普通用户';
+                    document.getElementById('mint-section').classList.add('hidden');
                     updateBalance();
-                    
-                    // 检测是否为管理员
-                    if (!apiKey.startsWith('brkey_')) {
-                        document.getElementById('user-type').textContent = '管理员 (' + savedUsername + ')';
-                        document.getElementById('mint-section').classList.remove('hidden');
-                    } else {
-                        document.getElementById('user-type').textContent = '普通用户 (' + savedUsername + ')';
-                        document.getElementById('mint-section').classList.add('hidden');
-                    }
                 }
             }
             
@@ -429,11 +475,6 @@
                 const username = document.getElementById('username-input').value.trim();
                 const input = document.getElementById('api-key-input').value.trim();
                 
-                if (!username) {
-                    showMsg('请输入用户名', 'error');
-                    return;
-                }
-                
                 if (!input) {
                     showMsg('请输入 API Key', 'error');
                     return;
@@ -441,17 +482,25 @@
                 
                 apiKey = input;
                 localStorage.setItem('brcoin_api_key', apiKey);
-                localStorage.setItem('brcoin_username', username);
+                if (username) {
+                    localStorage.setItem('brcoin_username', username);
+                } else {
+                    localStorage.removeItem('brcoin_username');
+                }
                 showWallet();
                 updateBalance();
                 
                 // 检测是否为管理员
                 if (!input.startsWith('brkey_')) {
-                    document.getElementById('user-type').textContent = '管理员 (' + username + ')';
+                    document.getElementById('user-type').textContent = '管理员';
                     document.getElementById('mint-section').classList.remove('hidden');
+                    document.getElementById('admin-section').classList.remove('hidden');
+                    document.getElementById('userinfo-section').classList.remove('hidden');
+                    document.getElementById('users-section').classList.remove('hidden');
+                    document.getElementById('balance-amount').textContent = 'N/A (无账户)';
                     showMsg('管理员钱包已连接！', 'success');
                 } else {
-                    document.getElementById('user-type').textContent = '普通用户 (' + username + ')';
+                    document.getElementById('user-type').textContent = username || '普通用户';
                     document.getElementById('mint-section').classList.add('hidden');
                     showMsg('钱包已连接！', 'success');
                 }
@@ -612,30 +661,293 @@
         async function updateBalance() {
             if (!apiKey) return;
             
-            // 获取用户名
             const username = localStorage.getItem('brcoin_username');
-            if (!username) {
-                document.getElementById('balance-amount').textContent = '请重新连接';
+            
+            // 如果有用户名，显示余额
+            if (username) {
+                try {
+                    const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`, {
+                        headers: { 'X-API-Key': apiKey }
+                    });
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        document.getElementById('balance-amount').textContent = data.balance + ' BR';
+                    } else {
+                        document.getElementById('balance-amount').textContent = '查询失败';
+                    }
+                } catch (err) {
+                    document.getElementById('balance-amount').textContent = '网络错误';
+                }
+            } else {
+                // 无用户名时显示提示
+                document.getElementById('balance-amount').textContent = '请输入用户名查询';
+            }
+        }
+        
+        // ===== 管理员功能 =====
+        
+        // 扣除资金
+        document.getElementById('deduct-btn').addEventListener('click', async function() {
+            const user = document.getElementById('admin-user').value.trim();
+            const amount = parseFloat(document.getElementById('admin-value').value);
+            
+            if (!user || !amount || amount <= 0) {
+                document.getElementById('admin-result').textContent = '请填写用户名和金额';
+                document.getElementById('admin-result').style.color = '#f44336';
                 return;
             }
             
+            document.getElementById('admin-result').textContent = '处理中...';
+            document.getElementById('admin-result').style.color = '#666';
+            
             try {
-                const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`, {
+                const response = await fetch(`${API_BASE}/deduct`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+                    body: JSON.stringify({ user, amount })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('admin-result').textContent = `成功扣除 ${amount} BR`;
+                    document.getElementById('admin-result').style.color = '#4CAF50';
+                } else {
+                    document.getElementById('admin-result').textContent = data.message || '操作失败';
+                    document.getElementById('admin-result').style.color = '#f44336';
+                }
+            } catch (err) {
+                document.getElementById('admin-result').textContent = '网络错误';
+                document.getElementById('admin-result').style.color = '#f44336';
+            }
+        });
+        
+        // 冻结账户
+        document.getElementById('freeze-btn').addEventListener('click', async function() {
+            const user = document.getElementById('admin-user').value.trim();
+            
+            if (!user) {
+                document.getElementById('admin-result').textContent = '请填写用户名';
+                document.getElementById('admin-result').style.color = '#f44336';
+                return;
+            }
+            
+            document.getElementById('admin-result').textContent = '处理中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+                    body: JSON.stringify({ action: 'freeze', user })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('admin-result').textContent = `${user} 已冻结`;
+                    document.getElementById('admin-result').style.color = '#4CAF50';
+                } else {
+                    document.getElementById('admin-result').textContent = data.message || '操作失败';
+                    document.getElementById('admin-result').style.color = '#f44336';
+                }
+            } catch (err) {
+                document.getElementById('admin-result').textContent = '网络错误';
+                document.getElementById('admin-result').style.color = '#f44336';
+            }
+        });
+        
+        // 解冻账户
+        document.getElementById('unfreeze-btn').addEventListener('click', async function() {
+            const user = document.getElementById('admin-user').value.trim();
+            
+            if (!user) {
+                document.getElementById('admin-result').textContent = '请填写用户名';
+                document.getElementById('admin-result').style.color = '#f44336';
+                return;
+            }
+            
+            document.getElementById('admin-result').textContent = '处理中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+                    body: JSON.stringify({ action: 'unfreeze', user })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('admin-result').textContent = `${user} 已解冻`;
+                    document.getElementById('admin-result').style.color = '#4CAF50';
+                } else {
+                    document.getElementById('admin-result').textContent = data.message || '操作失败';
+                    document.getElementById('admin-result').style.color = '#f44336';
+                }
+            } catch (err) {
+                document.getElementById('admin-result').textContent = '网络错误';
+                document.getElementById('admin-result').style.color = '#f44336';
+            }
+        });
+        
+        // 设置余额
+        document.getElementById('setbalance-btn').addEventListener('click', async function() {
+            const user = document.getElementById('admin-user').value.trim();
+            const value = parseFloat(document.getElementById('admin-value').value);
+            
+            if (!user || value === undefined || value < 0) {
+                document.getElementById('admin-result').textContent = '请填写用户名和数值';
+                document.getElementById('admin-result').style.color = '#f44336';
+                return;
+            }
+            
+            document.getElementById('admin-result').textContent = '处理中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+                    body: JSON.stringify({ action: 'setBalance', user, value })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('admin-result').textContent = `${user} 余额已设为 ${value} BR`;
+                    document.getElementById('admin-result').style.color = '#4CAF50';
+                } else {
+                    document.getElementById('admin-result').textContent = data.message || '操作失败';
+                    document.getElementById('admin-result').style.color = '#f44336';
+                }
+            } catch (err) {
+                document.getElementById('admin-result').textContent = '网络错误';
+                document.getElementById('admin-result').style.color = '#f44336';
+            }
+        });
+        
+        // 删除用户
+        document.getElementById('deleteuser-btn').addEventListener('click', async function() {
+            const user = document.getElementById('admin-user').value.trim();
+            
+            if (!user) {
+                document.getElementById('admin-result').textContent = '请填写用户名';
+                document.getElementById('admin-result').style.color = '#f44336';
+                return;
+            }
+            
+            if (!confirm(`确定删除用户 ${user}？此操作不可恢复！`)) return;
+            
+            document.getElementById('admin-result').textContent = '处理中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+                    body: JSON.stringify({ action: 'deleteUser', user, value: 1 })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('admin-result').textContent = `${user} 已删除`;
+                    document.getElementById('admin-result').style.color = '#4CAF50';
+                } else {
+                    document.getElementById('admin-result').textContent = data.message || '操作失败';
+                    document.getElementById('admin-result').style.color = '#f44336';
+                }
+            } catch (err) {
+                document.getElementById('admin-result').textContent = '网络错误';
+                document.getElementById('admin-result').style.color = '#f44336';
+            }
+        });
+        
+        // 用户信息
+        document.getElementById('userinfo-btn').addEventListener('click', async function() {
+            const user = document.getElementById('userinfo-user').value.trim();
+            
+            if (!user) {
+                document.getElementById('userinfo-result').textContent = '请输入用户名';
+                return;
+            }
+            
+            document.getElementById('userinfo-result').textContent = '查询中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/userinfo?user=${encodeURIComponent(user)}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    const status = data.frozen ? '❌ 已冻结' : '✅ 正常';
+                    document.getElementById('userinfo-result').innerHTML = `
+                        <div style="margin-bottom: 10px;"><strong>用户名:</strong> ${data.username}</div>
+                        <div style="margin-bottom: 10px;"><strong>余额:</strong> ${data.balance} BR</div>
+                        <div style="margin-bottom: 10px;"><strong>状态:</strong> ${status}</div>
+                        <div style="margin-bottom: 10px;"><strong>注册时间:</strong> ${data.createdAt || 'N/A'}</div>
+                    `;
+                } else {
+                    document.getElementById('userinfo-result').textContent = data.message || '查询失败';
+                }
+            } catch (err) {
+                document.getElementById('userinfo-result').textContent = '网络错误';
+            }
+        });
+        
+        // 所有用户列表
+        document.getElementById('users-btn').addEventListener('click', async function() {
+            document.getElementById('users-result').textContent = '加载中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/users`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    let html = '<table style="width: 100%; border-collapse: collapse;">';
+                    html += '<tr style="background: #f0f0f0;"><th style="padding: 8px; text-align: left;">用户名</th><th style="padding: 8px; text-align: right;">余额</th><th style="padding: 8px; text-align: center;">状态</th></tr>';
+                    data.users.forEach(u => {
+                        const status = u.frozen ? '❌' : '✅';
+                        html += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;">${u.username}</td><td style="padding: 8px; text-align: right;">${u.balance}</td><td style="padding: 8px; text-align: center;">${status}</td></tr>`;
+                    });
+                    html += '</table>';
+                    document.getElementById('users-result').innerHTML = html;
+                } else {
+                    document.getElementById('users-result').textContent = '加载失败';
+                }
+            } catch (err) {
+                document.getElementById('users-result').textContent = '网络错误';
+            }
+        });
+        
+        // 交易记录
+        document.getElementById('transactions-btn').addEventListener('click', async function() {
+            document.getElementById('transactions-result').textContent = '加载中...';
+            
+            try {
+                const response = await fetch(`${API_BASE}/transactions`, {
                     headers: { 'X-API-Key': apiKey }
                 });
                 const data = await response.json();
                 
                 if (response.ok) {
-                    document.getElementById('balance-amount').textContent = data.balance + ' BR';
+                    if (!data.transactions || data.transactions.length === 0) {
+                        document.getElementById('transactions-result').textContent = '暂无交易记录';
+                        return;
+                    }
+                    
+                    let html = '';
+                    data.transactions.slice(0, 50).forEach(t => {
+                        const type = t.type || t.action || 'transfer';
+                        const time = t.timestamp || t.time || '';
+                        html += `<div style="padding: 10px; border-bottom: 1px solid #eee;">
+                            <div style="font-weight: 600;">${type.toUpperCase()}</div>
+                            <div style="color: #666; font-size: 0.9em;">${t.from || ''} → ${t.to || ''} | ${t.amount || t.value || 0} BR</div>
+                            <div style="color: #999; font-size: 0.8em;">${time}</div>
+                        </div>`;
+                    });
+                    document.getElementById('transactions-result').innerHTML = html;
                 } else {
-                    console.error('余额查询失败:', data.message);
-                    document.getElementById('balance-amount').textContent = '查询失败';
+                    document.getElementById('transactions-result').textContent = data.message || '加载失败';
                 }
             } catch (err) {
-                console.error('获取余额失败:', err);
-                document.getElementById('balance-amount').textContent = '网络错误';
+                document.getElementById('transactions-result').textContent = '网络错误';
             }
-        }
+        });
+        
     </script>
 </body>
 </html>
