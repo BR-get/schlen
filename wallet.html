@@ -702,22 +702,36 @@
             document.getElementById('admin-result').style.color = '#666';
             
             try {
+                // 同时调用 /deduct 和 /admin deduct
                 const response = await fetch(`${API_BASE}/deduct`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
                     body: JSON.stringify({ user, amount })
                 });
-                const data = await response.json();
+                const data = await response.json().catch(() => ({}));
                 
                 if (response.ok) {
                     document.getElementById('admin-result').textContent = `成功扣除 ${amount} BR`;
                     document.getElementById('admin-result').style.color = '#4CAF50';
                 } else {
-                    document.getElementById('admin-result').textContent = data.message || '操作失败';
-                    document.getElementById('admin-result').style.color = '#f44336';
+                    // 尝试用 admin 接口
+                    const adminResp = await fetch(`${API_BASE}/admin`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+                        body: JSON.stringify({ action: 'deduct', user, value: amount })
+                    });
+                    const adminData = await adminResp.json().catch(() => ({}));
+                    
+                    if (adminResp.ok) {
+                        document.getElementById('admin-result').textContent = `成功扣除 ${amount} BR`;
+                        document.getElementById('admin-result').style.color = '#4CAF50';
+                    } else {
+                        document.getElementById('admin-result').textContent = adminData.message || data.message || '操作失败';
+                        document.getElementById('admin-result').style.color = '#f44336';
+                    }
                 }
             } catch (err) {
-                document.getElementById('admin-result').textContent = '网络错误';
+                document.getElementById('admin-result').textContent = '网络错误: ' + err.message;
                 document.getElementById('admin-result').style.color = '#f44336';
             }
         });
@@ -873,18 +887,27 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    const status = data.frozen ? '❌ 已冻结' : '✅ 正常';
+                    const frozen = data.frozen !== undefined ? data.frozen : false;
+                    const status = frozen ? '❌ 已冻结' : '✅ 正常';
+                    const username = data.username || data.name || user;
+                    const balance = data.balance !== undefined ? data.balance : 'N/A';
+                    const txCount = data.txCount || data.transactionCount || data.transactions || 0;
+                    const createdAt = data.createdAt || data.created || data.joinTime || 'N/A';
+                    
                     document.getElementById('userinfo-result').innerHTML = `
-                        <div style="margin-bottom: 10px;"><strong>用户名:</strong> ${data.username}</div>
-                        <div style="margin-bottom: 10px;"><strong>余额:</strong> ${data.balance} BR</div>
-                        <div style="margin-bottom: 10px;"><strong>状态:</strong> ${status}</div>
-                        <div style="margin-bottom: 10px;"><strong>注册时间:</strong> ${data.createdAt || 'N/A'}</div>
+                        <div style="padding: 15px; background: #f5f5f5; border-radius: 8px;">
+                            <div style="margin-bottom: 10px;"><strong>用户名:</strong> ${username}</div>
+                            <div style="margin-bottom: 10px;"><strong>余额:</strong> ${balance} BR</div>
+                            <div style="margin-bottom: 10px;"><strong>状态:</strong> ${status}</div>
+                            <div style="margin-bottom: 10px;"><strong>交易次数:</strong> ${txCount} 次</div>
+                            <div><strong>注册时间:</strong> ${createdAt}</div>
+                        </div>
                     `;
                 } else {
                     document.getElementById('userinfo-result').textContent = data.message || '查询失败';
                 }
             } catch (err) {
-                document.getElementById('userinfo-result').textContent = '网络错误';
+                document.getElementById('userinfo-result').textContent = '网络错误: ' + err.message;
             }
         });
         
@@ -897,19 +920,34 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    let html = '<table style="width: 100%; border-collapse: collapse;">';
-                    html += '<tr style="background: #f0f0f0;"><th style="padding: 8px; text-align: left;">用户名</th><th style="padding: 8px; text-align: right;">余额</th><th style="padding: 8px; text-align: center;">状态</th></tr>';
-                    data.users.forEach(u => {
+                    // 处理可能的返回格式
+                    const users = Array.isArray(data) ? data : (data.users || []);
+                    
+                    if (!users || users.length === 0) {
+                        document.getElementById('users-result').textContent = '暂无用户';
+                        return;
+                    }
+                    
+                    let html = '<div style="max-height: 250px; overflow-y: auto;">';
+                    html += '<table style="width: 100%; border-collapse: collapse; font-size: 0.85em;">';
+                    html += '<tr style="background: #e0e0e0;"><th style="padding: 8px; text-align: left;">用户名</th><th style="padding: 8px; text-align: right;">余额</th><th style="padding: 8px; text-align: center;">冻结</th></tr>';
+                    users.forEach((u, i) => {
                         const status = u.frozen ? '❌' : '✅';
-                        html += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;">${u.username}</td><td style="padding: 8px; text-align: right;">${u.balance}</td><td style="padding: 8px; text-align: center;">${status}</td></tr>`;
+                        const frozenStyle = u.frozen ? 'color: #f44336;' : 'color: #4CAF50;';
+                        html += `<tr style="background: ${i%2===0?'#f9f9f9':'#fff'}; border-bottom: 1px solid #eee;">
+                            <td style="padding: 8px;">${u.username || u.name || u.user}</td>
+                            <td style="padding: 8px; text-align: right;">${u.balance || 0} BR</td>
+                            <td style="padding: 8px; text-align: center; ${frozenStyle}">${status}</td>
+                        </tr>`;
                     });
-                    html += '</table>';
+                    html += '</table></div>';
+                    html += `<div style="margin-top: 10px; text-align: center; color: #666; font-size: 0.8em;">共 ${users.length} 位用户</div>`;
                     document.getElementById('users-result').innerHTML = html;
                 } else {
-                    document.getElementById('users-result').textContent = '加载失败';
+                    document.getElementById('users-result').textContent = data.message || '加载失败';
                 }
             } catch (err) {
-                document.getElementById('users-result').textContent = '网络错误';
+                document.getElementById('users-result').textContent = '网络错误: ' + err.message;
             }
         });
         
@@ -924,27 +962,38 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    if (!data.transactions || data.transactions.length === 0) {
+                    // 处理可能的返回格式：可能是数组或 {transactions: [...]} 或 {records: [...]}
+                    const records = Array.isArray(data) ? data : (data.transactions || data.records || []);
+                    
+                    if (!records || records.length === 0) {
                         document.getElementById('transactions-result').textContent = '暂无交易记录';
                         return;
                     }
                     
                     let html = '';
-                    data.transactions.slice(0, 50).forEach(t => {
-                        const type = t.type || t.action || 'transfer';
-                        const time = t.timestamp || t.time || '';
-                        html += `<div style="padding: 10px; border-bottom: 1px solid #eee;">
-                            <div style="font-weight: 600;">${type.toUpperCase()}</div>
-                            <div style="color: #666; font-size: 0.9em;">${t.from || ''} → ${t.to || ''} | ${t.amount || t.value || 0} BR</div>
-                            <div style="color: #999; font-size: 0.8em;">${time}</div>
+                    records.slice(0, 20).forEach((t, i) => {
+                        const type = (t.type || t.action || 'transfer').toUpperCase();
+                        const amount = t.amount || t.value || 0;
+                        const from = t.from || t.fromUser || '';
+                        const to = t.to || t.toUser || '';
+                        const time = t.timestamp || t.time || t.createdAt || '';
+                        const status = t.status || 'completed';
+                        
+                        html += `<div style="padding: 8px; border-bottom: 1px solid #eee; background: ${i%2===0?'#f9f9f9':'#fff'};">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-weight: 600;">${type}</span>
+                                <span style="color: ${type === 'MINT' ? '#4CAF50' : type === 'DEDUCT' ? '#f44336' : '#007BFF'};">${amount} BR</span>
+                            </div>
+                            <div style="color: #666; font-size: 0.85em; margin-top: 4px;">${from ? from + ' → ' : ''}${to}</div>
+                            <div style="color: #999; font-size: 0.75em; margin-top: 2px;">${time}</div>
                         </div>`;
                     });
-                    document.getElementById('transactions-result').innerHTML = html;
+                    document.getElementById('transactions-result').innerHTML = html || '暂无交易记录';
                 } else {
                     document.getElementById('transactions-result').textContent = data.message || '加载失败';
                 }
             } catch (err) {
-                document.getElementById('transactions-result').textContent = '网络错误';
+                document.getElementById('transactions-result').textContent = '网络错误: ' + err.message;
             }
         });
         
