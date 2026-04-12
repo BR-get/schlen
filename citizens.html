@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>公民专区 - Schlen联邦共和国</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+        <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 <body>
     <header class="main-header">
@@ -154,6 +155,12 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Valine评论 -->
+        <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+            <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
+            <div id="vcomments"></div>
+        </div>
     </main>
 
     <footer class="main-footer">
@@ -201,5 +208,12 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+        });
+    </script>
 </body>
 </html>

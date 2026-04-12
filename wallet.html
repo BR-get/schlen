@@ -320,6 +320,7 @@
             }
         }
     </style>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 <body>
     <div class="wallet-page">
@@ -443,7 +444,20 @@
         
         <a href="index.html" class="back-link">← 返回官网</a>
     </div>
+    
+    <!-- Valine评论 -->
+    <div style="max-width: 500px; margin: 40px auto; padding: 0 20px;">
+        <h3 style="text-align: center; margin-bottom: 20px; color: white;">💬 留言</h3>
+        <div id="vcomments"></div>
+    </div>
 
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+        });
+    </script>
     <script>
         const API_BASE = 'https://coin.schlen.top';
         let apiKey = localStorage.getItem('brcoin_api_key');
