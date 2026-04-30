@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 期待与愿景:
 [您希望为Schlen贡献什么?]`);
-                window.location.href = `mailto:joinschlen@shundebo.top?subject=${subject}&body=${body}`;
+                window.location.href = `mailto:join@schlen.top?subject=${subject}&body=${body}`;
                 modal.classList.remove('active');
             });
         }
