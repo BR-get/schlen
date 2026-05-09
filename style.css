@@ -1846,3 +1846,202 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+/* ==================== Valine è¯„è®ºç³»ç»Ÿæ ·å¼ ==================== */
+#vcomments {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+#vcomments .vheader {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+#vcomments .vheader .vinput {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    transition: border-color 0.3s ease;
+}
+#vcomments .vheader .vinput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+#vcomments .vedit {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+}
+#vcomments .vedit:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+#vcomments .vcontrol {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+#vcomments .vinfo {
+    font-size: 0.9em;
+    color: #888;
+}
+#vcomments .vbtn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+#vcomments .vbtn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+#vcomments .vcount {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--accent-color);
+}
+#vcomments .vlist {
+    margin-top: 25px;
+}
+#vcomments .vcard {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 0.3s ease;
+}
+#vcomments .vcard:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+#vcomments .vh {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+#vcomments .vimg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 2px solid var(--primary-color);
+}
+#vcomments .vhead {
+    flex: 1;
+}
+#vcomments .vnick {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1em;
+    margin-right: 10px;
+}
+#vcomments .vsys {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.75em;
+}
+#vcomments .vmeta {
+    color: #888;
+    font-size: 0.85em;
+}
+#vcomments .vcontent {
+    color: var(--text-dark);
+    line-height: 1.8;
+    margin: 12px 0;
+    font-size: 0.95em;
+}
+#vcomments .vcomment {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--accent-color);
+}
+#vcomments .vreply {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+#vcomments .vbtn:last-child {
+    background-color: var(--accent-color);
+}
+#vcomments .vbtn:last-child:hover {
+    background-color: #e6911c;
+}
+#vcomments .paginated .vcard {
+    border-left: 3px solid var(--primary-color);
+}
+#vcomments .empty {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+    font-size: 1em;
+}
+#vcomments .vempty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+#vcomments .vempty .vicon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+/* Valine å“åº”å¼ä¼˜åŒ– */
+@media (max-width: 768px) {
+    #vcomments {
+        padding: 20px 15px;
+    }
+    
+    #vcomments .vheader {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #vcomments .vheader .vinput {
+        width: 100%;
+    }
+    
+    #vcomments .vcontrol {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    #vcomments .vbtn {
+        width: 100%;
+    }
+    
+    #vcomments .vcard {
+        padding: 15px;
+    }
+    
+    #vcomments .vimg {
+        width: 40px;
+        height: 40px;
+    }
+}
