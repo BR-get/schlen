@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,9 +15,11 @@
     <title>法律法规 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <header class="main-header">
         <nav class="navbar">
@@ -34,9 +37,9 @@
                 <li><a href="support.html">支持</a></li>
                 <li><a href="x.html">X</a></li>
                 <li><a href="wallet.html">BR-coin</a></li>
-                                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
+                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
+                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
+                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
             </ul>
         </nav>
     </header>
@@ -51,7 +54,7 @@
 
         <section class="content-section">
             <div class="container">
-                
+
                 <!-- 法律体系说明 -->
                 <div class="info-card full-width" style="margin-bottom: 40px;">
                     <h3>📜 法律体系概述</h3>
@@ -63,7 +66,7 @@
                 <div class="law-section">
                     <h3>💰 数字经济基本法</h3>
                     <p class="law-meta">生效日期：2026年4月30日 | 投票结果：3:0 通过</p>
-                    
+
                     <div class="law-article">
                         <h4>第一条 立法目的</h4>
                         <p>为促进数字经济健康发展，保护数字资产安全，规范数字货币流通，维护市场秩序，制定本法。</p>
@@ -99,7 +102,7 @@
                 <div class="law-section">
                     <h3>🌿 环境保护法</h3>
                     <p class="law-meta">生效日期：2026年4月30日 | 投票结果：3:0 通过</p>
-                    
+
                     <div class="law-article">
                         <h4>第一条 立法目的</h4>
                         <p>为保护和改善环境，防治污染和其他公害，保障公众健康，推进生态文明建设，促进经济社会可持续发展，制定本法。</p>
@@ -140,7 +143,7 @@
                 <div class="law-section">
                     <h3>⚖️ 公民权利保障法</h3>
                     <p class="law-meta">生效日期：2026年4月30日 | 投票结果：3:0 通过</p>
-                    
+
                     <div class="law-article">
                         <h4>第一条 立法目的</h4>
                         <p>为保障公民基本权利，维护人格尊严，促进社会公平正义，制定本法。</p>
@@ -181,7 +184,7 @@
                 <div class="law-section">
                     <h3>🪙 BR-coin管理条例</h3>
                     <p class="law-meta">生效日期：2026年4月30日 | 投票结果：3:0 通过</p>
-                    
+
                     <div class="law-article">
                         <h4>第一条 发行管理</h4>
                         <p>BR-coin由国家统一发行和管理。任何组织和个人不得私自发行数字货币。</p>
@@ -217,7 +220,7 @@
                 <div class="law-section">
                     <h3>🗳️ 液态民主实施细则</h3>
                     <p class="law-meta">生效日期：2026年4月30日 | 投票结果：3:0 通过</p>
-                    
+
                     <div class="law-article">
                         <h4>第一条 投票权行使</h4>
                         <p>每位公民对每个议题享有一票投票权。可以选择直接投票，也可以委托他人代为投票。</p>
@@ -304,7 +307,24 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
 
@@ -314,39 +334,40 @@
             padding: 30px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         .law-section h3 {
             color: #007BFF;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #007BFF;
         }
-        
+
         .law-meta {
             color: #666;
             font-size: 0.9em;
             margin-bottom: 25px;
             font-style: italic;
         }
-        
+
         .law-article {
             margin-bottom: 25px;
             padding-left: 20px;
             border-left: 3px solid #e0e0e0;
         }
-        
+
         .law-article h4 {
             color: #333;
             margin-bottom: 10px;
             font-size: 1.1em;
         }
-        
+
         .law-article p {
             color: #555;
             line-height: 1.8;
         }
     </style>
 </body>
+
 </html>

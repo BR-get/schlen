@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,9 +15,11 @@
     <title>下载中心 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <header class="main-header">
         <nav class="navbar">
@@ -34,9 +37,9 @@
                 <li><a href="support.html">支持</a></li>
                 <li><a href="x.html">X</a></li>
                 <li><a href="wallet.html">BR-coin</a></li>
-                                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
+                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
+                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
+                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
             </ul>
         </nav>
     </header>
@@ -51,7 +54,7 @@
 
         <section class="content-section">
             <div class="container">
-                
+
                 <!-- 国旗国徽 -->
                 <div class="download-section">
                     <h3>🏴 国旗与国徽</h3>
@@ -63,7 +66,7 @@
                             <p class="file-info">格式：PNG | 尺寸：2000x1333px</p>
                             <a href="国旗.png" download class="btn btn-primary">下载</a>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">🛡️</div>
                             <h4>国徽（即将推出）</h4>
@@ -85,7 +88,7 @@
                             <p class="file-info">格式：PDF | 大小：约500KB</p>
                             <a href="constitution.html" class="btn btn-primary">在线阅读</a>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">⚖️</div>
                             <h4>法律法规汇编</h4>
@@ -93,7 +96,7 @@
                             <p class="file-info">格式：PDF | 大小：约1MB</p>
                             <a href="laws.html" class="btn btn-primary">在线阅读</a>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">🗳️</div>
                             <h4>液态民主白皮书</h4>
@@ -115,7 +118,7 @@
                             <p class="file-info">格式：PSD/PNG</p>
                             <button class="btn btn-secondary" disabled>开发中</button>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">📘</div>
                             <h4>护照模板</h4>
@@ -123,7 +126,7 @@
                             <p class="file-info">格式：PSD/PDF</p>
                             <button class="btn btn-secondary" disabled>开发中</button>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">📜</div>
                             <h4>公民证书</h4>
@@ -145,7 +148,7 @@
                             <p class="file-info">格式：SVG/PNG/AI</p>
                             <button class="btn btn-secondary" disabled>制作中</button>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">🖼️</div>
                             <h4>宣传海报</h4>
@@ -153,7 +156,7 @@
                             <p class="file-info">格式：JPG/PNG</p>
                             <button class="btn btn-secondary" disabled>制作中</button>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">🎬</div>
                             <h4>宣传视频</h4>
@@ -175,7 +178,7 @@
                             <p class="file-info">格式：HTML/PDF</p>
                             <a href="https://coin.schlen.top" target="_blank" class="btn btn-primary">访问API</a>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">🔗</div>
                             <h4>区块链白皮书</h4>
@@ -183,7 +186,7 @@
                             <p class="file-info">格式：PDF</p>
                             <button class="btn btn-secondary" disabled>编写中</button>
                         </div>
-                        
+
                         <div class="download-card">
                             <div class="download-icon">📊</div>
                             <h4>开源代码</h4>
@@ -260,7 +263,24 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
 
@@ -268,63 +288,63 @@
         .download-section {
             margin-bottom: 50px;
         }
-        
+
         .download-section h3 {
             color: #007BFF;
             margin-bottom: 25px;
             padding-bottom: 10px;
             border-bottom: 2px solid #007BFF;
         }
-        
+
         .download-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
-        
+
         .download-card {
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        
+
         .download-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
-        
+
         .download-icon {
             font-size: 3em;
             margin-bottom: 15px;
         }
-        
+
         .download-card h4 {
             color: #333;
             margin-bottom: 10px;
             font-size: 1.2em;
         }
-        
+
         .download-card p {
             color: #666;
             margin-bottom: 10px;
             line-height: 1.6;
         }
-        
+
         .file-info {
             font-size: 0.85em;
             color: #999;
             margin-bottom: 15px !important;
         }
-        
+
         .download-card .btn {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
         }
-        
+
         @media (max-width: 768px) {
             .download-grid {
                 grid-template-columns: 1fr;
@@ -332,4 +352,5 @@
         }
     </style>
 </body>
+
 </html>

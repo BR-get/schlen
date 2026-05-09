@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,9 +15,11 @@
     <title>公民专区 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
-        <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <header class="main-header">
         <nav class="navbar">
@@ -34,9 +37,9 @@
                 <li><a href="support.html">支持</a></li>
                 <li><a href="x.html">X</a></li>
                 <li><a href="wallet.html">BR-coin</a></li>
-                                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
+                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
+                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
+                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
             </ul>
         </nav>
     </header>
@@ -133,7 +136,7 @@
                 <div class="citizens-section">
                     <h3>公民论坛</h3>
                     <p class="section-desc">仅供公民参与的内部讨论区（仅展示示例）</p>
-                    
+
                     <div class="forum-preview">
                         <div class="forum-topic">
                             <div class="topic-icon">📋</div>
@@ -163,7 +166,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Valine评论 -->
         <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
             <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
@@ -216,8 +219,26 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
 </body>
+
 </html>

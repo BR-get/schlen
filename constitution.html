@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,9 +15,11 @@
     <title>宪法 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <header class="main-header">
         <nav class="navbar">
@@ -52,7 +55,7 @@
         <section class="content-section">
             <div class="container">
                 <div class="constitution-content">
-                    
+
                     <!-- 序言 -->
                     <div class="constitution-section">
                         <h3>序言</h3>
@@ -63,7 +66,7 @@
                     <!-- 第一章：总则 -->
                     <div class="constitution-section">
                         <h3>第一章 总则</h3>
-                        
+
                         <div class="article">
                             <h4>第一条</h4>
                             <p>Schlen联邦共和国是一个主权独立的国家，实行液态民主制度。</p>
@@ -93,7 +96,7 @@
                     <!-- 第二章：公民的基本权利与义务 -->
                     <div class="constitution-section">
                         <h3>第二章 公民的基本权利与义务</h3>
-                        
+
                         <div class="article">
                             <h4>第六条</h4>
                             <p>凡具有Schlen国籍的人都是Schlen联邦共和国公民。公民在法律面前一律平等。</p>
@@ -116,7 +119,8 @@
 
                         <div class="article">
                             <h4>第十条</h4>
-                            <p>公民的通信自由和通信秘密受法律保护。除因国家安全或者追查刑事犯罪的需要，由公安机关或者检察机关依照法律规定的程序对通信进行检查外，任何组织或者个人不得以任何理由侵犯公民的通信自由和通信秘密。</p>
+                            <p>公民的通信自由和通信秘密受法律保护。除因国家安全或者追查刑事犯罪的需要，由公安机关或者检察机关依照法律规定的程序对通信进行检查外，任何组织或者个人不得以任何理由侵犯公民的通信自由和通信秘密。
+                            </p>
                         </div>
 
                         <div class="article">
@@ -153,7 +157,7 @@
                     <!-- 第三章：液态民主制度 -->
                     <div class="constitution-section">
                         <h3>第三章 液态民主制度</h3>
-                        
+
                         <div class="article">
                             <h4>第十七条</h4>
                             <p>Schlen联邦共和国实行液态民主制度。公民可以对每个议题直接投票，也可以选择将自己的投票权委托给某个代表。</p>
@@ -178,7 +182,7 @@
                     <!-- 第四章：数字经济与BR-coin -->
                     <div class="constitution-section">
                         <h3>第四章 数字经济与BR-coin</h3>
-                        
+
                         <div class="article">
                             <h4>第二十一条</h4>
                             <p>BR-coin是Schlen联邦共和国的法定数字货币，具有与传统货币同等的法律地位。</p>
@@ -203,7 +207,7 @@
                     <!-- 第五章：环境保护 -->
                     <div class="constitution-section">
                         <h3>第五章 环境保护</h3>
-                        
+
                         <div class="article">
                             <h4>第二十五条</h4>
                             <p>国家保护和改善生活环境和生态环境，防治污染和其他公害。</p>
@@ -228,7 +232,7 @@
                     <!-- 第六章：宪法的修改 -->
                     <div class="constitution-section">
                         <h3>第六章 宪法的修改</h3>
-                        
+
                         <div class="article">
                             <h4>第二十九条</h4>
                             <p>宪法的修改，由全体公民的三分之二以上多数通过。</p>
@@ -304,8 +308,26 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
 </body>
+
 </html>

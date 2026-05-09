@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,80 +15,81 @@
     <title>BR-coin 钱包 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
     <style>
         .wallet-page {
             min-height: 100vh;
             background: linear-gradient(135deg, #007BFF 0%, #00BFFF 100%);
             padding: 40px 20px;
         }
-        
+
         .wallet-box {
             max-width: 500px;
             margin: 0 auto;
             background: white;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         .wallet-header {
             background: linear-gradient(135deg, #007BFF, #0056b3);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        
+
         .wallet-header h1 {
             font-size: 2em;
             margin-bottom: 10px;
         }
-        
+
         .wallet-header p {
             opacity: 0.9;
             font-size: 1em;
         }
-        
+
         .wallet-body {
             padding: 30px;
         }
-        
+
         .apikey-section {
             text-align: center;
         }
-        
+
         .apikey-section .icon {
             font-size: 3em;
             margin-bottom: 15px;
         }
-        
+
         .apikey-section h2 {
             color: #333;
             margin-bottom: 10px;
             font-size: 1.5em;
         }
-        
+
         .apikey-section .hint {
             color: #666;
             margin-bottom: 25px;
             font-size: 0.95em;
             line-height: 1.5;
         }
-        
+
         .apikey-section .api-link {
             color: #007BFF;
             font-weight: 600;
             text-decoration: none;
         }
-        
+
         .apikey-section .api-link:hover {
             text-decoration: underline;
         }
-        
+
         .input-group {
             margin-bottom: 20px;
         }
-        
+
         .input-group input {
             width: 100%;
             padding: 15px;
@@ -98,16 +100,16 @@
             transition: border-color 0.3s;
             margin-bottom: 10px;
         }
-        
+
         .input-group input:last-child {
             margin-bottom: 0;
         }
-        
+
         .input-group input:focus {
             outline: none;
             border-color: #007BFF;
         }
-        
+
         .btn-full {
             width: 100%;
             padding: 15px;
@@ -117,26 +119,26 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .btn-primary {
             background: #007BFF;
             color: white;
         }
-        
+
         .btn-primary:hover {
             background: #0056b3;
         }
-        
+
         .btn-secondary {
             background: #f0f0f0;
             color: #333;
             margin-top: 10px;
         }
-        
+
         .btn-secondary:hover {
             background: #e0e0e0;
         }
-        
+
         .balance-card {
             background: linear-gradient(135deg, #007BFF, #00BFFF);
             color: white;
@@ -145,22 +147,22 @@
             text-align: center;
             margin-bottom: 25px;
         }
-        
+
         .balance-card h3 {
             font-size: 0.9em;
             opacity: 0.9;
             margin-bottom: 10px;
         }
-        
+
         .balance-card .amount {
             font-size: 2.5em;
             font-weight: 700;
         }
-        
+
         .action-section {
             margin-bottom: 20px;
         }
-        
+
         .action-section h4 {
             color: #333;
             margin-bottom: 15px;
@@ -168,11 +170,11 @@
             border-bottom: 2px solid #f0f0f0;
             font-size: 1.1em;
         }
-        
+
         .form-row {
             margin-bottom: 15px;
         }
-        
+
         .form-row input {
             width: 100%;
             padding: 12px;
@@ -180,7 +182,7 @@
             border-radius: 6px;
             font-size: 1em;
         }
-        
+
         .message {
             padding: 12px;
             border-radius: 6px;
@@ -189,25 +191,25 @@
             display: none;
             word-break: break-word;
         }
-        
+
         .message.success {
             display: block;
             background: #d4edda;
             color: #155724;
         }
-        
+
         .message.error {
             display: block;
             background: #f8d7da;
             color: #721c24;
         }
-        
+
         .message.info {
             display: block;
             background: #d1ecf1;
             color: #0c5460;
         }
-        
+
         .back-link {
             display: block;
             text-align: center;
@@ -216,106 +218,108 @@
             text-decoration: none;
             padding: 10px;
         }
-        
+
         .back-link:hover {
             text-decoration: underline;
         }
-        
+
         .hidden {
             display: none !important;
         }
-        
+
         /* ==================== 响应式设计 ==================== */
         @media (max-width: 768px) {
             .wallet-page {
                 padding: 20px 15px;
             }
-            
+
             .wallet-box {
                 border-radius: 12px;
             }
-            
+
             .wallet-header {
                 padding: 20px 15px;
             }
-            
+
             .wallet-header h1 {
                 font-size: 1.6em;
             }
-            
+
             .wallet-header p {
                 font-size: 0.9em;
             }
-            
+
             .wallet-body {
                 padding: 20px 15px;
             }
-            
+
             .apikey-section .icon {
                 font-size: 2.5em;
             }
-            
+
             .apikey-section h2 {
                 font-size: 1.3em;
             }
-            
+
             .apikey-section .hint {
                 font-size: 0.9em;
             }
-            
+
             .input-group input {
                 padding: 12px;
-                font-size: 16px; /* 防止iOS缩放 */
+                font-size: 16px;
+                /* 防止iOS缩放 */
             }
-            
+
             .btn-full {
                 padding: 12px;
                 font-size: 1em;
-                min-height: 48px; /* 触摸友好 */
+                min-height: 48px;
+                /* 触摸友好 */
             }
-            
+
             .balance-card {
                 padding: 20px 15px;
             }
-            
+
             .balance-card .amount {
                 font-size: 2em;
             }
-            
+
             .action-section h4 {
                 font-size: 1em;
             }
-            
+
             .form-row input {
                 padding: 10px;
                 font-size: 16px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .wallet-header h1 {
                 font-size: 1.4em;
             }
-            
+
             .balance-card .amount {
                 font-size: 1.8em;
             }
-            
+
             .apikey-section h2 {
                 font-size: 1.2em;
             }
         }
-        
+
         /* 触摸设备优化 */
         @media (hover: none) {
             .btn-full:hover {
                 transform: none;
             }
-            
+
             .btn-primary:hover {
                 background: #007BFF;
             }
-            
+
             .btn-secondary:hover {
                 background: #f0f0f0;
             }
@@ -323,6 +327,7 @@
     </style>
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <div class="wallet-page">
         <div class="wallet-box">
@@ -330,27 +335,29 @@
                 <h1>BR-coin 钱包</h1>
                 <p>Schlen联邦共和国官方数字货币</p>
             </div>
-            
+
             <div class="wallet-body">
                 <!-- API Key 输入界面 -->
                 <div id="login-section" class="apikey-section">
                     <div class="icon">🔑</div>
                     <h2>连接您的钱包</h2>
                     <p class="hint">
-                        请先访问 <a href="https://coin.schlen.top" target="_blank" class="api-link">coin.schlen.top</a> 
+                        请先访问 <a href="https://coin.schlen.top" target="_blank" class="api-link">coin.schlen.top</a>
                         注册并获取 API Key
                     </p>
-                    
+
                     <div class="input-group">
-                        <input type="text" id="username-input" placeholder="用户名（选填）" autocomplete="off" style="margin-bottom: 10px;">
-                        <input type="text" id="api-key-input" placeholder="API Key (brkey_xxx 或管理员密钥)" autocomplete="off">
+                        <input type="text" id="username-input" placeholder="用户名（选填）" autocomplete="off"
+                            style="margin-bottom: 10px;">
+                        <input type="text" id="api-key-input" placeholder="API Key (brkey_xxx 或管理员密钥)"
+                            autocomplete="off">
                     </div>
-                    
+
                     <button id="connect-btn" class="btn-full btn-primary">连接钱包</button>
-                    
+
                     <div id="message" class="message"></div>
                 </div>
-                
+
                 <!-- 钱包操作界面 -->
                 <div id="wallet-section" class="hidden">
                     <div class="balance-card">
@@ -358,7 +365,7 @@
                         <div id="balance-amount" class="amount">0 BR</div>
                         <div id="user-type" style="font-size: 0.8em; margin-top: 5px; opacity: 0.9;">普通用户</div>
                     </div>
-                    
+
                     <!-- 管理员铸币功能 -->
                     <div id="mint-section" class="action-section hidden">
                         <h4>🏦 铸币 (管理员)</h4>
@@ -370,7 +377,7 @@
                         </div>
                         <button id="mint-btn" class="btn-full" style="background: #9C27B0; color: white;">执行铸币</button>
                     </div>
-                    
+
                     <div class="action-section">
                         <h4>💸 转账</h4>
                         <div class="form-row">
@@ -381,18 +388,19 @@
                         </div>
                         <button id="transfer-btn" class="btn-full btn-primary">确认转账</button>
                     </div>
-                    
+
                     <div class="action-section">
                         <h4>🔍 查询余额</h4>
                         <div class="form-row">
                             <input type="text" id="query-user" placeholder="输入用户名查询">
                         </div>
                         <button id="query-btn" class="btn-full btn-primary">查询</button>
-                        <div id="query-result" style="margin-top: 10px; text-align: center; color: #007BFF; font-weight: 600;"></div>
+                        <div id="query-result"
+                            style="margin-top: 10px; text-align: center; color: #007BFF; font-weight: 600;"></div>
                     </div>
-                    
+
                     <button id="disconnect-btn" class="btn-full btn-secondary">断开连接</button>
-                    
+
                     <!-- 管理员功能 -->
                     <div id="admin-section" class="action-section hidden">
                         <h4>⚙️ 管理员功能</h4>
@@ -403,17 +411,22 @@
                             <input type="number" id="admin-value" placeholder="金额/数值">
                         </div>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <button id="deduct-btn" class="btn-full" style="background: #FF5722; color: white;">扣除资金</button>
-                            <button id="freeze-btn" class="btn-full" style="background: #FFC107; color: #333;">冻结账户</button>
-                            <button id="unfreeze-btn" class="btn-full" style="background: #4CAF50; color: white;">解冻账户</button>
+                            <button id="deduct-btn" class="btn-full"
+                                style="background: #FF5722; color: white;">扣除资金</button>
+                            <button id="freeze-btn" class="btn-full"
+                                style="background: #FFC107; color: #333;">冻结账户</button>
+                            <button id="unfreeze-btn" class="btn-full"
+                                style="background: #4CAF50; color: white;">解冻账户</button>
                         </div>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-                            <button id="setbalance-btn" class="btn-full" style="background: #9C27B0; color: white;">设置余额</button>
-                            <button id="deleteuser-btn" class="btn-full" style="background: #f44336; color: white;">删除用户</button>
+                            <button id="setbalance-btn" class="btn-full"
+                                style="background: #9C27B0; color: white;">设置余额</button>
+                            <button id="deleteuser-btn" class="btn-full"
+                                style="background: #f44336; color: white;">删除用户</button>
                         </div>
                         <div id="admin-result" style="margin-top: 15px; text-align: center; font-weight: 600;"></div>
                     </div>
-                    
+
                     <!-- 用户信息 -->
                     <div id="userinfo-section" class="action-section hidden">
                         <h4>👤 用户信息</h4>
@@ -423,29 +436,31 @@
                         <button id="userinfo-btn" class="btn-full btn-primary">查询用户信息</button>
                         <div id="userinfo-result" style="margin-top: 15px; font-size: 0.9em;"></div>
                     </div>
-                    
+
                     <!-- 所有用户 -->
                     <div id="users-section" class="action-section hidden">
                         <h4>📋 所有用户列表</h4>
                         <button id="users-btn" class="btn-full btn-primary">刷新列表</button>
-                        <div id="users-result" style="margin-top: 15px; max-height: 250px; overflow-y: auto; font-size: 0.85em;"></div>
+                        <div id="users-result"
+                            style="margin-top: 15px; max-height: 250px; overflow-y: auto; font-size: 0.85em;"></div>
                     </div>
-                    
+
                     <!-- 交易记录 -->
                     <div id="transactions-section" class="action-section">
                         <h4>📜 交易记录</h4>
                         <button id="transactions-btn" class="btn-full btn-primary">查看记录</button>
-                        <div id="transactions-result" style="margin-top: 15px; max-height: 250px; overflow-y: auto; font-size: 0.8em;"></div>
+                        <div id="transactions-result"
+                            style="margin-top: 15px; max-height: 250px; overflow-y: auto; font-size: 0.8em;"></div>
                     </div>
-                    
+
                     <div id="wallet-message" class="message"></div>
                 </div>
             </div>
         </div>
-        
+
         <a href="index.html" class="back-link">← 返回官网</a>
     </div>
-    
+
     <!-- 统一Footer -->
     <footer class="main-footer" style="background: var(--footer-bg);">
         <div class="footer-content">
@@ -473,7 +488,7 @@
         <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利喵~</p>
         <p class="footer-disclaimer">⚠️ 本网站所述"Schlen联邦共和国"为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家。但我们认真对待每一份创意与梦想喵~</p>
     </footer>
-    
+
     <!-- Valine评论 -->
     <div style="max-width: 500px; margin: 40px auto; padding: 0 20px;">
         <h3 style="text-align: center; margin-bottom: 20px; color: white;">💬 留言</h3>
@@ -484,17 +499,34 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
     <script>
         const API_BASE = 'https://coin.schlen.top';
         let apiKey = localStorage.getItem('brcoin_api_key');
-        
+
         // 页面加载时检查
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('Wallet page loaded');
-            
+
             if (apiKey) {
                 showWallet();
                 const savedUsername = localStorage.getItem('brcoin_username');
@@ -512,17 +544,17 @@
                     updateBalance();
                 }
             }
-            
+
             // 连接按钮
-            document.getElementById('connect-btn').addEventListener('click', function() {
+            document.getElementById('connect-btn').addEventListener('click', function () {
                 const username = document.getElementById('username-input').value.trim();
                 const input = document.getElementById('api-key-input').value.trim();
-                
+
                 if (!input) {
                     showMsg('请输入 API Key', 'error');
                     return;
                 }
-                
+
                 apiKey = input;
                 localStorage.setItem('brcoin_api_key', apiKey);
                 if (username) {
@@ -532,7 +564,7 @@
                 }
                 showWallet();
                 updateBalance();
-                
+
                 // 检测是否为管理员
                 if (!input.startsWith('brkey_')) {
                     document.getElementById('user-type').textContent = '管理员';
@@ -548,9 +580,9 @@
                     showMsg('钱包已连接！', 'success');
                 }
             });
-            
+
             // 断开按钮
-            document.getElementById('disconnect-btn').addEventListener('click', function() {
+            document.getElementById('disconnect-btn').addEventListener('click', function () {
                 apiKey = null;
                 localStorage.removeItem('brcoin_api_key');
                 localStorage.removeItem('brcoin_username');
@@ -559,19 +591,19 @@
                 showLogin();
                 showMsg('已断开连接', 'info', 'wallet-message');
             });
-            
+
             // 转账按钮
-            document.getElementById('transfer-btn').addEventListener('click', async function() {
+            document.getElementById('transfer-btn').addEventListener('click', async function () {
                 const to = document.getElementById('transfer-to').value.trim();
                 const amount = parseFloat(document.getElementById('transfer-amount').value);
-                
+
                 if (!to || !amount || amount <= 0) {
                     showMsg('请填写完整的转账信息', 'error', 'wallet-message');
                     return;
                 }
-                
+
                 showMsg('正在转账...', 'info', 'wallet-message');
-                
+
                 try {
                     // 获取当前用户名
                     const fromUser = localStorage.getItem('brcoin_username');
@@ -579,7 +611,7 @@
                         showMsg('会话已过期，请重新连接', 'error', 'wallet-message');
                         return;
                     }
-                    
+
                     const response = await fetch(`${API_BASE}/transfer`, {
                         method: 'POST',
                         headers: {
@@ -588,9 +620,9 @@
                         },
                         body: JSON.stringify({ from: fromUser, to, amount })
                     });
-                    
+
                     const data = await response.json().catch(() => ({}));
-                    
+
                     if (response.ok) {
                         showMsg('转账成功！', 'success', 'wallet-message');
                         updateBalance();
@@ -603,22 +635,22 @@
                     showMsg('网络错误: ' + err.message, 'error', 'wallet-message');
                 }
             });
-            
+
             // 查询按钮
-            document.getElementById('query-btn').addEventListener('click', async function() {
+            document.getElementById('query-btn').addEventListener('click', async function () {
                 const username = document.getElementById('query-user').value.trim();
-                
+
                 if (!username) {
                     showMsg('请输入用户名', 'error', 'wallet-message');
                     return;
                 }
-                
+
                 document.getElementById('query-result').textContent = '查询中...';
-                
+
                 try {
                     const response = await fetch(`${API_BASE}/balance?user=${encodeURIComponent(username)}`);
                     const data = await response.json();
-                    
+
                     if (response.ok) {
                         document.getElementById('query-result').textContent = `${username}: ${data.balance} BR`;
                     } else {
@@ -628,19 +660,19 @@
                     document.getElementById('query-result').textContent = '查询失败';
                 }
             });
-            
+
             // 铸币按钮 (管理员)
-            document.getElementById('mint-btn').addEventListener('click', async function() {
+            document.getElementById('mint-btn').addEventListener('click', async function () {
                 const target = document.getElementById('mint-target').value.trim();
                 const amount = parseFloat(document.getElementById('mint-amount').value);
-                
+
                 if (!target || !amount || amount <= 0) {
                     showMsg('请填写完整的铸币信息', 'error', 'wallet-message');
                     return;
                 }
-                
+
                 showMsg('正在铸币...', 'info', 'wallet-message');
-                
+
                 try {
                     const response = await fetch(`${API_BASE}/mint`, {
                         method: 'POST',
@@ -650,9 +682,9 @@
                         },
                         body: JSON.stringify({ user: target, amount })
                     });
-                    
+
                     const data = await response.json().catch(() => ({}));
-                    
+
                     if (response.ok) {
                         showMsg(`成功铸币 ${amount} BR 给 ${target}`, 'success', 'wallet-message');
                         document.getElementById('mint-target').value = '';
@@ -666,46 +698,46 @@
                     showMsg('网络错误: ' + err.message, 'error', 'wallet-message');
                 }
             });
-            
+
             // 回车键支持
-            document.getElementById('username-input').addEventListener('keypress', function(e) {
+            document.getElementById('username-input').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     document.getElementById('api-key-input').focus();
                 }
             });
-            document.getElementById('api-key-input').addEventListener('keypress', function(e) {
+            document.getElementById('api-key-input').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     document.getElementById('connect-btn').click();
                 }
             });
         });
-        
+
         function showWallet() {
             document.getElementById('login-section').classList.add('hidden');
             document.getElementById('wallet-section').classList.remove('hidden');
         }
-        
+
         function showLogin() {
             document.getElementById('login-section').classList.remove('hidden');
             document.getElementById('wallet-section').classList.add('hidden');
         }
-        
+
         function showMsg(text, type, elementId = 'message') {
             const el = document.getElementById(elementId);
             el.textContent = text;
             el.className = 'message ' + type;
-            
+
             setTimeout(() => {
                 el.className = 'message';
                 el.textContent = '';
             }, 3000);
         }
-        
+
         async function updateBalance() {
             if (!apiKey) return;
-            
+
             const username = localStorage.getItem('brcoin_username');
-            
+
             // 如果有用户名，显示余额
             if (username) {
                 try {
@@ -713,7 +745,7 @@
                         headers: { 'X-API-Key': apiKey }
                     });
                     const data = await response.json();
-                    
+
                     if (response.ok) {
                         document.getElementById('balance-amount').textContent = data.balance + ' BR';
                     } else {
@@ -727,23 +759,23 @@
                 document.getElementById('balance-amount').textContent = '请输入用户名查询';
             }
         }
-        
+
         // ===== 管理员功能 =====
-        
+
         // 扣除资金
-        document.getElementById('deduct-btn').addEventListener('click', async function() {
+        document.getElementById('deduct-btn').addEventListener('click', async function () {
             const user = document.getElementById('admin-user').value.trim();
             const amount = parseFloat(document.getElementById('admin-value').value);
-            
+
             if (!user || !amount || amount <= 0) {
                 document.getElementById('admin-result').textContent = '请填写用户名和金额';
                 document.getElementById('admin-result').style.color = '#f44336';
                 return;
             }
-            
+
             document.getElementById('admin-result').textContent = '处理中...';
             document.getElementById('admin-result').style.color = '#666';
-            
+
             try {
                 // 同时调用 /deduct 和 /admin deduct
                 const response = await fetch(`${API_BASE}/deduct`, {
@@ -752,7 +784,7 @@
                     body: JSON.stringify({ user, amount })
                 });
                 const data = await response.json().catch(() => ({}));
-                
+
                 if (response.ok) {
                     document.getElementById('admin-result').textContent = `成功扣除 ${amount} BR`;
                     document.getElementById('admin-result').style.color = '#4CAF50';
@@ -764,7 +796,7 @@
                         body: JSON.stringify({ action: 'deduct', user, value: amount })
                     });
                     const adminData = await adminResp.json().catch(() => ({}));
-                    
+
                     if (adminResp.ok) {
                         document.getElementById('admin-result').textContent = `成功扣除 ${amount} BR`;
                         document.getElementById('admin-result').style.color = '#4CAF50';
@@ -778,19 +810,19 @@
                 document.getElementById('admin-result').style.color = '#f44336';
             }
         });
-        
+
         // 冻结账户
-        document.getElementById('freeze-btn').addEventListener('click', async function() {
+        document.getElementById('freeze-btn').addEventListener('click', async function () {
             const user = document.getElementById('admin-user').value.trim();
-            
+
             if (!user) {
                 document.getElementById('admin-result').textContent = '请填写用户名';
                 document.getElementById('admin-result').style.color = '#f44336';
                 return;
             }
-            
+
             document.getElementById('admin-result').textContent = '处理中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/admin`, {
                     method: 'POST',
@@ -798,7 +830,7 @@
                     body: JSON.stringify({ action: 'freeze', user })
                 });
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     document.getElementById('admin-result').textContent = `${user} 已冻结`;
                     document.getElementById('admin-result').style.color = '#4CAF50';
@@ -811,19 +843,19 @@
                 document.getElementById('admin-result').style.color = '#f44336';
             }
         });
-        
+
         // 解冻账户
-        document.getElementById('unfreeze-btn').addEventListener('click', async function() {
+        document.getElementById('unfreeze-btn').addEventListener('click', async function () {
             const user = document.getElementById('admin-user').value.trim();
-            
+
             if (!user) {
                 document.getElementById('admin-result').textContent = '请填写用户名';
                 document.getElementById('admin-result').style.color = '#f44336';
                 return;
             }
-            
+
             document.getElementById('admin-result').textContent = '处理中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/admin`, {
                     method: 'POST',
@@ -831,7 +863,7 @@
                     body: JSON.stringify({ action: 'unfreeze', user })
                 });
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     document.getElementById('admin-result').textContent = `${user} 已解冻`;
                     document.getElementById('admin-result').style.color = '#4CAF50';
@@ -844,20 +876,20 @@
                 document.getElementById('admin-result').style.color = '#f44336';
             }
         });
-        
+
         // 设置余额
-        document.getElementById('setbalance-btn').addEventListener('click', async function() {
+        document.getElementById('setbalance-btn').addEventListener('click', async function () {
             const user = document.getElementById('admin-user').value.trim();
             const value = parseFloat(document.getElementById('admin-value').value);
-            
+
             if (!user || value === undefined || value < 0) {
                 document.getElementById('admin-result').textContent = '请填写用户名和数值';
                 document.getElementById('admin-result').style.color = '#f44336';
                 return;
             }
-            
+
             document.getElementById('admin-result').textContent = '处理中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/admin`, {
                     method: 'POST',
@@ -865,7 +897,7 @@
                     body: JSON.stringify({ action: 'setBalance', user, value })
                 });
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     document.getElementById('admin-result').textContent = `${user} 余额已设为 ${value} BR`;
                     document.getElementById('admin-result').style.color = '#4CAF50';
@@ -878,21 +910,21 @@
                 document.getElementById('admin-result').style.color = '#f44336';
             }
         });
-        
+
         // 删除用户
-        document.getElementById('deleteuser-btn').addEventListener('click', async function() {
+        document.getElementById('deleteuser-btn').addEventListener('click', async function () {
             const user = document.getElementById('admin-user').value.trim();
-            
+
             if (!user) {
                 document.getElementById('admin-result').textContent = '请填写用户名';
                 document.getElementById('admin-result').style.color = '#f44336';
                 return;
             }
-            
+
             if (!confirm(`确定删除用户 ${user}？此操作不可恢复！`)) return;
-            
+
             document.getElementById('admin-result').textContent = '处理中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/admin`, {
                     method: 'POST',
@@ -900,7 +932,7 @@
                     body: JSON.stringify({ action: 'deleteUser', user, value: 1 })
                 });
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     document.getElementById('admin-result').textContent = `${user} 已删除`;
                     document.getElementById('admin-result').style.color = '#4CAF50';
@@ -913,22 +945,22 @@
                 document.getElementById('admin-result').style.color = '#f44336';
             }
         });
-        
+
         // 用户信息
-        document.getElementById('userinfo-btn').addEventListener('click', async function() {
+        document.getElementById('userinfo-btn').addEventListener('click', async function () {
             const user = document.getElementById('userinfo-user').value.trim();
-            
+
             if (!user) {
                 document.getElementById('userinfo-result').textContent = '请输入用户名';
                 return;
             }
-            
+
             document.getElementById('userinfo-result').textContent = '查询中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/userinfo?user=${encodeURIComponent(user)}`);
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     const frozen = data.frozen !== undefined ? data.frozen : false;
                     const status = frozen ? '❌ 已冻结' : '✅ 正常';
@@ -936,7 +968,7 @@
                     const balance = data.balance !== undefined ? data.balance : 'N/A';
                     const txCount = data.txCount || data.transactionCount || data.transactions || 0;
                     const createdAt = data.createdAt || data.created || data.joinTime || 'N/A';
-                    
+
                     document.getElementById('userinfo-result').innerHTML = `
                         <div style="padding: 15px; background: #f5f5f5; border-radius: 8px;">
                             <div style="margin-bottom: 10px;"><strong>用户名:</strong> ${username}</div>
@@ -953,31 +985,31 @@
                 document.getElementById('userinfo-result').textContent = '网络错误: ' + err.message;
             }
         });
-        
+
         // 所有用户列表
-        document.getElementById('users-btn').addEventListener('click', async function() {
+        document.getElementById('users-btn').addEventListener('click', async function () {
             document.getElementById('users-result').textContent = '加载中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/users`);
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     // 处理可能的返回格式
                     const users = Array.isArray(data) ? data : (data.users || []);
-                    
+
                     if (!users || users.length === 0) {
                         document.getElementById('users-result').textContent = '暂无用户';
                         return;
                     }
-                    
+
                     let html = '<div style="max-height: 250px; overflow-y: auto;">';
                     html += '<table style="width: 100%; border-collapse: collapse; font-size: 0.85em;">';
                     html += '<tr style="background: #e0e0e0;"><th style="padding: 8px; text-align: left;">用户名</th><th style="padding: 8px; text-align: right;">余额</th><th style="padding: 8px; text-align: center;">冻结</th></tr>';
                     users.forEach((u, i) => {
                         const status = u.frozen ? '❌' : '✅';
                         const frozenStyle = u.frozen ? 'color: #f44336;' : 'color: #4CAF50;';
-                        html += `<tr style="background: ${i%2===0?'#f9f9f9':'#fff'}; border-bottom: 1px solid #eee;">
+                        html += `<tr style="background: ${i % 2 === 0 ? '#f9f9f9' : '#fff'}; border-bottom: 1px solid #eee;">
                             <td style="padding: 8px;">${u.username || u.name || u.user}</td>
                             <td style="padding: 8px; text-align: right;">${u.balance || 0} BR</td>
                             <td style="padding: 8px; text-align: center; ${frozenStyle}">${status}</td>
@@ -993,26 +1025,26 @@
                 document.getElementById('users-result').textContent = '网络错误: ' + err.message;
             }
         });
-        
+
         // 交易记录
-        document.getElementById('transactions-btn').addEventListener('click', async function() {
+        document.getElementById('transactions-btn').addEventListener('click', async function () {
             document.getElementById('transactions-result').textContent = '加载中...';
-            
+
             try {
                 const response = await fetch(`${API_BASE}/transactions`, {
                     headers: { 'X-API-Key': apiKey }
                 });
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     // 处理可能的返回格式：可能是数组或 {transactions: [...]} 或 {records: [...]}
                     const records = Array.isArray(data) ? data : (data.transactions || data.records || []);
-                    
+
                     if (!records || records.length === 0) {
                         document.getElementById('transactions-result').textContent = '暂无交易记录';
                         return;
                     }
-                    
+
                     let html = '';
                     records.slice(0, 20).forEach((t, i) => {
                         const type = (t.type || t.action || 'transfer').toUpperCase();
@@ -1021,8 +1053,8 @@
                         const to = t.to || t.toUser || '';
                         const time = t.timestamp || t.time || t.createdAt || '';
                         const status = t.status || 'completed';
-                        
-                        html += `<div style="padding: 8px; border-bottom: 1px solid #eee; background: ${i%2===0?'#f9f9f9':'#fff'};">
+
+                        html += `<div style="padding: 8px; border-bottom: 1px solid #eee; background: ${i % 2 === 0 ? '#f9f9f9' : '#fff'};">
                             <div style="display: flex; justify-content: space-between;">
                                 <span style="font-weight: 600;">${type}</span>
                                 <span style="color: ${type === 'MINT' ? '#4CAF50' : type === 'DEDUCT' ? '#f44336' : '#007BFF'};">${amount} BR</span>
@@ -1039,7 +1071,8 @@
                 document.getElementById('transactions-result').textContent = '网络错误: ' + err.message;
             }
         });
-        
+
     </script>
 </body>
+
 </html>

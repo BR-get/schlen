@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,9 +15,11 @@
     <title>政体 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
-        <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <header class="main-header">
         <nav class="navbar">
@@ -34,9 +37,9 @@
                 <li><a href="support.html">支持</a></li>
                 <li><a href="x.html">X</a></li>
                 <li><a href="wallet.html">BR-coin</a></li>
-                                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
+                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
+                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
+                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
             </ul>
         </nav>
     </header>
@@ -55,7 +58,7 @@
                 <div class="gov-intro">
                     <h3>什么是液态民主？</h3>
                     <p class="lead-text">液态民主（Liquid Democracy）是一种结合了直接民主和代议民主优点的混合政体。在Schlen，每一位公民既是决策者，也可以是委托者。</p>
-                    
+
                     <div class="concept-cards">
                         <div class="concept-card">
                             <div class="concept-icon">🗳️</div>
@@ -132,7 +135,7 @@
                     </div>
                 </div>
 
-                    <!-- 参与方式 -->
+                <!-- 参与方式 -->
                 <div class="gov-section cta-section">
                     <h3>如何参与？</h3>
                     <p>成为Schlen公民，您就自动获得了参与国家治理的权利。通过我们的在线平台，您可以：</p>
@@ -146,7 +149,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Valine评论 -->
         <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
             <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
@@ -199,8 +202,26 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
 </body>
+
 </html>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-BCG1K6EZ72');
     </script>
@@ -14,9 +15,11 @@
     <title>新闻动态 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
-        <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
+
 <body>
     <header class="main-header">
         <nav class="navbar">
@@ -34,9 +37,9 @@
                 <li><a href="support.html">支持</a></li>
                 <li><a href="x.html">X</a></li>
                 <li><a href="wallet.html">BR-coin</a></li>
-                                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
+                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
+                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
+                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
             </ul>
         </nav>
     </header>
@@ -56,7 +59,9 @@
                     <div class="news-badge">🔥 头条</div>
                     <h3>🌊 Schlen联邦共和国官方网站全面升级3.0！</h3>
                     <p class="news-date">2026年4月 · 新施伦城</p>
-                    <p class="news-excerpt">经过一年多的持续建设，Schlen联邦共和国官方网站迎来3.0重大升级！新增AI虚拟导游、实时公民动态面板V2、以及BR-coin钱包深度集成。网站性能全面优化，为全球访客带来更流畅的浏览体验喵~！</p>
+                    <p class="news-excerpt">
+                        经过一年多的持续建设，Schlen联邦共和国官方网站迎来3.0重大升级！新增AI虚拟导游、实时公民动态面板V2、以及BR-coin钱包深度集成。网站性能全面优化，为全球访客带来更流畅的浏览体验喵~！
+                    </p>
                     <p class="news-excerpt">同时，经全体公民液态民主投票通过的第三版宪法已正式生效，新增环境保护条款和数字经济基本法，标志着我国法治建设进入新阶段。</p>
                 </div>
 
@@ -125,7 +130,7 @@
                         </article>
                     </div>
                 </div>
-                
+
                 <!-- Valine评论 -->
                 <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
                     <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
@@ -201,8 +206,26 @@
         new Valine({
             el: '#vcomments',
             appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn'
+            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+            placeholder: '欢迎留言喵~',
+            avatar: 'wavatar',
+            meta: ['nick', 'mail', 'link', 'qq'],
+            requiredFields: ['nick'],
+            pageSize: 10,
+            lang: 'zh-CN',
+            recordIP: false,
+            enableQQ: true,
+            avatarCDN: 'https://gravatar.loli.net/avatar/',
+            emojiCDN: 'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+            emojiMaps: { 'tv_doge': 'https://valinecdn.bili33.top/tv_doge.png' },
+            highlight: true,
+            mathJax: false,
+            visitor: false,
+            wordLimit: 500,
+            verify: false,
+            notify: false
         });
     </script>
 </body>
+
 </html>
