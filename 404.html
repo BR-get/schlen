@@ -1,57 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-BCG1K6EZ72');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - 页面未找到</title>
     <link rel="icon" type="image/png" href="国旗.png">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
 </head>
-<body class="error-page">
-    <header class="main-header">
-        <nav class="navbar">
-            <h1 class="logo"><a href="index.html">Schlen喵~</a></h1>
-            <ul class="nav-links">
-                <li><a href="about.html">关于Schlen</a></li>
-                <li><a href="islands.html">七座浮岛</a></li>
-                <li><a href="culture.html">文化</a></li>
-                <li><a href="government.html">政体</a></li>
-                <li><a href="citizens.html">公民专区</a></li>
-                <li><a href="news.html">动态</a></li>
-                <li><a href="constitution.html">宪法</a></li>
-                <li><a href="laws.html">法律</a></li>
-                <li><a href="down.html">下载</a></li>
-                <li><a href="support.html">支持</a></li>
-                <li><a href="x.html">X</a></li>
-                <li><a href="wallet.html">BR-coin</a></li>
-                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="error-container">
-        <div class="error-code">404</div>
-        <div class="error-icon">🏝️💨</div>
-        <h1>哎呀，这座岛屿飘走了！</h1>
-        <p>您访问的页面可能已经被洋流带到其他地方去了喵~</p>
-        <div class="error-actions">
-            <a href="index.html" class="btn btn-primary">返回主页</a>
-            <a href="islands.html" class="btn btn-secondary">查看七座浮岛</a>
-        </div>
-        <div class="floating-islands">
-            <span class="island-float">🏝️</span>
-            <span class="island-float">🏝️</span>
-            <span class="island-float">🏝️</span>
+<body>
+    <div class="error-page">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <div class="error-icon">🏝️💨</div>
+            <h1>哎呀，这座岛屿飘走了！</h1>
+            <p>您访问的页面可能已经被洋流带到其他地方去了喵~</p>
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-primary">返回主页</a>
+            </div>
+            <div class="floating-islands">
+                <span class="island-float">🏝️</span>
+                <span class="island-float">🏝️</span>
+                <span class="island-float">🏝️</span>
+            </div>
         </div>
     </div>
 
@@ -63,6 +32,8 @@
             justify-content: center;
             background: linear-gradient(135deg, #007BFF 0%, #00BFFF 50%, #87CEEB 100%);
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
         
         .error-container {
@@ -94,6 +65,7 @@
             line-height: 1;
             margin-bottom: 10px;
             text-shadow: 3px 3px 0 #FFA726;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .error-icon {
@@ -111,12 +83,14 @@
             color: #333;
             margin-bottom: 15px;
             font-size: 1.8em;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .error-container p {
             color: #666;
             margin-bottom: 30px;
             font-size: 1.1em;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .error-actions {
@@ -126,8 +100,34 @@
             flex-wrap: wrap;
         }
         
-        .error-actions .btn {
+        .btn {
             padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: #007BFF;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 2px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+            border-color: #007BFF;
         }
         
         .floating-islands {
@@ -178,22 +178,29 @@
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
             50% { transform: translate(10px, 10px) rotate(3deg); }
         }
+        
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            .error-code {
+                font-size: 6em;
+            }
+            
+            .error-icon {
+                font-size: 3em;
+            }
+            
+            .error-container h1 {
+                font-size: 1.5em;
+            }
+            
+            .error-container p {
+                font-size: 1em;
+            }
+        }
     </style>
-
-    <!-- 加入国籍弹窗 -->
-    <div id="join-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3>加入Schlen联邦共和国</h3>
-            <p>您确定要申请加入Schlen联邦共和国吗？</p>
-            <p class="modal-desc">作为世界最新颖的液态民主国家，我们期待您的加入！</p>
-            <div class="modal-actions">
-                <button id="confirm-join" class="btn btn-primary">确认申请</button>
-                <button id="cancel-join" class="btn btn-secondary">取消</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
