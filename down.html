@@ -21,28 +21,7 @@
 </head>
 
 <body>
-    <header class="main-header">
-        <nav class="navbar">
-            <h1 class="logo"><a href="index.html">Schlen喵~</a></h1>
-            <ul class="nav-links">
-                <li><a href="about.html">关于Schlen</a></li>
-                <li><a href="islands.html">七座浮岛</a></li>
-                <li><a href="culture.html">文化</a></li>
-                <li><a href="government.html">政体</a></li>
-                <li><a href="citizens.html">公民专区</a></li>
-                <li><a href="news.html">动态</a></li>
-                <li><a href="constitution.html">宪法</a></li>
-                <li><a href="laws.html">法律</a></li>
-                <li><a href="down.html" class="active">下载</a></li>
-                <li><a href="support.html">支持</a></li>
-                <li><a href="x.html">X</a></li>
-                <li><a href="wallet.html">BR-coin</a></li>
-                <li><a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a></li>
-                <li><a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a></li>
-                <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="header-root"></div>
 
     <main>
         <section class="page-hero">
@@ -218,47 +197,13 @@
         </section>
     </main>
 
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Schlen联邦共和国</h4>
-                <p>拥护真实性，共建美好未来喵~</p>
-            </div>
-            <div class="footer-links">
-                <a href="about.html">关于</a>
-                <a href="islands.html">浮岛</a>
-                <a href="culture.html">文化</a>
-                <a href="government.html">政体</a>
-                <a href="citizens.html">公民专区</a>
-                <a href="news.html">动态</a>
-                <a href="constitution.html">宪法</a>
-                <a href="laws.html">法律</a>
-                <a href="down.html">下载</a>
-                <a href="support.html">支持</a>
-                <a href="x.html">X</a>
-                <a href="wallet.html">BR-coin</a>
-                <a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a>
-                <a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a>
-            </div>
-        </div>
-        <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利喵~</p>
-        <p class="footer-disclaimer">⚠️ 本网站所述"Schlen联邦共和国"为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家。但我们认真对待每一份创意与梦想喵~</p>
-    </footer>
+    <div id="footer-root"></div>
+    <div id="modal-root"></div>
 
-    <div id="join-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3>加入Schlen联邦共和国</h3>
-            <p>您确定要申请加入Schlen联邦共和国吗？</p>
-            <p class="modal-desc">作为世界最新颖的液态民主国家，我们期待您的加入！</p>
-            <div class="modal-actions">
-                <button id="confirm-join" class="btn btn-primary">确认申请</button>
-                <button id="cancel-join" class="btn btn-secondary">取消</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="components.js"></script>
+    <script>
+        initPage('down');
+    </script>
     <script>
         new Valine({
             el: '#vcomments',
@@ -347,6 +292,27 @@
             .download-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        [data-theme="dark"] .download-section h3 {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        [data-theme="dark"] .download-card {
+            background: var(--card-bg);
+        }
+
+        [data-theme="dark"] .download-card h4 {
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .download-card p {
+            color: #adbac7;
+        }
+
+        [data-theme="dark"] .file-info {
+            color: #8b9bb5;
         }
     </style>
 </body>

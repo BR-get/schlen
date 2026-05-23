@@ -324,6 +324,106 @@
                 background: #f0f0f0;
             }
         }
+
+        /* 钱包主题切换按钮 */
+        .wallet-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wallet-header-top h1 {
+            font-size: 2em;
+            margin-bottom: 0;
+        }
+
+        .wallet-theme-toggle {
+            background: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            line-height: 1;
+            color: white;
+        }
+
+        .wallet-theme-toggle:hover {
+            transform: scale(1.15);
+            border-color: var(--accent-color);
+        }
+
+        /* 深蓝暗色模式 - 钱包 */
+        [data-theme="dark"] .wallet-page {
+            background: linear-gradient(135deg, #0a1628 0%, #0d1b2a 100%);
+        }
+
+        [data-theme="dark"] .wallet-box {
+            background: rgba(26, 45, 66, 0.98);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="dark"] .wallet-header {
+            background: linear-gradient(135deg, #0a1628, #1a2d42);
+        }
+
+        [data-theme="dark"] .wallet-body {
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .apikey-section .hint,
+        [data-theme="dark"] .apikey-section p {
+            color: #adbac7;
+        }
+
+        [data-theme="dark"] #username-input,
+        [data-theme="dark"] #api-key-input {
+            background-color: #0a1628;
+            border-color: #2d4a6a;
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .balance-card {
+            background: linear-gradient(135deg, #0a1628, #1a2d42);
+        }
+
+        [data-theme="dark"] .action-section h4 {
+            color: var(--primary-color);
+        }
+
+        [data-theme="dark"] .action-section input {
+            background-color: #0a1628;
+            border-color: #2d4a6a;
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .apikey-section h2 {
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .back-link {
+            color: var(--primary-color);
+        }
+
+        [data-theme="dark"] .wallet-box ::-webkit-input-placeholder {
+            color: #6c7e96;
+        }
+
+        [data-theme="dark"] #userinfo-result > div {
+            background: #0a1628 !important;
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .btn-secondary {
+            border-color: #2d4a6a;
+            color: #e9ecef;
+        }
+
+        [data-theme="dark"] .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
     </style>
     <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
@@ -332,7 +432,10 @@
     <div class="wallet-page">
         <div class="wallet-box">
             <div class="wallet-header">
-                <h1>BR-coin 钱包</h1>
+                <div class="wallet-header-top">
+                    <h1>BR-coin 钱包</h1>
+                    <button id="theme-toggle" class="wallet-theme-toggle" title="切换主题">🌙</button>
+                </div>
                 <p>Schlen联邦共和国官方数字货币</p>
             </div>
 
@@ -1070,6 +1173,12 @@
             }
         });
 
+    </script>
+
+    <script src="components.js"></script>
+    <script>
+        // 暗色模式初始化（只初始化主题切换，不渲染header/footer）
+        initThemeToggle();
     </script>
 </body>
 
