@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 </head>
 
 <body>
@@ -100,9 +100,9 @@
     <script>
         initPage('index');
     </script>
+    <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
     <script>
-        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-        init({
+        Waline.init({
             el: '#waline',
             serverURL: 'https://blogwaline-gamma.vercel.app',
             placeholder: '欢迎留言喵~',
