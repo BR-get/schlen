@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - 页面未找到</title>
+    <title>404 - 页面未找到 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
+    <link rel="stylesheet" href="style.css">
 </head>
-<!-- 别加东西 -->
-
 <body>
     <div class="error-page">
         <div class="error-container">
             <div class="error-code">404</div>
-            <div class="error-icon">🏝️💨</div>
-            <h1>哎呀，这座岛屿飘走了！</h1>
-            <p>您访问的页面可能已经被洋流带到其他地方去了喵~</p>
+            <div class="error-icon">🏝️</div>
+            <h1>页面未找到</h1>
+            <p>您访问的页面不存在，请返回首页</p>
             <div class="error-actions">
-                <a href="index.html" class="btn btn-primary">返回主页</a>
+                <a href="index.html" class="btn btn-primary">返回首页</a>
             </div>
-            <div class="floating-islands">
-                <span class="island-float">🏝️</span>
-                <span class="island-float">🏝️</span>
-                <span class="island-float">🏝️</span>
-            </div>
+            <p class="footer-disclaimer" style="margin-top:30px;font-size:0.85em;color:#666;">⚠️ Schlen联邦共和国为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家</p>
         </div>
     </div>
-
     <style>
         .error-page {
             min-height: 100vh;
@@ -34,206 +27,48 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #007BFF 0%, #00BFFF 50%, #87CEEB 100%);
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
         }
-
         .error-container {
             text-align: center;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            position: relative;
-            animation: float-in 0.6s ease;
+            padding: 60px 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 480px;
         }
-
-        @keyframes float-in {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .error-code {
-            font-size: 8em;
+            font-size: 6em;
             font-weight: 700;
             color: #007BFF;
-            line-height: 1;
-            margin-bottom: 10px;
-            text-shadow: 3px 3px 0 #FFA726;
             font-family: 'Montserrat', sans-serif;
         }
-
         .error-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
+            font-size: 3em;
+            margin: 20px 0;
         }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
         .error-container h1 {
             color: #333;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 10px;
+            font-size: 1.5em;
         }
-
         .error-container p {
             color: #666;
             margin-bottom: 30px;
-            font-size: 1.1em;
-            font-family: 'Montserrat', sans-serif;
         }
-
-        .error-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
         .btn {
             padding: 12px 30px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
             display: inline-block;
         }
-
         .btn-primary {
             background-color: #007BFF;
             color: white;
         }
-
         .btn-primary:hover {
             background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: #f0f0f0;
-            color: #333;
-            border: 2px solid #ddd;
-        }
-
-        .btn-secondary:hover {
-            background-color: #e0e0e0;
-            border-color: #007BFF;
-        }
-
-        .floating-islands {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .island-float {
-            position: absolute;
-            font-size: 2em;
-            opacity: 0.3;
-        }
-
-        .island-float:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            animation: float-1 6s ease-in-out infinite;
-        }
-
-        .island-float:nth-child(2) {
-            top: 20%;
-            right: 15%;
-            animation: float-2 8s ease-in-out infinite;
-        }
-
-        .island-float:nth-child(3) {
-            bottom: 20%;
-            left: 15%;
-            animation: float-3 7s ease-in-out infinite;
-        }
-
-        @keyframes float-1 {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: translate(10px, -15px) rotate(5deg);
-            }
-        }
-
-        @keyframes float-2 {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: translate(-15px, 10px) rotate(-5deg);
-            }
-        }
-
-        @keyframes float-3 {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: translate(10px, 10px) rotate(3deg);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .error-container {
-                padding: 30px 20px;
-                margin: 20px;
-            }
-
-            .error-code {
-                font-size: 6em;
-            }
-
-            .error-icon {
-                font-size: 3em;
-            }
-
-            .error-container h1 {
-                font-size: 1.5em;
-            }
-
-            .error-container p {
-                font-size: 1em;
-            }
         }
     </style>
 </body>
-
 </html>

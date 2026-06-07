@@ -4,7 +4,6 @@
 const NAV_ITEMS = [
   { id: 'index', label: '首页', href: 'index.html' },
   { id: 'about', label: '关于', href: 'about.html' },
-  { id: 'islands', label: '浮岛', href: 'islands.html' },
   { id: 'culture', label: '文化', href: 'culture.html' },
   { id: 'government', label: '政体', href: 'government.html' },
   { id: 'citizens', label: '公民', href: 'citizens.html' },
@@ -15,8 +14,6 @@ const NAV_ITEMS = [
 
 // 底部导航（不常用页面）
 const FOOTER_LINKS = [
-  { id: 'constitution', label: '宪法', href: 'constitution.html' },
-  { id: 'laws', label: '法律', href: 'laws.html' },
   { id: 'down', label: '下载', href: 'down.html' },
   { id: 'x', label: 'X', href: 'x.html' },
   { id: 'shop', label: '🛒 商店', href: 'https://shop.schlen.top', external: true },
@@ -36,7 +33,7 @@ function renderHeader(activePage) {
   const html = `
     <header class="main-header">
       <nav class="navbar">
-        <h1 class="logo"><a href="index.html">Schlen喵~</a></h1>
+        <h1 class="logo"><a href="index.html">Schlen</a></h1>
         <div class="nav-right">
           <ul class="nav-links">
             ${navLinks}
@@ -67,7 +64,7 @@ function renderFooter() {
       <div class="footer-content">
         <div class="footer-section">
           <h4>Schlen联邦共和国</h4>
-          <p>拥护真实性，共建美好未来喵~</p>
+          <p>拥护真实性，共建美好未来</p>
         </div>
         <div class="footer-links">
           ${topLinks}
@@ -76,8 +73,8 @@ function renderFooter() {
           ${bottomLinks}
         </div>
       </div>
-      <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利喵~</p>
-      <p class="footer-disclaimer">⚠️ 本网站所述"Schlen联邦共和国"为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家。但我们认真对待每一份创意与梦想喵~</p>
+      <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利</p>
+      <p class="footer-disclaimer">⚠️ 本网站所述"Schlen联邦共和国"为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家。但我们认真对待每一份创意与梦想</p>
     </footer>
   `;
 
