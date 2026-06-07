@@ -425,7 +425,7 @@
             color: var(--primary-color);
         }
     </style>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
 </head>
 
 <body>
@@ -595,29 +595,23 @@
     <!-- Valine评论 -->
     <div style="max-width: 500px; margin: 40px auto; padding: 0 20px;">
         <h3 style="text-align: center; margin-bottom: 20px; color: white;">💬 留言</h3>
-        <div id="vcomments"></div>
+        <div id="waline"></div>
     </div>
 
     <script>
-        new Valine({
-            el: '#vcomments',
-            appId: 'CCk6FnLd6w7rsDUaBvhr4YRg-gzGzoHsz',
-            appKey: 'F5NA7cw4JgnC4aIQ9g8mclPn',
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+        init({
+            el: '#waline',
+            serverURL: 'https://blogwaline-gamma.vercel.app',
             placeholder: '欢迎留言喵~',
             avatar: 'wavatar',
-            meta: ['nick', 'mail', 'link', 'qq'],
+            meta: ['nick', 'mail', 'link'],
             requiredFields: ['nick'],
             pageSize: 10,
             lang: 'zh-CN',
-            recordIP: false,
-            enableQQ: true,
-            avatarCDN: 'https://gravatar.loli.net/avatar/',
             highlight: true,
-            mathJax: false,
-            visitor: false,
             wordLimit: 500,
-            verify: false,
-            notify: false
+            dark: 'html[data-theme="dark"]'
         });
     </script>
     <script>
