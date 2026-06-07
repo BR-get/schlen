@@ -644,6 +644,7 @@ a:hover {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .footer-links a {
@@ -654,6 +655,14 @@ a:hover {
 .footer-links a:hover {
     color: var(--accent-color);
     text-decoration: none;
+}
+
+/* 底部次级链接 */
+.footer-extra {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9em;
 }
 
 .copyright {

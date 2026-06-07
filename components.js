@@ -1,20 +1,25 @@
 // ===== Schlen 联邦共和国 - 共享组件 =====
 
+// 常用导航（顶部显示）
 const NAV_ITEMS = [
   { id: 'index', label: '首页', href: 'index.html' },
-  { id: 'about', label: '关于Schlen', href: 'about.html' },
-  { id: 'islands', label: '七座浮岛', href: 'islands.html' },
+  { id: 'about', label: '关于', href: 'about.html' },
+  { id: 'islands', label: '浮岛', href: 'islands.html' },
   { id: 'culture', label: '文化', href: 'culture.html' },
   { id: 'government', label: '政体', href: 'government.html' },
-  { id: 'citizens', label: '公民专区', href: 'citizens.html' },
+  { id: 'citizens', label: '公民', href: 'citizens.html' },
   { id: 'news', label: '动态', href: 'news.html' },
+  { id: 'support', label: '支持', href: 'support.html' },
+  { id: 'wallet', label: '💰 钱包', href: 'wallet.html' },
+];
+
+// 底部导航（不常用页面）
+const FOOTER_LINKS = [
   { id: 'constitution', label: '宪法', href: 'constitution.html' },
   { id: 'laws', label: '法律', href: 'laws.html' },
   { id: 'down', label: '下载', href: 'down.html' },
-  { id: 'support', label: '支持', href: 'support.html' },
   { id: 'x', label: 'X', href: 'x.html' },
-  { id: 'wallet', label: 'BR-coin', href: 'wallet.html' },
-  { id: 'shop', label: '🛒 官方商店', href: 'https://shop.schlen.top', external: true },
+  { id: 'shop', label: '🛒 商店', href: 'https://shop.schlen.top', external: true },
   { id: 'schlenix', label: '💻 Schlenix', href: 'https://ix.schlen.top', external: true },
 ];
 
@@ -47,9 +52,14 @@ function renderHeader(activePage) {
 }
 
 function renderFooter() {
-  const footerLinks = NAV_ITEMS
-    .filter(item => !item.external)
+  const topLinks = NAV_ITEMS
     .map(item => `<a href="${item.href}">${item.label}</a>`)
+    .join('');
+  const bottomLinks = FOOTER_LINKS
+    .map(item => {
+      const target = item.external ? ' target="_blank"' : '';
+      return `<a href="${item.href}"${target}>${item.label}</a>`;
+    })
     .join('');
 
   const html = `
@@ -60,9 +70,10 @@ function renderFooter() {
           <p>拥护真实性，共建美好未来喵~</p>
         </div>
         <div class="footer-links">
-          ${footerLinks}
-          <a href="https://shop.schlen.top" target="_blank">🛒 官方商店</a>
-          <a href="https://ix.schlen.top" target="_blank">💻 Schlenix</a>
+          ${topLinks}
+        </div>
+        <div class="footer-links footer-extra">
+          ${bottomLinks}
         </div>
       </div>
       <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利喵~</p>
