@@ -19,7 +19,7 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 | 钱包 | `wallet.html` | BR-penkein-coin 钱包（最复杂的页面） |
 | 支持 | `support.html` | 联系方式、邮件模板、FAQ |
 | 下载 | `down.html` | 国旗下载 |
-| X | `x.html` | 自动跳转到 X/Twitter |
+| X | `x.html` | X/Twitter 关注页面，手动跳转 |
 | 404 | `404.html` | 自定义错误页（不使用 components.js） |
 
 > 注意：`constitution.html` 和 `laws.html` 曾引用但已移除链接，不要再引用这两个文件。
@@ -62,8 +62,8 @@ Waline.init({
 - `POST /admin` — 仅管理员，body: `{action, user, value}`（支持 deduct、freeze、unfreeze、setBalance、deleteUser）
 - API Key 以 `brkey_` 开头的是普通用户密钥，其他格式视为管理员密钥
 
-### `script.js`
-在需要弹窗或钱包功能的页面加载（index、about、citizens、news、government、culture、down、support）。通过 `DOMContentLoaded` 控制入籍弹窗和 BR-penkein-coin 钱包操作。使用 `fetchWithTimeout()` 包装器处理超时。
+### ~~`script.js`~~（已删除）
+该文件从未被任何 HTML 页面引用，所含功能已在 `components.js` 和 `wallet.html` 内联脚本中覆盖。
 
 ### 部署
 - `CNAME` 文件配置 GitHub Pages 自定义域名
