@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 [请简单介绍一下自己]
 
 对Schlen的理解:
-[请描述您对液态民主和BR-coin的了解]
+[请描述您对液态民主和BR-penkein-coin的了解]
 
 期待与愿景:
 [您希望为Schlen贡献什么?]`);
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ===== BR-coin 钱包 =====
+    // ===== BR-penkein-coin 钱包 =====
     const apiKeyForm = document.getElementById('apikey-form');
     if (!apiKeyForm) {
         console.log('Wallet not on this page');

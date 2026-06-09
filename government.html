@@ -12,12 +12,151 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Schlen联邦共和国实行液态民主：直接投票、信任委托、参与即奖励。了解我们的投票流程和政府结构。">
     <title>政体 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+    <style>
+        .delegation-viz {
+            display: grid;
+            grid-template-columns: 180px 80px 180px;
+            grid-template-rows: auto 80px auto;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .delegation-node {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+            position: relative;
+        }
+        .delegation-node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,123,255,0.3);
+        }
+        .delegation-node[data-citizen="info"] {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            grid-column: 1 / -1;
+        }
+        .node-avatar {
+            font-size: 2.5em;
+            margin-bottom: 6px;
+        }
+        .node-name {
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        .node-status {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin: 4px 0;
+        }
+        .node-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-top: 6px;
+        }
+        .delegation-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--primary-color);
+            font-size: 0.9em;
+        }
+        .delegation-arrow-vertical {
+            grid-column: 2;
+        }
+        .arrow-line {
+            width: 2px;
+            height: 30px;
+            background: var(--primary-color);
+        }
+        .delegation-arrow .arrow-line {
+            width: 40px;
+            height: 2px;
+        }
+        .delegation-arrow-vertical .arrow-line {
+            width: 2px;
+            height: 30px;
+        }
+        .delegation-info {
+            text-align: left;
+            font-size: 0.9em;
+            line-height: 1.7;
+        }
+        .delegation-info strong {
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .delegation-info p {
+            margin: 6px 0;
+            color: rgba(255,255,255,0.9);
+        }
+        @media (max-width: 640px) {
+            .delegation-viz {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+                gap: 8px;
+                padding: 20px 10px;
+            }
+            .delegation-arrow { display: none; }
+            .delegation-node[data-citizen="info"] { grid-column: 1 / -1; }
+        }
+        .reward-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        .reward-desc {
+            color: #555;
+            margin-bottom: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        .reward-btn {
+            text-decoration: none;
+            display: inline-block;
+        }
+        .reward-hint {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 15px;
+        }
+        [data-theme="dark"] .reward-desc {
+            color: #adbac7;
+        }
+        [data-theme="dark"] .reward-hint {
+            color: #8b9bb5;
+        }
+        [data-theme="dark"] .delegation-viz {
+            background: var(--card-bg);
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +166,7 @@
         <section class="page-hero gov-hero">
             <div class="hero-content">
                 <h2>液态民主</h2>
-                <p>流动的权力 · 公民的掌控 · 未来的政治</p>
+                <p>投票决定 · 信任流动 · 参与即奖励</p>
             </div>
         </section>
 
@@ -36,53 +175,96 @@
                 <!-- 什么是液态民主 -->
                 <div class="gov-intro">
                     <h3>什么是液态民主？</h3>
-                    <p class="lead-text">液态民主（Liquid Democracy）是一种结合了直接民主和代议民主优点的混合政体。在Schlen，每一位公民既是决策者，也可以是委托者。</p>
+                    <p class="lead-text">Schlen 的液态民主让每一位公民都能直接参与决策。核心机制三句话：<strong>人人可投票，信任可委托，参与有奖励</strong>。</p>
 
                     <div class="concept-cards">
                         <div class="concept-card">
                             <div class="concept-icon">🗳️</div>
                             <h4>直接投票</h4>
-                            <p>公民可以对每个议题直接表达意见，真正参与国家决策。</p>
+                            <p>每位公民对每项提案都可以直接投出赞成或反对票，按多数原则决定结果。每一票都算数。</p>
                         </div>
                         <div class="concept-card">
-                            <div class="concept-icon">🤝</div>
-                            <h4>权力委托</h4>
-                            <p>可以将投票权委托给信任的代表，适合忙碌或不熟悉的议题。</p>
+                            <div class="concept-icon">🔗</div>
+                            <h4>信任委托</h4>
+                            <p>忙碌或不了解议题？可以把投票权委托给你信任的公民。委托链可追踪、可撤回，权力永远属于你——只是暂时「借」了出去。</p>
                         </div>
                         <div class="concept-card">
-                            <div class="concept-icon">🔄</div>
-                            <h4>随时撤销</h4>
-                            <p>委托不是永久的，可以随时收回或更改，保持权力的流动性。</p>
+                            <div class="concept-icon">🪙</div>
+                            <h4>参与即奖励</h4>
+                            <p>参与投票、成功推动提案、甚至在委托链中贡献信任——都会获得 BR-penkein-coin 奖励。治理国家也是在挖矿。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 运作方式 -->
                 <div class="gov-section">
-                    <h3>运作方式</h3>
+                    <h3>投票流程</h3>
                     <div class="process-flow">
                         <div class="process-step">
                             <div class="step-number">1</div>
                             <h4>提案提交</h4>
-                            <p>任何公民都可以提交政策提案，经过初步审核后进入讨论期。</p>
+                            <p>任何公民提交政策提案，需质押少量 BR-penkein-coin 以防止垃圾提案。通过初步审核后进入讨论期。</p>
                         </div>
                         <div class="process-arrow">→</div>
                         <div class="process-step">
                             <div class="step-number">2</div>
                             <h4>公开讨论</h4>
-                            <p>全体公民进行为期7天的讨论，充分表达观点和建议。</p>
+                            <p>全体公民进行为期 7 天的讨论，充分表达观点和建议。提案人可根据反馈修改方案。</p>
                         </div>
                         <div class="process-arrow">→</div>
                         <div class="process-step">
                             <div class="step-number">3</div>
                             <h4>投票阶段</h4>
-                            <p>公民直接投票或委托投票，持续3天，确保每个人都有机会参与。</p>
+                            <p>每位公民投票：<strong>赞成</strong>或<strong>反对</strong>。按多数原则决定结果，也可委托他人代投。</p>
                         </div>
                         <div class="process-arrow">→</div>
                         <div class="process-step">
                             <div class="step-number">4</div>
-                            <h4>结果执行</h4>
-                            <p>获得多数支持的提案将被执行，由智能合约自动分配资源。</p>
+                            <h4>执行与激励</h4>
+                            <p>提案通过后自动执行。参与投票的公民及委托链上的所有中间人分享 BR-penkein-coin 激励池。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 信任委托可视化 -->
+                <div class="gov-section">
+                    <h3>信任流动</h3>
+                    <p class="section-desc" style="text-align:center;max-width:700px;margin:0 auto 40px;">忙不过来？把投票权委托给你信任的人。权力沿着委托链流动，每一层中间人都获得激励。随时可以收回。</p>
+                    <div class="delegation-viz">
+                        <div class="delegation-node" data-citizen="A">
+                            <div class="node-avatar">🧑‍🌾</div>
+                            <div class="node-name">公民A</div>
+                            <div class="node-status">在线</div>
+                            <div class="node-badge">委托给 B</div>
+                        </div>
+                        <div class="delegation-arrow">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head">▶</div>
+                            <div class="arrow-label">信任</div>
+                        </div>
+                        <div class="delegation-node" data-citizen="B">
+                            <div class="node-avatar">👩‍💼</div>
+                            <div class="node-name">公民B</div>
+                            <div class="node-status">在线</div>
+                            <div class="node-badge">持有 3 票</div>
+                        </div>
+                        <div class="delegation-arrow delegation-arrow-vertical">
+                            <div class="arrow-line"></div>
+                            <div class="arrow-head">▼</div>
+                            <div class="arrow-label">委托</div>
+                        </div>
+                        <div class="delegation-node" data-citizen="C">
+                            <div class="node-avatar">👨‍🔬</div>
+                            <div class="node-name">公民C</div>
+                            <div class="node-status">离线</div>
+                            <div class="node-badge">委托给 B</div>
+                        </div>
+                        <div class="delegation-node delegation-node-wide" data-citizen="info">
+                            <div class="delegation-info">
+                                <strong>委托链原理</strong>
+                                <p>A → B ← C：B 持有自己的投票权 + A 的委托 + C 的委托，共 3 票权重。</p>
+                                <p>A 和 C 随时可以收回委托。B 若弃权，委托权自动退回给 A 和 C。</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,22 +276,22 @@
                         <div class="structure-card">
                             <h4>🏛️ 公民大会</h4>
                             <p class="structure-role">最高权力机构</p>
-                            <p>由全体公民组成，通过液态民主系统行使立法权。所有重大决策都需要公民大会批准。</p>
+                            <p>由全体公民组成，通过投票行使立法权。所有重大决策都需要公民大会批准。</p>
                         </div>
                         <div class="structure-card">
                             <h4>⚡ 执行委员会</h4>
                             <p class="structure-role">日常行政机构</p>
-                            <p>由3名当选公民组成，负责日常行政事务。任期1年，可连任一次。</p>
+                            <p>由 3 名公民轮值担任，负责日常行政事务。任期 6 个月，到期自动轮换。</p>
                         </div>
                         <div class="structure-card">
                             <h4>⚖️ 仲裁委员会</h4>
                             <p class="structure-role">司法机构</p>
-                            <p>由5名具有法律背景的公民组成，负责解决纠纷和解释法律。</p>
+                            <p>由 3 名公民组成，负责解决纠纷和解释法律，确保投票过程公平公正。</p>
                         </div>
                         <div class="structure-card">
                             <h4>💻 技术委员会</h4>
                             <p class="structure-role">技术支持机构</p>
-                            <p>维护投票系统、BR-coin网络和智能合约，确保系统安全稳定运行。</p>
+                            <p>维护投票系统、BR-penkein-coin 网络和智能合约，确保委托链透明可追溯。</p>
                         </div>
                     </div>
                 </div>
@@ -117,14 +299,29 @@
                 <!-- 参与方式 -->
                 <div class="gov-section cta-section">
                     <h3>如何参与？</h3>
-                    <p>成为Schlen公民，您就自动获得了参与国家治理的权利。通过我们的在线平台，您可以：</p>
+                    <p>成为 Schlen 公民后，您就自动获得了参与国家治理的权利：</p>
                     <ul class="participation-list">
-                        <li>✅ 查看当前正在表决的提案</li>
-                        <li>✅ 提交自己的政策建议</li>
-                        <li>✅ 选择信任的代表委托投票权</li>
-                        <li>✅ 参与在线公开讨论</li>
-                        <li>✅ 查看投票历史和政府透明度报告</li>
+                        <li>✅ 查看当前正在投票的提案</li>
+                        <li>✅ 提交自己的政策建议（需质押 BR-penkein-coin）</li>
+                        <li>✅ 对提案投赞成或反对</li>
+                        <li>✅ 把自己的投票权委托给信任的公民</li>
+                        <li>✅ 参与投票获得 BR-penkein-coin 激励</li>
+                        <li>✅ 随时收回委托，权力始终在你手中</li>
+                        <li>✅ 查看委托链和投票透明度报告</li>
                     </ul>
+                </div>
+
+                <!-- 投票奖励 -->
+                <div class="gov-section reward-section">
+                    <h3 style="margin-bottom:15px;">🪙 领取投票奖励</h3>
+                    <p class="reward-desc">
+                        每次参与投票或作为委托链中间人贡献信任，都可以申请 BR-penkein-coin 激励。<br>
+                        填写申请发送至官方邮箱，我们核实后发放奖励。
+                    </p>
+                    <a href="mailto:official@schlen.top?subject=BR-penkein-coin 投票奖励申请&body=用户名：%0A%0A参与投票的提案：%0A%0A委托链角色（如有）：%0A%0A申请奖励金额：%0A%0A备注：" class="btn btn-primary btn-large reward-btn">
+                        ✉️ 邮件申请奖励
+                    </a>
+                    <p class="reward-hint">奖励金额根据参与度和投票权重计算，审核通过后发放</p>
                 </div>
             </div>
         </section>

@@ -34,8 +34,13 @@ function renderHeader(activePage) {
     <header class="main-header">
       <nav class="navbar">
         <h1 class="logo"><a href="index.html">Schlen</a></h1>
+        <button class="hamburger" id="hamburger-btn" aria-label="菜单">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
         <div class="nav-right">
-          <ul class="nav-links">
+          <ul class="nav-links" id="nav-links">
             ${navLinks}
             <li><a href="#" id="join-nation-btn" class="btn-join">加入国籍</a></li>
           </ul>
@@ -162,7 +167,7 @@ function initJoinModal() {
 [请简单介绍一下自己]
 
 对Schlen的理解:
-[请描述您对液态民主和BR-coin的了解]
+[请描述您对液态民主和BR-penkein-coin的了解]
 
 期待与愿景:
 [您希望为Schlen贡献什么?]`);
@@ -180,6 +185,24 @@ function initJoinModal() {
   });
 }
 
+// 汉堡菜单
+function initHamburger() {
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('#hamburger-btn');
+    if (btn) {
+      e.stopPropagation();
+      const nav = document.getElementById('nav-links');
+      nav.classList.toggle('nav-open');
+      return;
+    }
+    // 点击菜单外的区域自动关闭
+    const nav = document.getElementById('nav-links');
+    if (nav && nav.classList.contains('nav-open') && !e.target.closest('.nav-links')) {
+      nav.classList.remove('nav-open');
+    }
+  });
+}
+
 // 页面初始化
 function initPage(activePage) {
   renderHeader(activePage);
@@ -187,4 +210,5 @@ function initPage(activePage) {
   renderJoinModal();
   initThemeToggle();
   initJoinModal();
+  initHamburger();
 }

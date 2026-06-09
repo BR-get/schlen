@@ -110,6 +110,29 @@ a:hover {
     text-decoration: none !important;
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--text-light);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger-line + .hamburger-line {
+    margin-top: 5px;
+}
+
 /* Nav Right */
 .nav-right {
     display: flex;
@@ -286,7 +309,7 @@ a:hover {
     /* Spans all columns in the grid */
 }
 
-/* BR-coin Wallet */
+/* BR-penkein-coin Wallet */
 .section-desc {
     color: #555;
     font-size: 1.1em;
@@ -1558,35 +1581,66 @@ a:hover {
 /* 手机 (768px以下) */
 @media (max-width: 768px) {
 
-    /* 导航栏优化 */
+    /* 导航栏优化 - 汉堡菜单 */
     .main-header {
         position: relative;
     }
 
     .navbar {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         padding: 10px 15px;
     }
 
     .logo {
         font-size: 1.8em;
-        margin-bottom: 10px;
+        margin-bottom: 0;
+    }
+
+    .hamburger {
+        display: block;
+        order: 3;
+        margin-left: auto;
+    }
+
+    .nav-right {
+        order: 4;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 4px;
+        margin-top: 12px;
+        padding: 12px 0;
+        border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .nav-links.nav-open {
+        display: flex;
     }
 
     .nav-links li {
-        margin: 0 5px;
+        margin: 0;
+        width: 100%;
+        text-align: center;
     }
 
     .nav-links a {
-        font-size: 0.9em;
-        padding: 5px 10px;
+        font-size: 0.95em;
+        padding: 10px 0;
+        display: block;
+    }
+
+    #theme-toggle {
+        order: -1;
     }
 
     .btn-join {
