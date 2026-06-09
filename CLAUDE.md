@@ -13,9 +13,9 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 | 首页 | `index.html` | Hero + 信息卡片 + Waline 评论 |
 | 关于 | `about.html` | 地理位置、人口、首都 |
 | 文化 | `culture.html` | Boryoki 语言、常用短语 |
-| 政体 | `government.html` | 全体共识制 + 信任委托可视化 + BR-penkein-coin 激励 |
+| 政体 | `government.html` | 液态民主（直接投票 + 信任委托）+ BR-penkein-coin 激励 |
 | 公民 | `citizens.html` | 公民权益、入籍申请、论坛预览 |
-| 动态 | `news.html` | 占位页面，暂无实际内容 |
+| 动态 | `news.html` | 欢迎公告、社区动态 |
 | 钱包 | `wallet.html` | BR-penkein-coin 钱包（最复杂的页面） |
 | 支持 | `support.html` | 联系方式、邮件模板、FAQ |
 | 下载 | `down.html` | 国旗下载 |
@@ -39,29 +39,31 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 - 钱包页面有自己的独立暗色样式（内联 `<style>`）
 
 ### 评论系统 (Waline)
-除 404 外的每个页面用相同的配置初始化 Waline：
-```js
-Waline.init({
-  el: '#waline',
-  serverURL: 'https://blogwaline-gamma.vercel.app',
-  // ... 其余选项与其他页面一致
-})
-```
-暗色模式通过 `dark: 'html[data-theme="dark"]'` 支持。
+除 404 外的每个页面用相同的配置初始化 Waline，serverURL 为 `https://blogwaline-gamma.vercel.app`，暗色模式通过 `dark: 'html[data-theme="dark"]'` 支持。
+
+### 图标系统
+- Font Awesome 6 (`https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css`) 用于图标，已替换大部分关键图标（联系方式、概念卡片、权益卡片、主题切换）。部分装饰性 emoji 保留。
+
+### 字体
+- 主字体：MI Sans（小米字体），从 unpkg 加载 Regular/Medium/Bold/Light 四个字重
+- Logo 字体：Pacifico（Google Fonts）
+- 页脚标注：`字体：MI Sans · 小米字体`
+
+### Telegram 群组
+- 唯一群组链接：`https://t.me/+a7w9EUeKBThlY2Y5`
+- 全站多个入口（首页、支持页、公民页、关于页、政体页、动态页、页脚）
+- 引导用户到 #SCHLEN治理部 话题参与讨论
 
 ### BR-penkein-coin 钱包 (`wallet.html`)
-最复杂的页面，完全自包含 — 有自己的内联 `<style>` 和 `<script>`（不使用 `script.js`）。从 components.js 调用 `initThemeToggle()` 实现钱包页面的主题切换。API 地址 `https://coin.schlen.top`：
+最复杂的页面，完全自包含（内联 `<style>` + `<script>`）。通过 components.js 的 `initThemeToggle()` 实现主题切换。API 地址 `https://coin.schlen.top`：
 
-- `GET /balance?user=X` — 查询余额（公开）
-- `GET /users` — 用户列表（公开）
-- `GET /userinfo?user=X` — 用户详情（公开）
+- `GET /balance?user=X` — 查询余额
+- `GET /users` — 用户列表
+- `GET /userinfo?user=X` — 用户详情
 - `POST /transfer` — 需要 `X-API-Key` 请求头，body: `{from, to, amount}`
 - `POST /mint` — 仅管理员，body: `{user, amount}`
 - `POST /admin` — 仅管理员，body: `{action, user, value}`（支持 deduct、freeze、unfreeze、setBalance、deleteUser）
-- API Key 以 `brkey_` 开头的是普通用户密钥，其他格式视为管理员密钥
-
-### ~~`script.js`~~（已删除）
-该文件从未被任何 HTML 页面引用，所含功能已在 `components.js` 和 `wallet.html` 内联脚本中覆盖。
+- API Key 以 `brkey_` 开头的是普通用户密钥，否则视为管理员密钥
 
 ### 部署
 - `CNAME` 文件配置 GitHub Pages 自定义域名
@@ -77,10 +79,12 @@ Waline.init({
 
 ## 重要规则
 
-- **人口数字（3人）**：修改时需更新所有显示人口的文件 — 目前有 `index.html`、`about.html`、`citizens.html`。新增页面也要注意。
-- **Waline 服务端地址**：`https://blogwaline-gamma.vercel.app` — 除非迁移评论后端，否则不要修改
-- **Google Analytics 跟踪 ID**：每个页面的 `<head>` 中都使用 `G-BCG1K6EZ72`
+- **人口数字（3人）**：修改时需更新 `index.html`、`about.html`、`citizens.html`
+- **Waline 服务端地址**：`https://blogwaline-gamma.vercel.app` — 除非迁移，否则不要修改
+- **Google Analytics ID**：每个页面 `<head>` 中使用 `G-BCG1K6EZ72`
+- **BR-penkein-coin 不是区块链货币**：不要使用区块、挖矿、账本、链等区块链术语
 - **components.js 的修改**会同时影响所有页面
+- **404 页面**不使用 components.js（没有 header/footer，完全独立）
 
 ## 样式约定
 
