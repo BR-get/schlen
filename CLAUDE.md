@@ -22,8 +22,6 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 | X | `x.html` | X/Twitter 关注页面，手动跳转 |
 | 404 | `404.html` | 自定义错误页（不使用 components.js） |
 
-> 注意：`constitution.html` 和 `laws.html` 曾引用但已移除链接，不要再引用这两个文件。
-
 ## 架构
 
 ### 共享组件系统 (`components.js`)

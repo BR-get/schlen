@@ -1929,50 +1929,6 @@ a:hover {
     text-decoration: none;
 }
 
-/* Constitution Page Styles */
-.constitution-hero {
-    background: linear-gradient(135deg, #9C27B0, #E91E63);
-}
-
-.constitution-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.constitution-section {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.constitution-section h3 {
-    color: #007BFF;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #007BFF;
-    font-size: 1.8em;
-}
-
-.article {
-    margin-bottom: 25px;
-    padding-left: 20px;
-    border-left: 3px solid #e0e0e0;
-}
-
-.article h4 {
-    color: #333;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-.article p {
-    color: #555;
-    line-height: 1.8;
-    margin-bottom: 10px;
-}
 
 /* 触摸设备优化 */
 @media (hover: none) {
@@ -2060,26 +2016,6 @@ img {
     border-color: var(--accent-color);
 }
 
-[data-theme="dark"] .constitution-section {
-    background: var(--card-bg);
-}
-
-[data-theme="dark"] .constitution-section h3 {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-}
-
-[data-theme="dark"] .article h4 {
-    color: #e9ecef;
-}
-
-[data-theme="dark"] .article p {
-    color: #adbac7;
-}
-
-[data-theme="dark"] .article {
-    border-left-color: #2d4a6a;
-}
 
 [data-theme="dark"] .featured-news {
     background: linear-gradient(135deg, rgba(26, 45, 66, 0.95), rgba(20, 40, 60, 0.95));
