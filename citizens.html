@@ -16,8 +16,12 @@
     <title>公民专区 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 </head>
 
@@ -28,7 +32,7 @@
         <section class="page-hero citizens-hero">
             <div class="hero-content">
                 <h2>公民专区</h2>
-                <p>专属权益 · 社区互动 · 数字身份</p>
+                <p>专属权益 · 社区互动</p>
             </div>
         </section>
 
@@ -39,7 +43,7 @@
                     <h3>公民权益</h3>
                     <div class="benefits-grid">
                         <div class="benefit-card">
-                            <div class="benefit-icon">🗳️</div>
+                            <div class="benefit-icon"><i class="fas fa-landmark"></i></div>
                             <h4>政治权利</h4>
                             <ul>
                                 <li>参与液态民主投票</li>
@@ -49,7 +53,7 @@
                             </ul>
                         </div>
                         <div class="benefit-card">
-                            <div class="benefit-icon">💰</div>
+                            <div class="benefit-icon"><i class="fas fa-coins"></i></div>
                             <h4>经济权益</h4>
                             <ul>
                                 <li>免费获得基础 BR-penkein-coin 额度</li>
@@ -59,23 +63,13 @@
                             </ul>
                         </div>
                         <div class="benefit-card">
-                            <div class="benefit-icon">🏠</div>
+                            <div class="benefit-icon"><i class="fas fa-home"></i></div>
                             <h4>社会福利</h4>
                             <ul>
                                 <li>免费医疗和教育</li>
                                 <li>住房保障计划</li>
                                 <li>养老和失业保险</li>
                                 <li>文化设施免费使用</li>
-                            </ul>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">🌐</div>
-                            <h4>数字身份</h4>
-                            <ul>
-                                <li>专属数字公民ID</li>
-                                <li>数字身份认证</li>
-                                <li>全球免签（未来规划）</li>
-                                <li>元宇宙公民身份</li>
                             </ul>
                         </div>
                     </div>
@@ -102,13 +96,16 @@
                                 <li><strong>审核阶段</strong> - 3个工作日内完成初审</li>
                                 <li><strong>在线面试</strong> - 与现有公民进行视频交流</li>
                                 <li><strong>公民投票</strong> - 全体公民投票表决</li>
-                                <li><strong>正式入籍</strong> - 获得数字公民ID</li>
+                                <li><strong>正式入籍</strong></li>
                             </ol>
                         </div>
                     </div>
                     <div class="application-cta">
                         <p>目前已有 <strong>3</strong> 位公民，我们期待第 <strong>4</strong> 位公民的加入！</p>
-                        <a href="#" id="join-nation-btn-cta" class="btn btn-large">立即申请入籍</a>
+                        <a href="#" id="join-nation-btn-cta" class="btn btn-large">📝 立即申请入籍</a>
+                        <p style="margin-top: 12px; font-size: 0.9em; color: var(--text-secondary);">
+                            想先聊聊？加入我们的 <a href="https://t.me/+a7w9EUeKBThlY2Y5" target="_blank" style="color:#0088cc;font-weight:600;">Telegram 交流群</a>，认识一下现有公民！<br>进群后请到 <strong>SCHLEN治理部</strong> 话题了解最新议题。
+                        </p>
                     </div>
                 </div>
 
@@ -147,7 +144,7 @@
             </div>
         </section>
 
-        <!-- Valine评论 -->
+        <!-- Waline 评论 -->
         <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
             <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
             <div id="waline"></div>

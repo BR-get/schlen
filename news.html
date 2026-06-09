@@ -16,9 +16,77 @@
     <title>新闻动态 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+    <style>
+        .news-article {
+            max-width: 720px;
+            margin: 0 auto 40px;
+            background: var(--card-bg, #fff);
+            border-radius: 16px;
+            box-shadow: var(--box-shadow, 0 2px 8px rgba(0,0,0,0.1));
+            padding: 40px;
+        }
+        .news-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .news-tag {
+            background: #007BFF;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .news-date {
+            color: #999;
+            font-size: 0.9em;
+        }
+        .news-article h3 {
+            font-size: 1.8em;
+            color: var(--text-color, #333);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        .news-body p {
+            color: var(--text-secondary, #666);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1.05em;
+        }
+        .news-cta {
+            background: #e8f4fd;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin: 25px 0;
+        }
+        .news-cta p {
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+        [data-theme="dark"] .news-article {
+            background: var(--card-bg, #1a1a2e);
+        }
+        [data-theme="dark"] .news-cta {
+            background: #0a1628;
+        }
+        [data-theme="dark"] .news-date {
+            color: #8b9bb5;
+        }
+        @media (max-width: 640px) {
+            .news-article { padding: 25px; }
+            .news-article h3 { font-size: 1.4em; }
+        }
+    </style>
 </head>
 
 <body>
@@ -34,11 +102,24 @@
 
         <section class="content-section">
             <div class="container">
-                <div style="text-align: center; padding: 60px 20px;">
-                    <div style="font-size: 64px; margin-bottom: 20px;">📰</div>
-                    <h3 style="margin-bottom: 10px;">新闻板块</h3>
-                    <p style="color: var(--text-secondary);">内容待更新，敬请期待...</p>
-                </div>
+                <article class="news-article">
+                    <div class="news-header">
+                        <span class="news-tag">公告</span>
+                        <span class="news-date">2026年6月9日</span>
+                    </div>
+                    <h3>欢迎来到 Schlen 联邦共和国！</h3>
+                    <div class="news-body">
+                        <p>亲爱的访客：</p>
+                        <p>欢迎来到 <strong>Schlen 联邦共和国</strong> —— 一个漂浮在南太平洋上的梦幻国度。我们是一个由志同道合者共同构建的互联网微国家社区，致力于探索<b>液态民主</b>治理、发展独特的 <b>Boryoki</b> 语言文化，以及建设充满活力的数字公民社会。</p>
+                        <p>目前我们有 <strong>3 位公民</strong>，国家虽小，但每一位公民都是重要的建设者。无论你是被液态民主的理念吸引，还是对 BR-penkein-coin 经济系统感兴趣，或只是想找一个有趣的社区聊天交流——<strong>都欢迎你</strong>。</p>
+                        <div class="news-cta">
+                            <p>💬 想第一时间了解 Schlen 的动态？加入我们的 Telegram 交流群，和其他公民一起聊天吧！<br>进群后请到 <strong>SCHLEN治理部</strong> 话题参与讨论。</p>
+                            <a href="https://t.me/+a7w9EUeKBThlY2Y5" target="_blank" class="btn" style="background:#0088cc;">💬 加入交流群</a>
+                        </div>
+                        <p style="margin-top: 20px;">期待与你相遇。</p>
+                        <p>—— Schlen 联邦共和国 全体公民</p>
+                    </div>
+                </article>
 
                 <!-- 评论区 -->
                 <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">

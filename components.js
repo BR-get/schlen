@@ -16,6 +16,7 @@ const NAV_ITEMS = [
 const FOOTER_LINKS = [
   { id: 'down', label: '下载', href: 'down.html' },
   { id: 'x', label: 'X', href: 'x.html' },
+  { id: 'telegram', label: '💬 群组', href: 'https://t.me/+a7w9EUeKBThlY2Y5', external: true },
   { id: 'shop', label: '🛒 商店', href: 'https://shop.schlen.top', external: true },
   { id: 'schlenix', label: '💻 Schlenix', href: 'https://ix.schlen.top', external: true },
 ];
@@ -28,7 +29,7 @@ function renderHeader(activePage) {
   }).join('');
 
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const themeIcon = isDark ? '☀️' : '🌙';
+  const themeIcon = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
 
   const html = `
     <header class="main-header">
@@ -80,6 +81,7 @@ function renderFooter() {
       </div>
       <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利</p>
       <p class="footer-disclaimer">⚠️ 本网站所述"Schlen联邦共和国"为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家。但我们认真对待每一份创意与梦想</p>
+      <p class="footer-font-credit">字体：MI Sans · 小米字体</p>
     </footer>
   `;
 

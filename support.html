@@ -16,8 +16,12 @@
     <title>联系与支持 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 </head>
 
@@ -46,7 +50,7 @@
                     </div>
                     <div class="contact-grid">
                         <div class="contact-card">
-                            <div class="contact-icon">📧</div>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <h4>官方邮箱</h4>
                             <p class="contact-info">official@schlen.top</p>
                             <p class="contact-desc">用于官方事务、合作洽谈、媒体采访</p>
@@ -56,7 +60,7 @@
                         </div>
 
                         <div class="contact-card">
-                            <div class="contact-icon">🐦</div>
+                            <div class="contact-icon"><i class="fab fa-x-twitter"></i></div>
                             <h4>X (Twitter)</h4>
                             <p class="contact-info">@schlen_land</p>
                             <p class="contact-desc">关注我们获取最新动态和公告</p>
@@ -64,9 +68,18 @@
                         </div>
 
                         <div class="contact-card">
-                            <div class="contact-icon">💬</div>
+                            <div class="contact-icon"><i class="fab fa-telegram"></i></div>
+                            <h4>交流群</h4>
+                            <p class="contact-info">Telegram</p>
+                            <p class="contact-desc">随时聊天、讨论国家议题、认识其他公民</p>
+                            <a href="https://t.me/+a7w9EUeKBThlY2Y5" target="_blank" class="btn btn-primary">加入群组</a>
+                            <p style="font-size:0.85em;color:#999;margin-top:12px;">进群后请到 <strong>SCHLEN治理部</strong> 话题参与讨论</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-icon"><i class="fas fa-comment-dots"></i></div>
                             <h4>在线留言</h4>
-                            <p class="contact-info">Valine评论系统</p>
+                            <p class="contact-info">Waline 评论系统</p>
                             <p class="contact-desc">在任何页面底部留言，我们会及时回复</p>
                             <a href="#vcomments" class="btn btn-primary">前往留言</a>
                         </div>
@@ -268,7 +281,7 @@
                     </div>
                 </div>
 
-                <!-- Valine评论 -->
+                <!-- Waline 评论 -->
                 <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
                     <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
                     <div id="waline"></div>

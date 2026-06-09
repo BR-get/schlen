@@ -89,4 +89,4 @@ Waline.init({
 - CSS 变量定义在 `:root` 和 `[data-theme="dark"]` 中：`--primary-color`、`--accent-color`、`--bg-light`、`--card-bg`、`--text-dark` 等
 - 海洋主题：蓝色系（主色 #007BFF），珊瑚橙点缀（#FFA726）
 - 钱包页面有独立的 CSS 命名空间（`.wallet-page`、`.wallet-box` 等），与主站样式无冲突
-- 所有页面引用 Google Fonts：Montserrat + Pacifico
+- 主字体为 MI Sans（小米字体），Logo 使用 Pacifico（Google Fonts），Font Awesome 6 用于图标

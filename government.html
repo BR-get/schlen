@@ -16,8 +16,12 @@
     <title>政体 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
     <style>
         .delegation-viz {
@@ -179,17 +183,17 @@
 
                     <div class="concept-cards">
                         <div class="concept-card">
-                            <div class="concept-icon">🗳️</div>
+                            <div class="concept-icon"><i class="fas fa-vote-yea"></i></div>
                             <h4>直接投票</h4>
                             <p>每位公民对每项提案都可以直接投出赞成或反对票，按多数原则决定结果。每一票都算数。</p>
                         </div>
                         <div class="concept-card">
-                            <div class="concept-icon">🔗</div>
+                            <div class="concept-icon"><i class="fas fa-link"></i></div>
                             <h4>信任委托</h4>
                             <p>忙碌或不了解议题？可以把投票权委托给你信任的公民。委托链可追踪、可撤回，权力永远属于你——只是暂时「借」了出去。</p>
                         </div>
                         <div class="concept-card">
-                            <div class="concept-icon">🪙</div>
+                            <div class="concept-icon"><i class="fas fa-coins"></i></div>
                             <h4>参与即奖励</h4>
                             <p>参与投票、成功推动提案、甚至在委托链中贡献信任——都会获得 BR-penkein-coin 奖励。</p>
                         </div>
@@ -309,6 +313,11 @@
                         <li>✅ 随时收回委托，权力始终在你手中</li>
                         <li>✅ 查看委托链和投票透明度报告</li>
                     </ul>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <p style="margin-bottom: 15px;">💬 对国家治理有想法？来群里和其他公民一起讨论吧！</p>
+                        <a href="https://t.me/+a7w9EUeKBThlY2Y5" target="_blank" class="btn" style="background:#0088cc;">💬 加入交流群</a>
+                        <span style="font-size:0.85em;color:#999;margin-left:10px;">进群后请到 <strong>SCHLEN治理部</strong> 话题参与讨论</span>
+                    </div>
                 </div>
 
                 <!-- 投票奖励 -->
@@ -326,7 +335,7 @@
             </div>
         </section>
 
-        <!-- Valine评论 -->
+        <!-- Waline 评论 -->
         <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
             <h3 style="text-align: center; margin-bottom: 20px;">💬 留言</h3>
             <div id="waline"></div>

@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap');
+/* 字体：MI Sans (小米字体) https://github.com/dsrkafuu/misans */
+@import url('https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css') ;
+@import url('https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css') ;
+@import url('https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css') ;
+@import url('https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css') ;
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 :root {
     --primary-color: #007BFF;
@@ -26,7 +31,7 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MiSans', 'Montserrat', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-light);
@@ -380,7 +385,7 @@ a:hover {
     color: #666;
     cursor: pointer;
     transition: color 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MiSans', 'Montserrat', sans-serif;
 }
 
 .tab-btn.active {
@@ -402,7 +407,7 @@ a:hover {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MiSans', 'Montserrat', sans-serif;
     font-size: 1em;
 }
 
@@ -469,7 +474,7 @@ a:hover {
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MiSans', 'Montserrat', sans-serif;
 }
 
 .action-card button {
@@ -702,6 +707,14 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
+}
+
+.footer-font-credit {
+    text-align: center;
+    font-size: 0.8em;
+    opacity: 0.5;
+    margin-top: 8px;
+    color: var(--text-light);
 }
 
 /* Page Hero Styles */
@@ -1538,7 +1551,7 @@ a:hover {
     padding: 12px 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MiSans', 'Montserrat', sans-serif;
 }
 
 .subscribe-form button {

@@ -7,6 +7,9 @@
     <title>404 - 页面未找到 - Schlen联邦共和国</title>
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
 </head>
 <body>
     <div class="error-page">
@@ -19,6 +22,10 @@
                 <a href="index.html" class="btn btn-primary">返回首页</a>
             </div>
             <p class="footer-disclaimer" style="margin-top:30px;font-size:0.85em;color:#666;">⚠️ Schlen联邦共和国为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家</p>
+            <div class="easter-egg" onclick="this.classList.toggle('found')">
+                <i class="fas fa-map-marked-alt"></i>
+                <span class="egg-text">✨ 你发现了失落的浮岛 ✨</span>
+            </div>
         </div>
     </div>
     <style>
@@ -41,7 +48,7 @@
             font-size: 6em;
             font-weight: 700;
             color: #007BFF;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'MiSans', sans-serif;
         }
         .error-icon {
             font-size: 3em;
@@ -69,6 +76,52 @@
         }
         .btn-primary:hover {
             background-color: #0056b3;
+        }
+        .easter-egg {
+            margin-top: 24px;
+            cursor: pointer;
+            color: #999;
+            font-size: 1em;
+            transition: color 0.3s;
+            user-select: none;
+        }
+        .easter-egg:hover {
+            color: #FFA726;
+        }
+        .easter-egg .egg-text {
+            display: none;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        .easter-egg.found {
+            color: #FFA726;
+        }
+        .easter-egg.found .egg-text {
+            display: inline;
+            animation: fadeIn 0.5s ease;
+        }
+        .easter-egg.found i {
+            animation: bounce 0.5s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        [data-theme="dark"] .error-container {
+            background: var(--card-bg);
+        }
+        [data-theme="dark"] .error-container h1 {
+            color: #e9ecef;
+        }
+        [data-theme="dark"] .error-container p {
+            color: #adbac7;
+        }
+        [data-theme="dark"] .error-code {
+            color: var(--primary-color);
         }
     </style>
 </body>
