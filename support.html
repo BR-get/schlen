@@ -2,27 +2,20 @@
 <html lang="zh-CN">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-BCG1K6EZ72');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="联系Schlen联邦共和国官方，获取入籍申请、合作洽谈和技术支持。我们随时为您提供帮助。">
     <title>联系与支持 - Schlen联邦共和国</title>
+    <meta property="og:title" content="联系与支持 - Schlen联邦共和国">
+    <meta property="og:description" content="联系Schlen联邦共和国官方，获取入籍申请、合作洽谈和技术支持。我们随时为您提供帮助。">
+    <meta property="og:image" content="https://schlen.top/国旗.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="联系与支持 - Schlen联邦共和国">
+    <meta name="twitter:description" content="联系Schlen联邦共和国官方，获取入籍申请、合作洽谈和技术支持。我们随时为您提供帮助。">
+    <meta name="twitter:image" content="https://schlen.top/国旗.png">
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 </head>
 
 <body>
@@ -296,22 +289,6 @@
     <script>
         initPage('support');
     </script>
-    <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
-    <script>
-        Waline.init({
-            el: '#waline',
-            serverURL: 'https://blogwaline-gamma.vercel.app',
-            placeholder: '欢迎留言',
-            avatar: 'wavatar',
-            meta: ['nick', 'mail', 'link'],
-            requiredFields: ['nick'],
-            pageSize: 10,
-            lang: 'zh-CN',
-            highlight: true,
-            wordLimit: 500,
-            dark: 'html[data-theme="dark"]'
-        });
-    </script>
 
     <script>
         // 复制模板功能
@@ -434,204 +411,6 @@
         }
     </script>
 
-    <style>
-        .contact-section {
-            margin-bottom: 50px;
-        }
-
-        .contact-section h3 {
-            color: #007BFF;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #007BFF;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .contact-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .contact-card h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .contact-info {
-            color: #007BFF;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .contact-desc {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .template-section {
-            margin-bottom: 50px;
-        }
-
-        .template-section h3 {
-            color: #007BFF;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #007BFF;
-        }
-
-        .template-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 25px;
-        }
-
-        .template-card h4 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .template-content p {
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .template-body {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            overflow-x: auto;
-        }
-
-        .template-body pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .copy-btn {
-            width: 100%;
-            padding: 10px;
-        }
-
-        .faq-section {
-            margin-bottom: 50px;
-        }
-
-        .faq-section h3 {
-            color: #007BFF;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #007BFF;
-        }
-
-        .faq-item {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-        }
-
-        .faq-item h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .faq-item p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .faq-item a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .faq-item a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        [data-theme="dark"] .contact-card {
-            background: var(--card-bg);
-        }
-
-        [data-theme="dark"] .contact-section h3,
-        [data-theme="dark"] .template-section h3,
-        [data-theme="dark"] .faq-section h3 {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-        }
-
-        [data-theme="dark"] .contact-card h4,
-        [data-theme="dark"] .template-card h4,
-        [data-theme="dark"] .faq-item h4 {
-            color: #e9ecef;
-        }
-
-        [data-theme="dark"] .contact-desc,
-        [data-theme="dark"] .template-content p,
-        [data-theme="dark"] .faq-item p {
-            color: #adbac7;
-        }
-
-        [data-theme="dark"] .template-card {
-            background: var(--card-bg);
-        }
-
-        [data-theme="dark"] .faq-item {
-            background: var(--card-bg);
-        }
-
-        [data-theme="dark"] .template-body {
-            background: #0a1628;
-        }
-
-        [data-theme="dark"] .template-body pre {
-            color: #adbac7;
-        }
-
-        [data-theme="dark"] .contact-info {
-            color: var(--primary-color);
-        }
-    </style>
 </body>
 
 </html>

@@ -2,166 +2,21 @@
 <html lang="zh-CN">
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-BCG1K6EZ72');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Schlen联邦共和国实行液态民主：直接投票、信任委托、参与即奖励。了解我们的投票流程和政府结构。">
     <title>政体 - Schlen联邦共和国</title>
+    <meta property="og:title" content="政体 - Schlen联邦共和国">
+    <meta property="og:description" content="Schlen联邦共和国实行液态民主：直接投票、信任委托、参与即奖励。了解我们的投票流程和政府结构。">
+    <meta property="og:image" content="https://schlen.top/国旗.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="政体 - Schlen联邦共和国">
+    <meta name="twitter:description" content="Schlen联邦共和国实行液态民主：直接投票、信任委托、参与即奖励。了解我们的投票流程和政府结构。">
+    <meta name="twitter:image" content="https://schlen.top/国旗.png">
     <link rel="icon" type="image/png" href="国旗.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
-    <style>
-        .delegation-viz {
-            display: grid;
-            grid-template-columns: 180px 80px 180px;
-            grid-template-rows: auto 80px auto;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            padding: 40px 20px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: var(--box-shadow);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .delegation-node {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 12px;
-            padding: 20px 16px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: default;
-            position: relative;
-        }
-        .delegation-node:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,123,255,0.3);
-        }
-        .delegation-node[data-citizen="info"] {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            grid-column: 1 / -1;
-        }
-        .node-avatar {
-            font-size: 2.5em;
-            margin-bottom: 6px;
-        }
-        .node-name {
-            font-weight: 700;
-            font-size: 1.1em;
-        }
-        .node-status {
-            font-size: 0.8em;
-            opacity: 0.8;
-            margin: 4px 0;
-        }
-        .node-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 3px 12px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            margin-top: 6px;
-        }
-        .delegation-arrow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            color: var(--primary-color);
-            font-size: 0.9em;
-        }
-        .delegation-arrow-vertical {
-            grid-column: 2;
-        }
-        .arrow-line {
-            width: 2px;
-            height: 30px;
-            background: var(--primary-color);
-        }
-        .delegation-arrow .arrow-line {
-            width: 40px;
-            height: 2px;
-        }
-        .delegation-arrow-vertical .arrow-line {
-            width: 2px;
-            height: 30px;
-        }
-        .delegation-info {
-            text-align: left;
-            font-size: 0.9em;
-            line-height: 1.7;
-        }
-        .delegation-info strong {
-            display: block;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .delegation-info p {
-            margin: 6px 0;
-            color: rgba(255,255,255,0.9);
-        }
-        @media (max-width: 640px) {
-            .delegation-viz {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto;
-                gap: 8px;
-                padding: 20px 10px;
-            }
-            .delegation-arrow { display: none; }
-            .delegation-node[data-citizen="info"] { grid-column: 1 / -1; }
-        }
-        .reward-section {
-            text-align: center;
-            padding: 40px 20px;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-        .reward-desc {
-            color: #555;
-            margin-bottom: 20px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-        }
-        .reward-btn {
-            text-decoration: none;
-            display: inline-block;
-        }
-        .reward-hint {
-            font-size: 0.85em;
-            color: #888;
-            margin-top: 15px;
-        }
-        [data-theme="dark"] .reward-desc {
-            color: #adbac7;
-        }
-        [data-theme="dark"] .reward-hint {
-            color: #8b9bb5;
-        }
-        [data-theme="dark"] .delegation-viz {
-            background: var(--card-bg);
-        }
-    </style>
-</head>
+    </head>
 
 <body>
     <div id="header-root"></div>
@@ -348,22 +203,6 @@
     <script src="components.js"></script>
     <script>
         initPage('government');
-    </script>
-    <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
-    <script>
-        Waline.init({
-            el: '#waline',
-            serverURL: 'https://blogwaline-gamma.vercel.app',
-            placeholder: '欢迎留言',
-            avatar: 'wavatar',
-            meta: ['nick', 'mail', 'link'],
-            requiredFields: ['nick'],
-            pageSize: 10,
-            lang: 'zh-CN',
-            highlight: true,
-            wordLimit: 500,
-            dark: 'html[data-theme="dark"]'
-        });
     </script>
 </body>
 

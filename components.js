@@ -205,12 +205,78 @@ function initHamburger() {
   });
 }
 
-// 页面初始化
+// ===== 公共资源注入 =====
+
+let _commonHeadInjected = false;
+function injectCommonHead() {
+  if (_commonHeadInjected) return;
+  _commonHeadInjected = true;
+  const links = [
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+    'https://fonts.googleapis.com/css2?family=Pacifico&display=swap',
+    'https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Regular.min.css',
+    'https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Medium.min.css',
+    'https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Bold.min.css',
+    'https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Light.min.css',
+    'https://unpkg.com/@waline/client@v2/dist/waline.css'
+  ];
+  links.forEach(href => {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  });
+}
+
+let _gaInjected = false;
+function initGA() {
+  if (_gaInjected) return;
+  _gaInjected = true;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BCG1K6EZ72';
+  document.head.appendChild(s);
+  var s2 = document.createElement('script');
+  s2.textContent = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-BCG1K6EZ72')";
+  document.head.appendChild(s2);
+}
+
+let _walineInit = false;
+function initWaline() {
+  if (_walineInit) return;
+  var el = document.getElementById('waline');
+  if (!el) return;
+  _walineInit = true;
+  var s = document.createElement('script');
+  s.src = 'https://unpkg.com/@waline/client@v2/dist/waline.js';
+  s.onload = function() {
+    Waline.init({
+      el: '#waline',
+      serverURL: 'https://blogwaline-gamma.vercel.app',
+      placeholder: '欢迎留言',
+      avatar: 'wavatar',
+      meta: ['nick', 'mail', 'link'],
+      requiredFields: ['nick'],
+      pageSize: 10,
+      lang: 'zh-CN',
+      highlight: true,
+      wordLimit: 500,
+      dark: 'html[data-theme="dark"]'
+    });
+  };
+  document.body.appendChild(s);
+}
+
+// ===== 页面初始化 =====
+
 function initPage(activePage) {
+  injectCommonHead();
+  initGA();
   renderHeader(activePage);
   renderFooter();
   renderJoinModal();
   initThemeToggle();
   initJoinModal();
   initHamburger();
+  initWaline();
 }

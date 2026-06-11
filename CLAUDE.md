@@ -24,30 +24,51 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 
 ## 架构
 
+### 公共资源注入 (`components.js`)
+除 404 外的所有页面不直接在 HTML 中加载 CDN 资源和第三方脚本。`components.js` 在初始化时会自动调用以下函数注入：
+- `injectCommonHead()` — 注入 Font Awesome、MI Sans 字体、Pacifico 字体、Waline CSS
+- `initGA()` — 注入 Google Analytics (`G-BCG1K6EZ72`)
+- `initWaline()` — 自动检测 `<div id="waline">`，存在则加载 Waline.js 并初始化
+
 ### 共享组件系统 (`components.js`)
-除 404 外的每个页面都调用 `initPage('pageId')`，该函数渲染以下三个容器：
+除 404 外的每个页面调用 `initPage('pageId')`，该函数渲染以下三个容器：
 - `<div id="header-root">` — 顶部导航栏（Logo + NAV_ITEMS + "加入国籍"按钮 + 主题切换）
 - `<div id="footer-root">` — 页脚（NAV_ITEMS + FOOTER_LINKS 中的链接）
 - `<div id="modal-root">` — 入籍申请弹窗（打开 mailto 链接）
 
-关键全局变量和函数：`NAV_ITEMS`（主导航）、`FOOTER_LINKS`（底部链接）、`initPage()`、`initThemeToggle()`、`initJoinModal()`
+关键全局变量和函数：`NAV_ITEMS`（主导航）、`FOOTER_LINKS`（底部链接）、`initPage()`、`injectCommonHead()`、`initGA()`、`initWaline()`、`renderFooter()`、`initThemeToggle()`、`initJoinModal()`
+
+### 每个页面的 `<head>` 结构
+所有页面（除 404 外）的 `<head>` 只包含：
+- `<meta charset>`、`<meta viewport>`、`<meta description>`、`<title>`
+- OG / Twitter Card 元标签（`og:image` 统一为 `https://schlen.top/国旗.png`）
+- `<link rel="icon">`、`<link rel="stylesheet" href="style.css">`
+- 其余 CDN 资源（FA、字体、Waline CSS）均由 `components.js` 动态注入
+
+### 样式组织
+所有样式集中在 `style.css`（原各页面的内联 `<style>` 已全部迁移），按页面分区管理：
+- `/* ===== Support Page Styles ===== */`
+- `/* ===== Download Page Styles ===== */`
+- `/* ===== Government Page Styles ===== */`
+- `/* ===== News Page Styles ===== */`
+- `/* ===== Wallet Page Styles ===== */`
 
 ### 主题系统
 - 在 `<html>` 上设置 `data-theme="dark"` 属性切换暗色模式
 - 偏好存储在 `localStorage.schlen_theme`
 - 暗色模式样式集中在 `style.css` 的 `[data-theme="dark"]` 选择器下
-- 钱包页面有自己的独立暗色样式（内联 `<style>`）
 
 ### 评论系统 (Waline)
-除 404 外的每个页面用相同的配置初始化 Waline，serverURL 为 `https://blogwaline-gamma.vercel.app`，暗色模式通过 `dark: 'html[data-theme="dark"]'` 支持。
+`components.js` 的 `initWaline()` 自动处理，serverURL 为 `https://blogwaline-gamma.vercel.app`，暗色模式通过 `dark: 'html[data-theme="dark"]'` 支持。页面只需放置 `<div id="waline"></div>`，无需手动加载 Waline 脚本。
 
 ### 图标系统
-- Font Awesome 6 (`https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css`) 用于图标，已替换大部分关键图标（联系方式、概念卡片、权益卡片、主题切换）。部分装饰性 emoji 保留。
+- Font Awesome 6 由 `components.js` 动态注入
+- 404 页面因不使用 components.js，在其 `<head>` 中直接加载 FA
 
 ### 字体
-- 主字体：MI Sans（小米字体），从 unpkg 加载 Regular/Medium/Bold/Light 四个字重
-- Logo 字体：Pacifico（Google Fonts）
-- 页脚标注：`字体：MI Sans · 小米字体`
+- 主字体：MI Sans（小米字体），Logo 字体：Pacifico（Google Fonts）
+- 由 `style.css` 的 `@import` 加载（@import 位于文件顶部，优先于 JS 注入）
+- `components.js` 的 `injectCommonHead()` 也加载字体（缓存命中，无额外开销）
 
 ### Telegram 群组
 - 唯一群组链接：`https://t.me/+a7w9EUeKBThlY2Y5`
@@ -55,7 +76,7 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 - 引导用户到 #SCHLEN治理部 话题参与讨论
 
 ### BR-penkein-coin 钱包 (`wallet.html`)
-最复杂的页面，完全自包含（内联 `<style>` + `<script>`）。通过 components.js 的 `initThemeToggle()` 实现主题切换。API 地址 `https://coin.schlen.top`：
+最复杂的页面，使用内联 `<script>` 完成所有钱包逻辑。不调用 `initPage()`，而是单独调用 `renderFooter()` + `initThemeToggle()` + `initWaline()`。API 地址 `https://coin.schlen.top`：
 
 - `GET /balance?user=X` — 查询余额
 - `GET /users` — 用户列表
@@ -71,20 +92,23 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 
 ## 添加新页面
 
-1. 创建 `.html` 文件，在 body 中添加 `<div id="header-root">`、`<div id="footer-root">`、`<div id="modal-root">`
-2. 加载 `components.js`，调用 `initPage('yourPageId')`
-3. 添加 Waline 初始化代码块（从任意页面复制）
-4. 在 `components.js` 的 `NAV_ITEMS` 数组中添加页面 ID（次要页面则加到 `FOOTER_LINKS`）
-5. 如需自定义渐变色，在 `style.css` 中添加对应的 page-hero 背景类
+1. 创建 `.html` 文件，在 `<head>` 中：charset、viewport、description、title、OG 标签、favicon、style.css
+2. 在 body 中添加 `<div id="header-root">`、`<div id="footer-root">`、`<div id="modal-root">`
+3. 如需评论区，添加 `<div id="waline"></div>`（Waline 由 components.js 自动初始化）
+4. 在 body 末尾加载 `<script src="components.js"></script>` 并调用 `initPage('yourPageId')`
+5. 在 `components.js` 的 `NAV_ITEMS` 数组中添加页面 ID（次要页面则加到 `FOOTER_LINKS`）
+6. 如需自定义渐变色，在 `style.css` 中添加对应的 page-hero 背景类
 
 ## 重要规则
 
 - **人口数字（3人）**：修改时需更新 `index.html`、`about.html`、`citizens.html`
 - **Waline 服务端地址**：`https://blogwaline-gamma.vercel.app` — 除非迁移，否则不要修改
-- **Google Analytics ID**：每个页面 `<head>` 中使用 `G-BCG1K6EZ72`
+- **Google Analytics ID**：`G-BCG1K6EZ72` — 硬编码在 `components.js` 的 `initGA()` 中
+- **OG 图片**：统一使用 `https://schlen.top/国旗.png`，如需更换在所有页面的 OG 标签中同步更新
+- **Hero 背景**：使用 `国旗.png`，浅色/暗色模式各有不同的渐变叠加层，在 `style.css` 中维护
 - **BR-penkein-coin 不是区块链货币**：不要使用区块、挖矿、账本、链等区块链术语
 - **components.js 的修改**会同时影响所有页面
-- **404 页面**不使用 components.js（没有 header/footer，完全独立）
+- **404 页面**不使用 components.js（没有 header/footer，完全独立），需自行加载 FA 和字体
 
 ## 样式约定
 
