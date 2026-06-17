@@ -1,5 +1,17 @@
 // ===== Schlen 联邦共和国 - 共享组件 =====
 
+// 无扩展名路径自动补全 .html
+(function() {
+  var path = window.location.pathname;
+  // 根路径、子目录根路径、已有扩展名的路径都不处理
+  if (path === '/' || path === '/schlen/' || path.match(/\.[a-zA-Z0-9]+$/)) return;
+  // 去掉尾部斜杠再判断
+  var clean = path.replace(/\/+$/, '');
+  if (clean && !clean.match(/\.[a-zA-Z0-9]+$/)) {
+    window.location.replace(clean + '.html');
+  }
+})();
+
 // 常用导航（顶部显示）
 const NAV_ITEMS = [
   { id: 'index', label: '首页', href: 'index.html' },
