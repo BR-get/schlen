@@ -16,6 +16,7 @@ const NAV_ITEMS = [
 const FOOTER_LINKS = [
   { id: 'down', label: '下载', href: 'down.html' },
   { id: 'x', label: 'X', href: 'x.html' },
+  { id: 'pride', label: '🏳️‍🌈 骄傲月', href: 'pride.html' },
   { id: 'telegram', label: '💬 群组', href: 'https://t.me/+a7w9EUeKBThlY2Y5', external: true },
   { id: 'shop', label: '🛒 商店', href: 'https://shop.schlen.top', external: true },
   { id: 'schlenix', label: '💻 Schlenix', href: 'https://ix.schlen.top', external: true },
