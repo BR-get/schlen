@@ -85,12 +85,18 @@
         </div>
     </main>
 
-    <div id="footer-root"></div>
     <div id="modal-root"></div>
 
     <script src="components.js"></script>
     <script>
-        initPage('pride');
+        injectCommonHead();
+        initGA();
+        renderHeader('pride');
+        renderJoinModal();
+        initThemeToggle();
+        initJoinModal();
+        initHamburger();
+        initWaline();
     </script>
 </body>
 
