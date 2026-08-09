@@ -94,6 +94,7 @@ function renderFooter() {
       <p class="copyright">&copy; 2026 Schlen联邦共和国. 保留所有权利</p>
       <p class="footer-disclaimer">⚠️ 本网站所述"Schlen联邦共和国"为虚构的互联网微国家，仅供娱乐与创意交流，非真实主权国家。但我们认真对待每一份创意与梦想</p>
       <p class="footer-font-credit">字体：MI Sans · 小米字体</p>
+      <p class="footer-music"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=3408342828&auto=0&height=66"></iframe></p>
     </footer>
   `;
 
@@ -279,6 +280,132 @@ function initWaline() {
   document.body.appendChild(s);
 }
 
+// ===== 隐藏彩蛋：输入 "schlen" 或连点页脚国名 5 次 =====
+
+let _eggBuffer = '';
+let _footerClicks = 0;
+let _footerClickTimer = null;
+let _eggRunning = false;
+
+function initEasterEgg() {
+  // 键盘输入 "schlen" 触发
+  document.addEventListener('keydown', function(e) {
+    if (e.key && e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
+      _eggBuffer = (_eggBuffer + e.key).slice(-8);
+      if (/schlen/i.test(_eggBuffer)) {
+        _eggBuffer = '';
+        triggerEasterEgg();
+      }
+    }
+  });
+
+  // 连续点击页脚 "Schlen联邦共和国" 5 次触发
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.footer-section h4')) return;
+    _footerClicks++;
+    clearTimeout(_footerClickTimer);
+    _footerClickTimer = setTimeout(function() { _footerClicks = 0; }, 2500);
+    if (_footerClicks >= 5) {
+      _footerClicks = 0;
+      triggerEasterEgg();
+    }
+  });
+}
+
+function triggerEasterEgg() {
+  if (_eggRunning) return;
+  _eggRunning = true;
+
+  var canvas = document.createElement('canvas');
+  canvas.id = 'easter-egg-canvas';
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
+  document.body.appendChild(canvas);
+
+  var ctx = canvas.getContext('2d');
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var particles = [];
+  var colors = ['#FF6B6B', '#FFA726', '#FFD93D', '#6BCB77', '#4D96FF', '#B05FF6'];
+
+  function explode(x, y) {
+    for (var i = 0; i < 45; i++) {
+      var angle = Math.random() * Math.PI * 2;
+      var speed = 2 + Math.random() * 5;
+      particles.push({
+        x: x, y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 55 + Math.random() * 30,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: 2 + Math.random() * 3
+      });
+    }
+  }
+
+  var island = { x: canvas.width / 2, y: canvas.height + 40, emoji: '🏝️', vy: -1.4 };
+  var msgAlpha = 1;
+
+  var rockets = 0;
+  var launchTimer = setInterval(function() {
+    rockets++;
+    explode(Math.random() * canvas.width, Math.random() * canvas.height * 0.5);
+    if (rockets >= 8) clearInterval(launchTimer);
+  }, 320);
+
+  var frame = 0;
+  function draw() {
+    frame++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (msgAlpha > 0) {
+      ctx.font = 'bold 26px MiSans, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.globalAlpha = Math.max(0, msgAlpha);
+      ctx.fillStyle = '#fff';
+      ctx.strokeStyle = 'rgba(0,123,255,0.7)';
+      ctx.lineWidth = 4;
+      ctx.strokeText('✨ 失落的浮岛出现了！ ✨', canvas.width / 2, canvas.height * 0.22);
+      ctx.fillText('✨ 失落的浮岛出现了！ ✨', canvas.width / 2, canvas.height * 0.22);
+      ctx.globalAlpha = 1;
+      msgAlpha -= 0.005;
+    }
+
+    island.y += island.vy;
+    ctx.font = '64px serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(island.emoji, island.x, island.y);
+
+    particles = particles.filter(function(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.06;
+      p.life--;
+      ctx.globalAlpha = Math.max(0, p.life / 70);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      return p.life > 0;
+    });
+
+    if (frame < 700 && (particles.length > 0 || island.y > -80 || msgAlpha > 0)) {
+      requestAnimationFrame(draw);
+    } else {
+      _eggRunning = false;
+      clearInterval(launchTimer);
+      window.removeEventListener('resize', resize);
+      if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+    }
+  }
+  draw();
+}
+
 // ===== 页面初始化 =====
 
 function initPage(activePage) {
@@ -291,4 +418,5 @@ function initPage(activePage) {
   initJoinModal();
   initHamburger();
   initWaline();
+  initEasterEgg();
 }
