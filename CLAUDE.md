@@ -16,7 +16,6 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 | 政体 | `government.html` | 液态民主（直接投票 + 信任委托）+ BR-penkein-coin 激励 |
 | 公民 | `citizens.html` | 公民权益、入籍申请、论坛预览 |
 | 动态 | `news.html` | 欢迎公告、社区动态 |
-| 钱包 | `wallet.html` | BR-penkein-coin 钱包（最复杂的页面） |
 | 支持 | `support.html` | 联系方式、邮件模板、FAQ |
 | 下载 | `down.html` | 国旗下载 |
 | X | `x.html` | X/Twitter 关注页面，手动跳转 |
@@ -75,17 +74,6 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 - 全站多个入口（首页、支持页、公民页、关于页、政体页、动态页、页脚）
 - 引导用户到 #SCHLEN治理部 话题参与讨论
 
-### BR-penkein-coin 钱包 (`wallet.html`)
-最复杂的页面，使用内联 `<script>` 完成所有钱包逻辑。不调用 `initPage()`，而是单独调用 `renderFooter()` + `initThemeToggle()` + `initWaline()`。API 地址 `https://coin.schlen.top`：
-
-- `GET /balance?user=X` — 查询余额
-- `GET /users` — 用户列表
-- `GET /userinfo?user=X` — 用户详情
-- `POST /transfer` — 需要 `X-API-Key` 请求头，body: `{from, to, amount}`
-- `POST /mint` — 仅管理员，body: `{user, amount}`
-- `POST /admin` — 仅管理员，body: `{action, user, value}`（支持 deduct、freeze、unfreeze、setBalance、deleteUser）
-- API Key 以 `brkey_` 开头的是普通用户密钥，否则视为管理员密钥
-
 ### 部署
 - `CNAME` 文件配置 GitHub Pages 自定义域名
 - 推送到 `main` 分支后自动通过 GitHub Actions / Pages 部署
@@ -115,5 +103,4 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 
 - CSS 变量定义在 `:root` 和 `[data-theme="dark"]` 中：`--primary-color`、`--accent-color`、`--bg-light`、`--card-bg`、`--text-dark` 等
 - 海洋主题：蓝色系（主色 #007BFF），珊瑚橙点缀（#FFA726）
-- 钱包页面有独立的 CSS 命名空间（`.wallet-page`、`.wallet-box` 等），与主站样式无冲突
 - 主字体为 MI Sans（小米字体），Logo 使用 Pacifico（Google Fonts），Font Awesome 6 用于图标

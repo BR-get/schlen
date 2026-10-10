@@ -21,7 +21,6 @@ const NAV_ITEMS = [
   { id: 'citizens', label: '公民', href: 'citizens.html' },
   { id: 'news', label: '动态', href: 'news.html' },
   { id: 'support', label: '支持', href: 'support.html' },
-  { id: 'wallet', label: '💰 钱包', href: 'wallet.html' },
 ];
 
 // 底部导航（不常用页面）
@@ -29,7 +28,6 @@ const FOOTER_LINKS = [
   { id: 'down', label: '下载', href: 'down.html' },
   { id: 'x', label: 'X', href: 'x.html' },
   { id: 'telegram', label: '💬 群组', href: 'https://t.me/+a7w9EUeKBThlY2Y5', external: true },
-  { id: 'shop', label: '🛒 商店', href: 'https://shop.schlen.top', external: true },
   { id: 'schlenix', label: '💻 Schlenix', href: 'https://ix.schlen.top', external: true },
 ];
 
