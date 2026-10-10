@@ -2067,12 +2067,6 @@ img {
 .delegation-info strong { display: block; text-align: center; margin-bottom: 10px; font-size: 1.1em; }
 .delegation-info p { margin: 6px 0; color: rgba(255,255,255,0.9); }
 @media (max-width: 640px) { .delegation-viz { grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 8px; padding: 20px 10px; } .delegation-arrow { display: none; } .delegation-node[data-citizen="info"] { grid-column: 1 / -1; } }
-.reward-section { text-align: center; padding: 40px 20px; background: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
-.reward-desc { color: #555; margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-.reward-btn { text-decoration: none; display: inline-block; }
-.reward-hint { font-size: 0.85em; color: #888; margin-top: 15px; }
-[data-theme="dark"] .reward-desc { color: #adbac7; }
-[data-theme="dark"] .reward-hint { color: #8b9bb5; }
 [data-theme="dark"] .delegation-viz { background: var(--card-bg); }
 
 /* ===== News Page Styles (migrated from news.html) ===== */

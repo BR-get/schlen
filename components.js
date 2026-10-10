@@ -180,7 +180,7 @@ function initJoinModal() {
 [请简单介绍一下自己]
 
 对Schlen的理解:
-[请描述您对液态民主和BR-penkein-coin的了解]
+[请描述您对液态民主的了解]
 
 期待与愿景:
 [您希望为Schlen贡献什么?]`);

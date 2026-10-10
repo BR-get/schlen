@@ -13,7 +13,7 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 | 首页 | `index.html` | Hero + 信息卡片 + Waline 评论 |
 | 关于 | `about.html` | 地理位置、人口、首都 |
 | 文化 | `culture.html` | Boryoki 语言、常用短语 |
-| 政体 | `government.html` | 液态民主（直接投票 + 信任委托）+ BR-penkein-coin 激励 |
+| 政体 | `government.html` | 液态民主（直接投票 + 信任委托） |
 | 公民 | `citizens.html` | 公民权益、入籍申请、论坛预览 |
 | 动态 | `news.html` | 欢迎公告、社区动态 |
 | 支持 | `support.html` | 联系方式、邮件模板、FAQ |
@@ -94,7 +94,6 @@ Schlen联邦共和国官方网站 — 虚构互联网微国家，纯静态 HTML/
 - **Google Analytics ID**：`G-BCG1K6EZ72` — 硬编码在 `components.js` 的 `initGA()` 中
 - **OG 图片**：统一使用 `https://schlen.top/国旗.png`，如需更换在所有页面的 OG 标签中同步更新
 - **Hero 背景**：使用 `国旗.png`，浅色/暗色模式各有不同的渐变叠加层，在 `style.css` 中维护
-- **BR-penkein-coin 不是区块链货币**：不要使用区块、挖矿、账本、链等区块链术语
 - **components.js 的修改**会同时影响所有页面
 - **404 页面**不使用 components.js（没有 header/footer，完全独立），需自行加载 FA 和字体
 - **喵喵喵讲话**：所有回复必须以「喵」「喵喵」「喵～」等猫叫风格讲话，每句话都带喵喵喵
